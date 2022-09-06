@@ -1,0 +1,768 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C48D7B3C28C5EB9000634E38 /* ChillkraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B3B28C5EB9000634E38 /* ChillkraApp.swift */; };
+		C48D7B3E28C5EB9000634E38 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B3D28C5EB9000634E38 /* ContentView.swift */; };
+		C48D7B4028C5EB9100634E38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B3F28C5EB9100634E38 /* Assets.xcassets */; };
+		C48D7B4328C5EB9100634E38 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B4228C5EB9100634E38 /* Preview Assets.xcassets */; };
+		C48D7B4D28C5EB9100634E38 /* ChillkraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B4C28C5EB9100634E38 /* ChillkraTests.swift */; };
+		C48D7B5728C5EB9100634E38 /* ChillkraUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B5628C5EB9100634E38 /* ChillkraUITests.swift */; };
+		C48D7B5928C5EB9100634E38 /* ChillkraUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B5828C5EB9100634E38 /* ChillkraUITestsLaunchTests.swift */; };
+		C48D7B7228C5EC2600634E38 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B7128C5EC2600634E38 /* LoginView.swift */; };
+		C48D7B8428C5EC5700634E38 /* JosefinSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7428C5EC5700634E38 /* JosefinSans-Italic.ttf */; };
+		C48D7B8528C5EC5700634E38 /* JosefinSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7528C5EC5700634E38 /* JosefinSans-Thin.ttf */; };
+		C48D7B8628C5EC5700634E38 /* JosefinSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7628C5EC5700634E38 /* JosefinSans-Bold.ttf */; };
+		C48D7B8728C5EC5700634E38 /* JosefinSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7728C5EC5700634E38 /* JosefinSans-Light.ttf */; };
+		C48D7B8828C5EC5700634E38 /* JosefinSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7828C5EC5700634E38 /* JosefinSans-LightItalic.ttf */; };
+		C48D7B8928C5EC5700634E38 /* JosefinSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7928C5EC5700634E38 /* JosefinSans-SemiBold.ttf */; };
+		C48D7B8A28C5EC5700634E38 /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7A28C5EC5700634E38 /* JosefinSans-Regular.ttf */; };
+		C48D7B8B28C5EC5700634E38 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7B28C5EC5700634E38 /* OFL.txt */; };
+		C48D7B8C28C5EC5700634E38 /* JosefinSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7C28C5EC5700634E38 /* JosefinSans-BoldItalic.ttf */; };
+		C48D7B8D28C5EC5700634E38 /* JosefinSans-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7D28C5EC5700634E38 /* JosefinSans-ThinItalic.ttf */; };
+		C48D7B8E28C5EC5700634E38 /* JosefinSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B7E28C5EC5700634E38 /* JosefinSans-SemiBoldItalic.ttf */; };
+		C48D7B8F28C5EC5700634E38 /* Kalam-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B8028C5EC5700634E38 /* Kalam-Regular.ttf */; };
+		C48D7B9028C5EC5700634E38 /* Kalam-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B8128C5EC5700634E38 /* Kalam-Light.ttf */; };
+		C48D7B9128C5EC5700634E38 /* Kalam-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C48D7B8228C5EC5700634E38 /* Kalam-Bold.ttf */; };
+		C48D7B9628C5EE6A00634E38 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B9528C5EE6A00634E38 /* CustomFonts.swift */; };
+		C48D7B9828C6137400634E38 /* CustomSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B9728C6137400634E38 /* CustomSize.swift */; };
+		C48D7B9A28C61CB500634E38 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B9928C61CB500634E38 /* TitleView.swift */; };
+		C48D7B9C28C6348E00634E38 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B9B28C6348E00634E38 /* HeaderView.swift */; };
+		C48D7B9E28C6361A00634E38 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48D7B9D28C6361A00634E38 /* SignUpView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C48D7B4928C5EB9100634E38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C48D7B3028C5EB9000634E38 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C48D7B3728C5EB9000634E38;
+			remoteInfo = Chillkra;
+		};
+		C48D7B5328C5EB9100634E38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C48D7B3028C5EB9000634E38 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C48D7B3728C5EB9000634E38;
+			remoteInfo = Chillkra;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C48D7B3828C5EB9000634E38 /* Chillkra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chillkra.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C48D7B3B28C5EB9000634E38 /* ChillkraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChillkraApp.swift; sourceTree = "<group>"; };
+		C48D7B3D28C5EB9000634E38 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C48D7B3F28C5EB9100634E38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C48D7B4228C5EB9100634E38 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C48D7B4828C5EB9100634E38 /* ChillkraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChillkraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C48D7B4C28C5EB9100634E38 /* ChillkraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChillkraTests.swift; sourceTree = "<group>"; };
+		C48D7B5228C5EB9100634E38 /* ChillkraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChillkraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C48D7B5628C5EB9100634E38 /* ChillkraUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChillkraUITests.swift; sourceTree = "<group>"; };
+		C48D7B5828C5EB9100634E38 /* ChillkraUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChillkraUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C48D7B7128C5EC2600634E38 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		C48D7B7428C5EC5700634E38 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
+		C48D7B7528C5EC5700634E38 /* JosefinSans-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Thin.ttf"; sourceTree = "<group>"; };
+		C48D7B7628C5EC5700634E38 /* JosefinSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Bold.ttf"; sourceTree = "<group>"; };
+		C48D7B7728C5EC5700634E38 /* JosefinSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Light.ttf"; sourceTree = "<group>"; };
+		C48D7B7828C5EC5700634E38 /* JosefinSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		C48D7B7928C5EC5700634E38 /* JosefinSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		C48D7B7A28C5EC5700634E38 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
+		C48D7B7B28C5EC5700634E38 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		C48D7B7C28C5EC5700634E38 /* JosefinSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C48D7B7D28C5EC5700634E38 /* JosefinSans-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-ThinItalic.ttf"; sourceTree = "<group>"; };
+		C48D7B7E28C5EC5700634E38 /* JosefinSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		C48D7B8028C5EC5700634E38 /* Kalam-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kalam-Regular.ttf"; sourceTree = "<group>"; };
+		C48D7B8128C5EC5700634E38 /* Kalam-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kalam-Light.ttf"; sourceTree = "<group>"; };
+		C48D7B8228C5EC5700634E38 /* Kalam-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kalam-Bold.ttf"; sourceTree = "<group>"; };
+		C48D7B9428C5ED6F00634E38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C48D7B9528C5EE6A00634E38 /* CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
+		C48D7B9728C6137400634E38 /* CustomSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSize.swift; sourceTree = "<group>"; };
+		C48D7B9928C61CB500634E38 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		C48D7B9B28C6348E00634E38 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		C48D7B9D28C6361A00634E38 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C48D7B3528C5EB9000634E38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C48D7B4528C5EB9100634E38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C48D7B4F28C5EB9100634E38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C48D7B2F28C5EB9000634E38 = {
+			isa = PBXGroup;
+			children = (
+				C48D7B3A28C5EB9000634E38 /* Chillkra */,
+				C48D7B4B28C5EB9100634E38 /* ChillkraTests */,
+				C48D7B5528C5EB9100634E38 /* ChillkraUITests */,
+				C48D7B3928C5EB9000634E38 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C48D7B3928C5EB9000634E38 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B3828C5EB9000634E38 /* Chillkra.app */,
+				C48D7B4828C5EB9100634E38 /* ChillkraTests.xctest */,
+				C48D7B5228C5EB9100634E38 /* ChillkraUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C48D7B3A28C5EB9000634E38 /* Chillkra */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B9428C5ED6F00634E38 /* Info.plist */,
+				C48D7B6C28C5EC0100634E38 /* Components */,
+				C48D7B6B28C5EBD600634E38 /* Core */,
+				C48D7B6A28C5EBCB00634E38 /* Extensions */,
+				C48D7B6928C5EBC500634E38 /* Model */,
+				C48D7B6828C5EBBF00634E38 /* Service */,
+				C48D7B6728C5EBB900634E38 /* Font */,
+				C48D7B3B28C5EB9000634E38 /* ChillkraApp.swift */,
+				C48D7B3D28C5EB9000634E38 /* ContentView.swift */,
+				C48D7B9328C5EC7400634E38 /* New Group */,
+				C48D7B3F28C5EB9100634E38 /* Assets.xcassets */,
+				C48D7B4128C5EB9100634E38 /* Preview Content */,
+			);
+			path = Chillkra;
+			sourceTree = "<group>";
+		};
+		C48D7B4128C5EB9100634E38 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B4228C5EB9100634E38 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C48D7B4B28C5EB9100634E38 /* ChillkraTests */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B4C28C5EB9100634E38 /* ChillkraTests.swift */,
+			);
+			path = ChillkraTests;
+			sourceTree = "<group>";
+		};
+		C48D7B5528C5EB9100634E38 /* ChillkraUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B5628C5EB9100634E38 /* ChillkraUITests.swift */,
+				C48D7B5828C5EB9100634E38 /* ChillkraUITestsLaunchTests.swift */,
+			);
+			path = ChillkraUITests;
+			sourceTree = "<group>";
+		};
+		C48D7B6728C5EBB900634E38 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B7328C5EC5700634E38 /* josefin-sans */,
+				C48D7B7F28C5EC5700634E38 /* kalam */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		C48D7B6828C5EBBF00634E38 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		C48D7B6928C5EBC500634E38 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C48D7B6A28C5EBCB00634E38 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C48D7B6B28C5EBD600634E38 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B6D28C5EC0B00634E38 /* Login */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		C48D7B6C28C5EC0100634E38 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B9528C5EE6A00634E38 /* CustomFonts.swift */,
+				C48D7B9728C6137400634E38 /* CustomSize.swift */,
+				C48D7B9B28C6348E00634E38 /* HeaderView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C48D7B6D28C5EC0B00634E38 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B6F28C5EC1200634E38 /* Model View */,
+				C48D7B6E28C5EC0F00634E38 /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		C48D7B6E28C5EC0F00634E38 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B7128C5EC2600634E38 /* LoginView.swift */,
+				C48D7B9928C61CB500634E38 /* TitleView.swift */,
+				C48D7B9D28C6361A00634E38 /* SignUpView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C48D7B6F28C5EC1200634E38 /* Model View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Model View";
+			sourceTree = "<group>";
+		};
+		C48D7B7328C5EC5700634E38 /* josefin-sans */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B7428C5EC5700634E38 /* JosefinSans-Italic.ttf */,
+				C48D7B7528C5EC5700634E38 /* JosefinSans-Thin.ttf */,
+				C48D7B7628C5EC5700634E38 /* JosefinSans-Bold.ttf */,
+				C48D7B7728C5EC5700634E38 /* JosefinSans-Light.ttf */,
+				C48D7B7828C5EC5700634E38 /* JosefinSans-LightItalic.ttf */,
+				C48D7B7928C5EC5700634E38 /* JosefinSans-SemiBold.ttf */,
+				C48D7B7A28C5EC5700634E38 /* JosefinSans-Regular.ttf */,
+				C48D7B7B28C5EC5700634E38 /* OFL.txt */,
+				C48D7B7C28C5EC5700634E38 /* JosefinSans-BoldItalic.ttf */,
+				C48D7B7D28C5EC5700634E38 /* JosefinSans-ThinItalic.ttf */,
+				C48D7B7E28C5EC5700634E38 /* JosefinSans-SemiBoldItalic.ttf */,
+			);
+			path = "josefin-sans";
+			sourceTree = "<group>";
+		};
+		C48D7B7F28C5EC5700634E38 /* kalam */ = {
+			isa = PBXGroup;
+			children = (
+				C48D7B8028C5EC5700634E38 /* Kalam-Regular.ttf */,
+				C48D7B8128C5EC5700634E38 /* Kalam-Light.ttf */,
+				C48D7B8228C5EC5700634E38 /* Kalam-Bold.ttf */,
+			);
+			path = kalam;
+			sourceTree = "<group>";
+		};
+		C48D7B9328C5EC7400634E38 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C48D7B3728C5EB9000634E38 /* Chillkra */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C48D7B5C28C5EB9100634E38 /* Build configuration list for PBXNativeTarget "Chillkra" */;
+			buildPhases = (
+				C48D7B3428C5EB9000634E38 /* Sources */,
+				C48D7B3528C5EB9000634E38 /* Frameworks */,
+				C48D7B3628C5EB9000634E38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chillkra;
+			productName = Chillkra;
+			productReference = C48D7B3828C5EB9000634E38 /* Chillkra.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C48D7B4728C5EB9100634E38 /* ChillkraTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C48D7B5F28C5EB9100634E38 /* Build configuration list for PBXNativeTarget "ChillkraTests" */;
+			buildPhases = (
+				C48D7B4428C5EB9100634E38 /* Sources */,
+				C48D7B4528C5EB9100634E38 /* Frameworks */,
+				C48D7B4628C5EB9100634E38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C48D7B4A28C5EB9100634E38 /* PBXTargetDependency */,
+			);
+			name = ChillkraTests;
+			productName = ChillkraTests;
+			productReference = C48D7B4828C5EB9100634E38 /* ChillkraTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C48D7B5128C5EB9100634E38 /* ChillkraUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C48D7B6228C5EB9100634E38 /* Build configuration list for PBXNativeTarget "ChillkraUITests" */;
+			buildPhases = (
+				C48D7B4E28C5EB9100634E38 /* Sources */,
+				C48D7B4F28C5EB9100634E38 /* Frameworks */,
+				C48D7B5028C5EB9100634E38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C48D7B5428C5EB9100634E38 /* PBXTargetDependency */,
+			);
+			name = ChillkraUITests;
+			productName = ChillkraUITests;
+			productReference = C48D7B5228C5EB9100634E38 /* ChillkraUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C48D7B3028C5EB9000634E38 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					C48D7B3728C5EB9000634E38 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					C48D7B4728C5EB9100634E38 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = C48D7B3728C5EB9000634E38;
+					};
+					C48D7B5128C5EB9100634E38 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = C48D7B3728C5EB9000634E38;
+					};
+				};
+			};
+			buildConfigurationList = C48D7B3328C5EB9000634E38 /* Build configuration list for PBXProject "Chillkra" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C48D7B2F28C5EB9000634E38;
+			productRefGroup = C48D7B3928C5EB9000634E38 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C48D7B3728C5EB9000634E38 /* Chillkra */,
+				C48D7B4728C5EB9100634E38 /* ChillkraTests */,
+				C48D7B5128C5EB9100634E38 /* ChillkraUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C48D7B3628C5EB9000634E38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C48D7B8B28C5EC5700634E38 /* OFL.txt in Resources */,
+				C48D7B4328C5EB9100634E38 /* Preview Assets.xcassets in Resources */,
+				C48D7B4028C5EB9100634E38 /* Assets.xcassets in Resources */,
+				C48D7B8828C5EC5700634E38 /* JosefinSans-LightItalic.ttf in Resources */,
+				C48D7B8928C5EC5700634E38 /* JosefinSans-SemiBold.ttf in Resources */,
+				C48D7B8428C5EC5700634E38 /* JosefinSans-Italic.ttf in Resources */,
+				C48D7B9028C5EC5700634E38 /* Kalam-Light.ttf in Resources */,
+				C48D7B8728C5EC5700634E38 /* JosefinSans-Light.ttf in Resources */,
+				C48D7B8528C5EC5700634E38 /* JosefinSans-Thin.ttf in Resources */,
+				C48D7B8E28C5EC5700634E38 /* JosefinSans-SemiBoldItalic.ttf in Resources */,
+				C48D7B8A28C5EC5700634E38 /* JosefinSans-Regular.ttf in Resources */,
+				C48D7B8F28C5EC5700634E38 /* Kalam-Regular.ttf in Resources */,
+				C48D7B8628C5EC5700634E38 /* JosefinSans-Bold.ttf in Resources */,
+				C48D7B8C28C5EC5700634E38 /* JosefinSans-BoldItalic.ttf in Resources */,
+				C48D7B9128C5EC5700634E38 /* Kalam-Bold.ttf in Resources */,
+				C48D7B8D28C5EC5700634E38 /* JosefinSans-ThinItalic.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C48D7B4628C5EB9100634E38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C48D7B5028C5EB9100634E38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C48D7B3428C5EB9000634E38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C48D7B7228C5EC2600634E38 /* LoginView.swift in Sources */,
+				C48D7B9628C5EE6A00634E38 /* CustomFonts.swift in Sources */,
+				C48D7B9828C6137400634E38 /* CustomSize.swift in Sources */,
+				C48D7B3E28C5EB9000634E38 /* ContentView.swift in Sources */,
+				C48D7B9E28C6361A00634E38 /* SignUpView.swift in Sources */,
+				C48D7B3C28C5EB9000634E38 /* ChillkraApp.swift in Sources */,
+				C48D7B9A28C61CB500634E38 /* TitleView.swift in Sources */,
+				C48D7B9C28C6348E00634E38 /* HeaderView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C48D7B4428C5EB9100634E38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C48D7B4D28C5EB9100634E38 /* ChillkraTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C48D7B4E28C5EB9100634E38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C48D7B5928C5EB9100634E38 /* ChillkraUITestsLaunchTests.swift in Sources */,
+				C48D7B5728C5EB9100634E38 /* ChillkraUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C48D7B4A28C5EB9100634E38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C48D7B3728C5EB9000634E38 /* Chillkra */;
+			targetProxy = C48D7B4928C5EB9100634E38 /* PBXContainerItemProxy */;
+		};
+		C48D7B5428C5EB9100634E38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C48D7B3728C5EB9000634E38 /* Chillkra */;
+			targetProxy = C48D7B5328C5EB9100634E38 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C48D7B5A28C5EB9100634E38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C48D7B5B28C5EB9100634E38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C48D7B5D28C5EB9100634E38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Chillkra/Preview Content\"";
+				DEVELOPMENT_TEAM = JZBZF2LXM3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Chillkra/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Huy.Chillkra;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C48D7B5E28C5EB9100634E38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Chillkra/Preview Content\"";
+				DEVELOPMENT_TEAM = JZBZF2LXM3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Chillkra/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Huy.Chillkra;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C48D7B6028C5EB9100634E38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JZBZF2LXM3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Huy.ChillkraTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chillkra.app/Chillkra";
+			};
+			name = Debug;
+		};
+		C48D7B6128C5EB9100634E38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JZBZF2LXM3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Huy.ChillkraTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chillkra.app/Chillkra";
+			};
+			name = Release;
+		};
+		C48D7B6328C5EB9100634E38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JZBZF2LXM3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Huy.ChillkraUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Chillkra;
+			};
+			name = Debug;
+		};
+		C48D7B6428C5EB9100634E38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JZBZF2LXM3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Huy.ChillkraUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Chillkra;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C48D7B3328C5EB9000634E38 /* Build configuration list for PBXProject "Chillkra" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C48D7B5A28C5EB9100634E38 /* Debug */,
+				C48D7B5B28C5EB9100634E38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C48D7B5C28C5EB9100634E38 /* Build configuration list for PBXNativeTarget "Chillkra" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C48D7B5D28C5EB9100634E38 /* Debug */,
+				C48D7B5E28C5EB9100634E38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C48D7B5F28C5EB9100634E38 /* Build configuration list for PBXNativeTarget "ChillkraTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C48D7B6028C5EB9100634E38 /* Debug */,
+				C48D7B6128C5EB9100634E38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C48D7B6228C5EB9100634E38 /* Build configuration list for PBXNativeTarget "ChillkraUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C48D7B6328C5EB9100634E38 /* Debug */,
+				C48D7B6428C5EB9100634E38 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C48D7B3028C5EB9000634E38 /* Project object */;
+}
