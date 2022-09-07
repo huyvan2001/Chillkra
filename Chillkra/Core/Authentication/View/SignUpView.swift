@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @State var selectedIndex: Int = 0
     @State var name: String = ""
     @State var email: String = ""
     @State var password: String = ""
     let customSize = CustomSize()
+    @EnvironmentObject var viewModel : AuthViewModel
     var body: some View {
         VStack{
             VStack(alignment: .leading){
+                
                 HeaderView(imageApp: "General.sun",
                            textApp: "Chillkra",
                            name: "",
@@ -34,6 +37,7 @@ struct SignUpView: View {
             footer
             
         }
+        .navigationBarHidden(true)
         .foregroundColor(Color("General.mainTextColor"))
         .padding()
         .frame(maxWidth:.infinity,maxHeight: .infinity)
@@ -44,6 +48,7 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView()
+            .environmentObject(AuthViewModel())
     }
 }
 
@@ -88,15 +93,15 @@ extension SignUpView {
     }
     
     var button: some View {
-        NavigationLink {
-            //
-        } label: {
+        Button(action: {
+            viewModel.signup(withEmail: email, name: name, password: password)
+        }, label: {
             Text("Sign up")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))
                 .frame(width: customSize.widthButton, height: customSize.heightButton)
                 .background(Color("General.buttonColor"))
                 .cornerRadius(6)
-        }
+        })
         .padding()
     }
     
@@ -105,8 +110,13 @@ extension SignUpView {
         VStack{
             HStack{
                 Text("Already have an account?")
-                Text("Login")
-                    .underline()
+                NavigationLink {
+                    LoginView()
+                } label: {
+                    Text("Login")
+                        .underline()
+                }
+
             }
             .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
             

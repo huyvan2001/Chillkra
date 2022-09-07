@@ -8,20 +8,31 @@
 import SwiftUI
 
 struct SearchView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
     @State var textSearch: String = ""
     var customSize = CustomSize()
     var body: some View {
         VStack{
-            HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: "Siddhi", personImage: "Person", title: "Search")
-                
-                historySearch
+            if let user = viewModel.currentUser {
+                HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: user.name, personImage: "Person", title: "Search")
+            }
+            
+            
+            SearchBar(text: $textSearch)
+            
+            
+            
+            historySearch
                 .padding(.bottom)
             
             
-                recently
+            
+            recently
             
             
-                Spacer()
+            
+            
+            Spacer()
         }
         .navigationBarHidden(true)
         .foregroundColor(Color("General.mainTextColor"))
@@ -33,6 +44,7 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
+            .environmentObject(AuthViewModel())
     }
 }
 extension SearchView {
@@ -59,20 +71,28 @@ extension SearchView {
         }
     }
     
+    
+    
+    
     var recently: some View {
         VStack(alignment: .leading){
-        Text("Recently played")
+            Text("Recently played")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
                 .padding(.bottom)
-        ScrollView(.horizontal){
-            LazyHStack{
-                MusicRow(imageName: "Main.LostMountain", time: "15m", NameRow: "Lost Mountain", NameSinger: "Shiva")
-                MusicRow(imageName: "Main.OutOfSpace", time: "46m", NameRow: "Out Of Space", NameSinger: "Krishna")
-                MusicRow(imageName: "Main.Brahaman", time: "30m", NameRow: "Mother", NameSinger: "Vishnu")
+            ScrollView(.horizontal){
+                LazyHStack{
+                    MusicRow(imageName: "Main.LostMountain", time: "15m", NameRow: "Lost Mountain", NameSinger: "Shiva")
+                    MusicRow(imageName: "Main.OutOfSpace", time: "46m", NameRow: "Out Of Space", NameSinger: "Krishna")
+                    MusicRow(imageName: "Main.Brahaman", time: "30m", NameRow: "Mother", NameSinger: "Vishnu")
+                }
             }
         }
-        }
-        .frame(width: .infinity, height: 220)
+        .frame(height: 220)
         
     }
+    
+    
+    
+    
+    
 }

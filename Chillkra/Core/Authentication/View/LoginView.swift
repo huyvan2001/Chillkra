@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State var email = ""
     @State var password = ""
+    @EnvironmentObject var viewModel: AuthViewModel
     let customSize = CustomSize()
     
     
@@ -30,6 +31,7 @@ struct LoginView: View {
             
             footer
         }
+        .navigationBarHidden(true)
         .foregroundColor(Color("General.mainTextColor"))
         .padding()
         .frame(maxWidth:.infinity,maxHeight: .infinity)
@@ -83,23 +85,28 @@ extension LoginView{
         
     }
     var button: some View {
-        NavigationLink {
-            //
-        } label: {
+        Button(action: {
+            viewModel.login(withEmail: email, password: password)
+        }, label: {
             Text("Login")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))
                 .frame(width: customSize.widthButton, height: customSize.heightButton)
                 .background(Color("General.buttonColor"))
                 .cornerRadius(6)
-        }
+        })
         .padding()
     }
     var footer: some View {
         VStack{
             HStack{
                 Text("Don't have an account?")
-                Text("Sign up")
-                    .underline()
+                NavigationLink {
+                    SignUpView()
+                } label: {
+                    Text("Sign up")
+                        .underline()
+                }
+
             }
             .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
             

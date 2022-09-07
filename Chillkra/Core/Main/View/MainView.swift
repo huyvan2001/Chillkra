@@ -9,10 +9,12 @@ import SwiftUI
 
 struct MainView: View {
     var customSize = CustomSize()
+    @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         VStack(alignment: .leading){
-            HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: "Siddhi", personImage: "Person", title: "")
-            
+            if let user = viewModel.currentUser{
+                HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: user.name, personImage: "Person", title: "")
+            }
             recently
             
             feelRow
@@ -54,7 +56,7 @@ extension MainView{
             }
         }
         }
-        .frame(width: .infinity, height: 220)
+        .frame(height: 220)
     }
     
     var feelRow: some View {

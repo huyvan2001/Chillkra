@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject  var viewModel : AuthViewModel
     let customSize = CustomSize()
     var body: some View {
-       Text("Hello World")
+        if viewModel.userSession == nil{
+            SplashView()
+        }
+        else {
+            MainTabView()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView()
+        ContentView()
+            .environmentObject(AuthViewModel())
     }
 }

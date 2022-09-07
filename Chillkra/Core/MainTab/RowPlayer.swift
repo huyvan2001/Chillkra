@@ -61,7 +61,7 @@ struct RowPlayer: View {
             }
             .padding()
         }
-        .frame(width:customSize.rowPlayerWidth,height: customSize.rowPlayerHeight)
+            .frame(height: customSize.rowPlayerHeight)
         .background(LinearGradient(colors: [Color("Main.ColorRowPlayerStart").opacity(0.9),Color("Main.ColorRowPlayerEnd").opacity(0.9)], startPoint: .leading, endPoint: .trailing)
         )
         .cornerRadius(customSize.radiusMusicRow)

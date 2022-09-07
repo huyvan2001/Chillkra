@@ -13,11 +13,14 @@ class CustomSize{
     let widthButton: CGFloat = 343
     let radiusButton: CGFloat = 6
     let icontitleSize: CGFloat = 40
+    let bigText: CGFloat = 60
     let largeText: CGFloat = 40
     let buttonText: CGFloat = 32
     let mediumText: CGFloat = 24
     let smallText: CGFloat = 20
+    let largetinyText: CGFloat = 18
     let tinyText: CGFloat = 16
+    let smalltinyText: CGFloat = 10
     let heightTextField: CGFloat = 25
     let widthTextField: CGFloat = 252
     let iconfooterSize: CGFloat = 60
@@ -42,5 +45,9 @@ class CustomSize{
     let radiusSearch: CGFloat = 4
     let favsRowSize: CGFloat = 162
     let favsRowRadius: CGFloat = 8
+    let imageprofileSize: CGFloat = 123
+    let totalRowHeight: CGFloat = 156.11
+    let totalRowWidth: CGFloat = 342.99
+    let totalRadius: CGFloat = 24
 }
 

@@ -15,7 +15,7 @@ enum type {
         case .login:
             return "Login"
         case .signup:
-            return "Signup"
+            return "Sign up"
         }
     }
     var description:String{

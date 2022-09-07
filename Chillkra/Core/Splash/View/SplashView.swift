@@ -35,7 +35,7 @@ struct SplashView: View {
                 
                 
                 NavigationLink {
-                    //
+                    LoginView()
                 } label: {
                     Text("Login")
                         .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))
@@ -49,7 +49,7 @@ struct SplashView: View {
                     Text("Don't have an account?")
                         .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
                     NavigationLink {
-                        //
+                        SignUpView()
                     } label: {
                         Text("Sign up")
                             .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.smallText))

@@ -14,6 +14,7 @@ struct HeaderView: View {
     let personImage: String
     let title: String
     var customSize = CustomSize()
+    
     var body: some View {
         VStack {
             HStack{
@@ -24,22 +25,34 @@ struct HeaderView: View {
                     .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
                 Spacer()
                 
-                HStack{
-                    Text(name)
-                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
-                    Image(personImage)
-                        .resizable()
-                        .frame(width: customSize.icontitleSize, height:customSize.icontitleSize)
+                if name != "" {
+                    HStack{
+                        Text(name)
+                            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                        
+                        NavigationLink {
+                            SettingView()
+                        } label: {
+                            Image(personImage)
+                                .resizable()
+                                .frame(width: customSize.icontitleSize, height:customSize.icontitleSize)
+                        }
+
+
+
+                    }
                 }
             }
+            .padding(.top,32)
             .padding(.bottom)
             
-            if name == "" {
+            if title != "" {
                 Text(title)
                     .padding(.top)
                     .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.largeText))
             }
         }
+        .padding(.bottom)
     }
 }
 
