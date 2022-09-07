@@ -8,13 +8,11 @@
 import Foundation
 import SwiftUI
 class CustomSize{
-    let mainHeightIcon: CGFloat = 161
-    let mainWidthIcon: CGFloat = 161
+    let mainIconSize: CGFloat = 161
     let heightButton: CGFloat = 56
     let widthButton: CGFloat = 343
     let radiusButton: CGFloat = 6
-    let icontitleHeight: CGFloat = 40
-    let icontitleWidth: CGFloat = 40
+    let icontitleSize: CGFloat = 40
     let largeText: CGFloat = 40
     let buttonText: CGFloat = 32
     let mediumText: CGFloat = 24
@@ -22,7 +20,27 @@ class CustomSize{
     let tinyText: CGFloat = 16
     let heightTextField: CGFloat = 25
     let widthTextField: CGFloat = 252
-    let iconfooterHeight: CGFloat = 60
-    let iconfooterWidth: CGFloat = 60
-    
+    let iconfooterSize: CGFloat = 60
+    let MusicRowHeight: CGFloat = 112.5
+    let MusicRowWidth: CGFloat = 125
+    let radiusMusicRow: CGFloat = 8
+    let iconFeelSize: CGFloat = 80
+    let iconFeelRadius: CGFloat = 9
+    let listRowWidth: CGFloat = 343
+    let listRowHeight: CGFloat = 181
+    let circleSize: CGFloat = 44
+    let TabHeight: CGFloat = 87
+    let TabWidth: CGFloat = 375
+    let TabRadius: CGFloat = 16
+    let rowPlayerWidth: CGFloat = 400
+    let rowPlayerHeight: CGFloat = 90.58
+    let searchBarWidth: CGFloat = 344
+    let searchBarHeight: CGFloat = 51
+    let searchBarRadius: CGFloat = 32
+    let rowSearchWidth: CGFloat = 162
+    let rowSearchHeight: CGFloat = 50
+    let radiusSearch: CGFloat = 4
+    let favsRowSize: CGFloat = 162
+    let favsRowRadius: CGFloat = 8
 }
+

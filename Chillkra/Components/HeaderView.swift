@@ -12,30 +12,39 @@ struct HeaderView: View {
     let textApp: String
     let name: String
     let personImage: String
+    let title: String
     var customSize = CustomSize()
     var body: some View {
-        HStack{
-            Image(imageApp)
-                .resizable()
-                .frame(width: customSize.icontitleHeight, height:customSize.icontitleWidth)
-            Text(textApp)
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
-            Spacer()
-            
+        VStack {
             HStack{
-                Text(name)
-                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
-                Image(personImage)
+                Image(imageApp)
                     .resizable()
-                    .frame(width: customSize.icontitleHeight, height:customSize.icontitleWidth)
+                    .frame(width: customSize.icontitleSize, height:customSize.icontitleSize)
+                Text(textApp)
+                    .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                Spacer()
+                
+                HStack{
+                    Text(name)
+                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                    Image(personImage)
+                        .resizable()
+                        .frame(width: customSize.icontitleSize, height:customSize.icontitleSize)
+                }
+            }
+            .padding(.bottom)
+            
+            if name == "" {
+                Text(title)
+                    .padding(.top)
+                    .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.largeText))
             }
         }
-        .padding(.bottom)
     }
 }
 
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: "Siddhi", personImage: "Person")
+        HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: "Siddhi", personImage: "Person",title: "Search")
     }
 }

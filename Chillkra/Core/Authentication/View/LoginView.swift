@@ -1,5 +1,5 @@
 //
-//  SignUpView.swift
+//  LoginView.swift
 //  Chillkra
 //
 //  Created by Lê Văn Huy on 05/09/2022.
@@ -7,62 +7,48 @@
 
 import SwiftUI
 
-struct SignUpView: View {
-    @State var name: String = ""
-    @State var email: String = ""
-    @State var password: String = ""
+struct LoginView: View {
+    @State var email = ""
+    @State var password = ""
     let customSize = CustomSize()
+    
+    
+    
     var body: some View {
         VStack{
+            
             VStack(alignment: .leading){
-                HeaderView(imageApp: "General.sun",
-                           textApp: "Chillkra",
-                           name: "",
-                           personImage: "")
-                    .padding(.bottom)
+                HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: "", personImage: "", title: "")
                 
-                TitleView(title: "Sign up",
-                          description1: "Sign up for free meditation chill and",
-                          description2: "relax experiences with music.")
-                .padding(.bottom)
+                TitleView(typeView: .login)
+                
                 
                 field
-                
             }
+            
             button
             
-            Spacer()
-            
             footer
-            
         }
         .foregroundColor(Color("General.mainTextColor"))
         .padding()
         .frame(maxWidth:.infinity,maxHeight: .infinity)
         .background(Color("backgroundColor"))
+        
     }
 }
 
-struct SignUpView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        LoginView()
     }
 }
-
-extension SignUpView {
+extension LoginView{
+    
     var field: some View {
         
         VStack(alignment: .leading){
             VStack(alignment: .leading){
-                Text("Name")
-                    .padding(.top)
-                    .padding(.bottom)
-                TextField("Buda Maitreya",text: $name)
-                    .frame(width: customSize.widthTextField, height: customSize.heightTextField)
-                Divider()
-                    .overlay(Color("General.mainTextColor"))
-                
-                
                 Text("Email")
                     .padding(.top)
                     .padding(.bottom)
@@ -70,9 +56,6 @@ extension SignUpView {
                     .frame(width: customSize.widthTextField, height: customSize.heightTextField)
                 Divider()
                     .overlay(Color("General.mainTextColor"))
-                
-                
-                
                 Text("Password")
                     .padding(.top)
                     .padding(.bottom)
@@ -82,18 +65,28 @@ extension SignUpView {
                     .overlay(Color("General.mainTextColor"))
             }
             .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
-
+            
+            
+            HStack{
+                Spacer()
+                NavigationLink {
+                    //
+                } label: {
+                    Text("Forgot your password?")
+                }
+            }
+            .padding(.top)
+            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
             
         }
         .padding(.bottom)
         
     }
-    
     var button: some View {
         NavigationLink {
             //
         } label: {
-            Text("Sign up")
+            Text("Login")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))
                 .frame(width: customSize.widthButton, height: customSize.heightButton)
                 .background(Color("General.buttonColor"))
@@ -101,13 +94,11 @@ extension SignUpView {
         }
         .padding()
     }
-    
-    
     var footer: some View {
         VStack{
             HStack{
-                Text("Already have an account?")
-                Text("Login")
+                Text("Don't have an account?")
+                Text("Sign up")
                     .underline()
             }
             .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
@@ -121,14 +112,13 @@ extension SignUpView {
             HStack{
                 Image("Google")
                     .scaledToFit()
-                    .frame(width: customSize.iconfooterWidth, height: customSize.icontitleHeight)
+                    .frame(width: customSize.iconfooterSize, height: customSize.iconfooterSize)
                     .padding()
                 Image("Facebook")
                     .scaledToFit()
-                    .frame(width: customSize.iconfooterWidth, height: customSize.icontitleHeight)
+                    .frame(width: customSize.iconfooterSize, height: customSize.iconfooterSize)
                     .padding()
             }
         }
     }
 }
-
