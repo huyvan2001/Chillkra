@@ -6,57 +6,49 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct SettingView: View {
+    @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel
     var customSize = CustomSize()
     var body: some View {
-        ZStack(alignment: .bottom){
-            VStack(alignment: .leading){
-                if let user = viewModel.currentUser {
-                    HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: user.name, personImage: "Person",title: "Settings")
-                }
-                
-                
-                
-                HStack{
-                    Spacer()
-                    profile
-                    Spacer()
-                }
-                .padding(.bottom)
-                
-                
-                account
-                    .padding(.bottom)
-                
-                notification
-                    .padding(.bottom)
-                
-                
-                other
-                
-                Spacer()
-                
-                
-            }
-            .navigationBarHidden(true)
-            .foregroundColor(Color("General.mainTextColor"))
-            .padding()
-            .background(Color("backgroundColor"))
+        VStack(alignment: .leading){
+            HeaderView(selectedIndex: $selectedIndex, title: "Setting")
             
-
+            
+            HStack{
+                Spacer()
+                profile
+                    .padding(.bottom)
+                Spacer()
+            }
+            
+            
+            account
+                .padding(.bottom)
+            
+            notification
+                .padding(.bottom)
+            
+            
+            other
+            
+            Spacer()
+            
         }
-       
-        
+        .navigationBarHidden(true)
+        .foregroundColor(Color("General.mainTextColor"))
+        .padding()
+        .background(Color("backgroundColor"))
     }
+    
     
 }
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            SettingView()
+            SettingView(selectedIndex: .constant(2))
                 .environmentObject(AuthViewModel())
         }
     }
@@ -66,9 +58,17 @@ extension SettingView{
     var profile: some View {
         VStack{
             if let user = viewModel.currentUser {
-                Image("Person")
-                    .resizable()
-                    .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                if user.urlImage == "" {
+                    Image("Person")
+                        .resizable()
+                        .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                }
+                else {
+                    KFImage(URL(string: user.urlImage))
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                }
                 Text(user.name)
                     .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
             }
@@ -85,7 +85,7 @@ extension SettingView{
             
             VStack(alignment: .leading){
                 NavigationLink {
-                    //
+                    EditProfileView()
                 } label: {
                     HStack{
                         Text("Edit Profile")
@@ -98,7 +98,7 @@ extension SettingView{
                 
                 
                 NavigationLink {
-                    //
+                    ChangePasswordView(selectedIndex: $selectedIndex)
                 } label: {
                     HStack{
                         Text("Change password")
@@ -108,7 +108,7 @@ extension SettingView{
                     }
                     .padding(.top)
                 }
-
+                
                 
                 NavigationLink {
                     //
@@ -146,10 +146,10 @@ extension SettingView{
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.tinyText))
                 .padding(.bottom)
             VStack(alignment: .leading){
-                    Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
-                        Text("Notification")
-                    }
-                    .padding(.bottom)
+                Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
+                    Text("Notification")
+                }
+                .padding(.bottom)
                 Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
                     Text("App Notification")
                 }
@@ -162,19 +162,13 @@ extension SettingView{
     
     var other: some View{
         VStack(alignment: .leading){
-            Text("Other")
-                .foregroundColor(Color("Setting.ColorTitle"))
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.tinyText))
-                .padding(.bottom)
-            
             Button {
                 viewModel.logOut()
             } label: {
                 Text("Logout")
-                    .padding(.bottom)
                     .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.smallText))
             }
-
+            
         }
     }
 }

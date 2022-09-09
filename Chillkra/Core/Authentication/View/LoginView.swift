@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @State var check: Bool = true
     @State var email = ""
     @State var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
@@ -19,7 +20,7 @@ struct LoginView: View {
         VStack{
             
             VStack(alignment: .leading){
-                HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: "", personImage: "", title: "")
+                HeaderView(selectedIndex: .constant(1), title: "")
                 
                 TitleView(typeView: .login)
                 
@@ -28,6 +29,15 @@ struct LoginView: View {
             }
             
             button
+            
+            if check == false {
+                withAnimation(.spring()){
+                    Text("Fail to Login. Please check email and password !!!")
+                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .padding()
+                        .foregroundColor(.red)
+                }
+            }
             
             footer
         }
@@ -43,6 +53,7 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(AuthViewModel())
     }
 }
 extension LoginView{
@@ -86,7 +97,9 @@ extension LoginView{
     }
     var button: some View {
         Button(action: {
-            viewModel.login(withEmail: email, password: password)
+            viewModel.login(withEmail: email, password: password) { check in
+                self.check = check
+            }
         }, label: {
             Text("Login")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))

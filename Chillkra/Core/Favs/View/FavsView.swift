@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct FavsView: View {
+    @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel : AuthViewModel
     let customSize = CustomSize()
     @State private var textSearch: String = ""
     var body: some View {
         VStack{
-            if let user = viewModel.currentUser {
-                HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: user.name, personImage: "Person",title: "Favorites")
-            }
+            HeaderView(selectedIndex: $selectedIndex, title: "Favorites")
             
             SearchBar(text: $textSearch)
             
@@ -33,7 +32,7 @@ struct FavsView: View {
 
 struct FavsView_Previews: PreviewProvider {
     static var previews: some View {
-        FavsView()
+        FavsView(selectedIndex: .constant(1))
             .environmentObject(AuthViewModel())
     }
 }

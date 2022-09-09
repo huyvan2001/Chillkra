@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PlayView: View {
+    @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel
     let customSize = CustomSize()
     var body: some View {
@@ -16,9 +17,7 @@ struct PlayView: View {
                 .resizable()
                 
             VStack{
-                if let user = viewModel.currentUser {
-                    HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: user.name, personImage: "Person",title: "")
-                }
+                    HeaderView(selectedIndex: $selectedIndex, title: "")
                 
                 name
                     .padding(.top,50)
@@ -48,7 +47,7 @@ struct PlayView: View {
 
 struct PlayView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayView()
+        PlayView(selectedIndex: .constant(2))
             .environmentObject(AuthViewModel())
     }
 }

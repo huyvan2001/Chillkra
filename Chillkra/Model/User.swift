@@ -13,6 +13,7 @@ class User: Identifiable,Decodable{
     @DocumentID var id: String?
     let name: String
     let email: String
+    let urlImage: String
     var isCurrentUser: Bool {
         return Auth.auth().currentUser?.uid == id
     }

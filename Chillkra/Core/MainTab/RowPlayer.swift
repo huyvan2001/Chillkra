@@ -38,6 +38,7 @@ struct RowPlayer: View {
                         Image(systemName: "heart.fill")
                             .font(.title3)
                             .foregroundColor(Color(favs == true ? "backgroundColor": "Main.IconPlay"))
+                    }
                     
                     Button {
                         pause.toggle()
@@ -57,7 +58,6 @@ struct RowPlayer: View {
 
                     
                     
-                }
             }
             .padding()
         }

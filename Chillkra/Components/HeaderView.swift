@@ -6,37 +6,43 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct HeaderView: View {
-    let imageApp: String
-    let textApp: String
-    let name: String
-    let personImage: String
+    @Binding var selectedIndex: Int
     let title: String
     var customSize = CustomSize()
-    
+    @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         VStack {
             HStack{
-                Image(imageApp)
+                Image("General.sun")
                     .resizable()
                     .frame(width: customSize.icontitleSize, height:customSize.icontitleSize)
-                Text(textApp)
+                Text("Chillkra")
                     .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
                 Spacer()
                 
-                if name != "" {
+                      if let user =  viewModel.currentUser {
                     HStack{
-                        Text(name)
+                        Text(user.name)
                             .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
                         
-                        NavigationLink {
-                            SettingView()
+                        Button {
+                            self.selectedIndex = 5
                         } label: {
-                            Image(personImage)
-                                .resizable()
-                                .frame(width: customSize.icontitleSize, height:customSize.icontitleSize)
+                            if user.urlImage == "" {
+                                Image("Person")
+                                    .resizable()
+                                    .frame(width: customSize.icontitleSize, height:customSize.icontitleSize)
+                            }
+                            else {
+                                KFImage(URL(string: user.urlImage))
+                                    .resizable()
+                                    .clipShape(Circle())
+                                    .frame(width: customSize.icontitleSize, height:customSize.icontitleSize)
+                            }
                         }
+
 
 
 
@@ -58,6 +64,7 @@ struct HeaderView: View {
 
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: "Siddhi", personImage: "Person",title: "Search")
+        HeaderView(selectedIndex: .constant(1), title: "")
+            .environmentObject(AuthViewModel())
     }
 }

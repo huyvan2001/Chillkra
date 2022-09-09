@@ -6,6 +6,7 @@
 //
 import SwiftUI
 struct StatsView: View {
+    @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var selectFiller: StatsFillerViewModel = .activity
     let customSize = CustomSize()
@@ -13,9 +14,7 @@ struct StatsView: View {
     var body: some View {
         VStack{
             
-            if let user = viewModel.currentUser {
-                HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: user.name, personImage: "Person",title: "Stats")
-            }
+            HeaderView(selectedIndex: $selectedIndex, title: "Stats")
             
             statsFiller
             if selectFiller == .activity {
@@ -42,7 +41,7 @@ struct StatsView: View {
 
 struct StatsView_Previews: PreviewProvider {
     static var previews: some View {
-        StatsView()
+        StatsView(selectedIndex: .constant(1))
             .environmentObject(AuthViewModel())
     }
 }

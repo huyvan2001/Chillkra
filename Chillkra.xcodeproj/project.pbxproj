@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C42024AB28C9D5F700468B70 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AA28C9D5F700468B70 /* EditProfileView.swift */; };
+		C42024AD28C9DA1700468B70 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AC28C9DA1700468B70 /* ChangePasswordView.swift */; };
+		C42024AF28C9E3CE00468B70 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AE28C9E3CE00468B70 /* ImageUploader.swift */; };
+		C42024B228C9E41500468B70 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024B128C9E41500468B70 /* ImagePicker.swift */; };
+		C42024B528CA37EA00468B70 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C42024B428CA37EA00468B70 /* Kingfisher */; };
 		C462939B28C887CC00F8D1A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C462939A28C887CC00F8D1A9 /* FirebaseAuth */; };
 		C462939D28C887CC00F8D1A9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C462939C28C887CC00F8D1A9 /* FirebaseDatabase */; };
 		C462939F28C887CC00F8D1A9 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C462939E28C887CC00F8D1A9 /* FirebaseDatabaseSwift */; };
@@ -83,6 +88,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C42024AA28C9D5F700468B70 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		C42024AC28C9DA1700468B70 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		C42024AE28C9E3CE00468B70 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		C42024B128C9E41500468B70 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C46293A428C8896D00F8D1A9 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C46293A628C88A1400F8D1A9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C46293AB28C8A43D00F8D1A9 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -146,6 +155,7 @@
 			files = (
 				C462939F28C887CC00F8D1A9 /* FirebaseDatabaseSwift in Frameworks */,
 				C46293A128C887CC00F8D1A9 /* FirebaseFirestore in Frameworks */,
+				C42024B528CA37EA00468B70 /* Kingfisher in Frameworks */,
 				C462939D28C887CC00F8D1A9 /* FirebaseDatabase in Frameworks */,
 				C46293A328C887CC00F8D1A9 /* FirebaseStorage in Frameworks */,
 				C462939B28C887CC00F8D1A9 /* FirebaseAuth in Frameworks */,
@@ -170,6 +180,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C42024B028C9E40700468B70 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C42024B128C9E41500468B70 /* ImagePicker.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		C482EB4B28C82D0D00ADAE41 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				C482EB4E28C82D5000ADAE41 /* SettingView.swift */,
+				C42024AA28C9D5F700468B70 /* EditProfileView.swift */,
+				C42024AC28C9DA1700468B70 /* ChangePasswordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,6 +237,7 @@
 		C48D7B3A28C5EB9000634E38 /* Chillkra */ = {
 			isa = PBXGroup;
 			children = (
+				C42024B028C9E40700468B70 /* Utils */,
 				C48D7B6A28C5EBCB00634E38 /* Extensions */,
 				C48D7B6828C5EBBF00634E38 /* Service */,
 				C48D7B6928C5EBC500634E38 /* Model */,
@@ -272,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				C46293AB28C8A43D00F8D1A9 /* UserService.swift */,
+				C42024AE28C9E3CE00468B70 /* ImageUploader.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -294,6 +316,7 @@
 		C48D7B6B28C5EBD600634E38 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C48D7B6D28C5EC0B00634E38 /* Authentication */,
 				C4DA900028C849360067A1AB /* Played */,
 				C482EB4B28C82D0D00ADAE41 /* Setting */,
 				C48D7BC028C6FDEF00634E38 /* MainTab */,
@@ -302,7 +325,6 @@
 				C48D7BA728C6D98B00634E38 /* Search */,
 				C48D7BA628C6D98900634E38 /* Main */,
 				C48D7B9F28C6D7BD00634E38 /* Splash */,
-				C48D7B6D28C5EC0B00634E38 /* Authentication */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -565,6 +587,7 @@
 				C46293A028C887CC00F8D1A9 /* FirebaseFirestore */,
 				C46293A228C887CC00F8D1A9 /* FirebaseStorage */,
 				C46293A928C88BD700F8D1A9 /* FirebaseFirestoreSwift */,
+				C42024B428CA37EA00468B70 /* Kingfisher */,
 			);
 			productName = Chillkra;
 			productReference = C48D7B3828C5EB9000634E38 /* Chillkra.app */;
@@ -641,6 +664,7 @@
 			packageReferences = (
 				C462939928C887CC00F8D1A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C46293A828C88BD700F8D1A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C42024B328CA37EA00468B70 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = C48D7B3928C5EB9000634E38 /* Products */;
 			projectDirPath = "";
@@ -702,16 +726,19 @@
 				C482EB4A28C7868E00ADAE41 /* FavsRow.swift in Sources */,
 				C48D7BB328C6F1C500634E38 /* ListRow.swift in Sources */,
 				C48D7B7228C5EC2600634E38 /* LoginView.swift in Sources */,
+				C42024B228C9E41500468B70 /* ImagePicker.swift in Sources */,
 				C48D7B9628C5EE6A00634E38 /* CustomFonts.swift in Sources */,
 				C48D7B9828C6137400634E38 /* CustomSize.swift in Sources */,
 				C48D7BAD28C6D9D200634E38 /* MainView.swift in Sources */,
 				C48D7B3E28C5EB9000634E38 /* ContentView.swift in Sources */,
+				C42024AD28C9DA1700468B70 /* ChangePasswordView.swift in Sources */,
 				C48D7B9E28C6361A00634E38 /* SignUpView.swift in Sources */,
 				C46293A728C88A1400F8D1A9 /* User.swift in Sources */,
 				C48D7BC428C7243800634E38 /* RowPlayer.swift in Sources */,
 				C48D7B3C28C5EB9000634E38 /* ChillkraApp.swift in Sources */,
 				C48D7B9A28C61CB500634E38 /* TitleView.swift in Sources */,
 				C48D7BC228C6FDFC00634E38 /* MainTabView.swift in Sources */,
+				C42024AF28C9E3CE00468B70 /* ImageUploader.swift in Sources */,
 				C4DA8FFF28C847180067A1AB /* TotalRow.swift in Sources */,
 				C48D7BB128C6E49700634E38 /* FeelRow.swift in Sources */,
 				C4DA901028C87EC50067A1AB /* ActivityView.swift in Sources */,
@@ -720,6 +747,7 @@
 				C48D7BBD28C6FD4100634E38 /* StatsView.swift in Sources */,
 				C48D7BBF28C6FD4A00634E38 /* SearchView.swift in Sources */,
 				C4DA900428C849FF0067A1AB /* PlayView.swift in Sources */,
+				C42024AB28C9D5F700468B70 /* EditProfileView.swift in Sources */,
 				C482EB4628C731DA00ADAE41 /* SearchBar.swift in Sources */,
 				C482EB4828C7373400ADAE41 /* SearchRow.swift in Sources */,
 				C48D7BA428C6D7DC00634E38 /* SplashView.swift in Sources */,
@@ -1057,6 +1085,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C42024B328CA37EA00468B70 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		C462939928C887CC00F8D1A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1076,6 +1112,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C42024B428CA37EA00468B70 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C42024B328CA37EA00468B70 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		C462939A28C887CC00F8D1A9 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C462939928C887CC00F8D1A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

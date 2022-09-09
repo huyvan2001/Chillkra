@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @State var selectedIndex: Int = 0
+    @State var check: Bool = true
     @State var name: String = ""
     @State var email: String = ""
     @State var password: String = ""
@@ -18,10 +18,7 @@ struct SignUpView: View {
         VStack{
             VStack(alignment: .leading){
                 
-                HeaderView(imageApp: "General.sun",
-                           textApp: "Chillkra",
-                           name: "",
-                           personImage: "", title: "")
+                HeaderView(selectedIndex: .constant(1), title: "")
                     .padding(.bottom)
                 
                 TitleView(typeView: .signup)
@@ -31,6 +28,27 @@ struct SignUpView: View {
                 
             }
             button
+            
+            if check == false {
+                withAnimation(.spring()) {
+                    Text("Fail to Sign Up. Email exists!!!")
+                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .padding()
+                        .foregroundColor(.red)
+
+                }
+            }
+            
+            if name.isEmpty || email.isEmpty || password.isEmpty {
+                withAnimation(.spring()) {
+                    Text("Please fill Information ")
+                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .padding()
+                        .foregroundColor(.red)
+                }
+            }
+            
+            
             
             Spacer()
             
@@ -94,7 +112,15 @@ extension SignUpView {
     
     var button: some View {
         Button(action: {
-            viewModel.signup(withEmail: email, name: name, password: password)
+            
+            if !name.isEmpty && !email.isEmpty && !password.isEmpty {
+                viewModel.signup(withEmail: email, name: name, password: password) { check in
+                    self.check = check
+                }
+            }
+            
+            
+            
         }, label: {
             Text("Sign up")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))

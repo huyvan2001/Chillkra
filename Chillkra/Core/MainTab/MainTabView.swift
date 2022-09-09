@@ -8,53 +8,58 @@ import SwiftUI
 
 struct MainTabView: View {
     let customSize = CustomSize()
+    @Namespace var animation
     @State private var selectedIndex = 0
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
-        ZStack(alignment: .bottom){
-            VStack{
-                if selectedIndex == 0 {
-                    withAnimation(.easeInOut){
-                        MainView()
-                    }
-                }
-                else if selectedIndex == 1 {
-                    withAnimation(.easeInOut){
-                    SearchView()
-                    }
-            
-                }
-                else if selectedIndex == 2 {
-                    withAnimation(.easeInOut){
-                        StatsView()
-                        
-                    }
-                }
-                else if selectedIndex == 3 {
-                    withAnimation(.easeInOut){
-                    FavsView()
-                    }
-                }
-                else if selectedIndex == 4{
-                    withAnimation(.easeOut){
-                    PlayView()
+        VStack{
+            if selectedIndex == 0 {
+                    MainView(selectedIndex: $selectedIndex)
+                    .frame(height: 888)
+            }
+            else if selectedIndex == 1 {
+                SearchView(selectedIndex: $selectedIndex)
+                    .frame(height: 888)
+            }
+            else if selectedIndex == 2 {
+                StatsView(selectedIndex: $selectedIndex)
+                    .frame(height: 888)
+            }
+            else if selectedIndex == 3 {
+                FavsView(selectedIndex: $selectedIndex)
+                    .frame(height: 888)
+            }
+            else if selectedIndex == 4{
+                PlayView(selectedIndex: $selectedIndex)
+                    .frame(height: 888)
+            }
+            else if selectedIndex == 5 {
+                ScrollView(.vertical){
+                    VStack{
+                        SettingView(selectedIndex: $selectedIndex)
+                            .frame(height: 888)
                     }
                 }
             }
-            
-            Button {
-                self.selectedIndex = 4
-            } label: {
-                RowPlayer()
-                    .offset(x: 0, y: -87.5)
-            }
-            
-            TabBar(selectedIndex: $selectedIndex)
-            
-
-
-
+            Spacer()
         }
+        .background(Color("backgroundColor"))
+        .frame(maxWidth: .infinity,maxHeight: .infinity)
+        .overlay(
+            VStack{
+                Spacer()
+//                if selectedIndex != 4{
+//                    Button {
+//                        self.selectedIndex = 4
+//                    } label: {
+//                        RowPlayer()
+//                            .padding(.bottom,-6)
+//                    }
+//                }
+                TabBar(selectedIndex: $selectedIndex)
+                
+            }
+        )
         .ignoresSafeArea()
     }
 }

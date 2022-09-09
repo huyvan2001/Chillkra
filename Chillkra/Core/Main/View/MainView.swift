@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
+    @Binding var selectedIndex: Int
     var customSize = CustomSize()
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         VStack(alignment: .leading){
-            if let user = viewModel.currentUser{
-                HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: user.name, personImage: "Person", title: "")
-            }
+            HeaderView(selectedIndex: $selectedIndex, title: "")
             recently
             
             feelRow
@@ -39,7 +38,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(selectedIndex: .constant(5))
     }
 }
 extension MainView{

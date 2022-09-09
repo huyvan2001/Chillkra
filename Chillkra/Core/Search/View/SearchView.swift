@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct SearchView: View {
+    @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel
     @State var textSearch: String = ""
     var customSize = CustomSize()
     var body: some View {
         VStack{
-            if let user = viewModel.currentUser {
-                HeaderView(imageApp: "General.sun", textApp: "Chillkra", name: user.name, personImage: "Person", title: "Search")
-            }
+            HeaderView(selectedIndex: $selectedIndex, title: "Search")
             
             
             SearchBar(text: $textSearch)
@@ -43,7 +42,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(selectedIndex: .constant(1))
             .environmentObject(AuthViewModel())
     }
 }
