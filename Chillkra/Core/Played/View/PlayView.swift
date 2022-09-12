@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import AVFoundation
 struct PlayView: View {
     @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel

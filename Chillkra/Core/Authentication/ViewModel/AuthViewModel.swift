@@ -23,6 +23,7 @@ class AuthViewModel: ObservableObject {
     }
     
     
+    
     //MARK: LOGIN
     func login(withEmail email: String, password: String,completion:@escaping(Bool)->Void) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
@@ -36,6 +37,7 @@ class AuthViewModel: ObservableObject {
             completion(true)
         }
     }
+    
     
     
     //MARK: SIGNUP
@@ -56,6 +58,8 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    
+    
     //MARK: CHANGE PASSWORD
     func changePassword(email:String,currentPassword: String,newPassword: String,completion:@escaping(Bool) -> Void){
         let credential = EmailAuthProvider.credential(withEmail:email, password: currentPassword)
@@ -67,7 +71,11 @@ class AuthViewModel: ObservableObject {
     }
     
     
-    //MARK: Edit Profile with name
+    
+    
+    
+    
+    //MARK: Edit Profilename
     func editName(_ name: String){
         guard let uid = userSession?.uid else { return }
         
@@ -80,7 +88,7 @@ class AuthViewModel: ObservableObject {
     }
     
     
-    //MARK: Edit Profile
+    //MARK: Edit ProfileImage
     func editImage(_ image: UIImage){
         guard let uid = userSession?.uid else { return }
         
@@ -96,6 +104,8 @@ class AuthViewModel: ObservableObject {
     
     
     
+    
+    
     //MARK: FETCH USER
     func fetchUser(){
         guard let uid = userSession?.uid else { return }
@@ -106,6 +116,8 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    
+    
     //MARK: LOG OUT
     func logOut(){
         self.userSession = nil
@@ -113,6 +125,14 @@ class AuthViewModel: ObservableObject {
         try? Auth.auth().signOut()
     }
     
+    
+    //MARK: RESET PASSWORD
+    func resetPassword(email: String,completion:@escaping(Bool)->Void){
+        Auth.auth().sendPasswordReset(withEmail: email) { _ in
+            print("Email isn't exist")
+        }
+        completion(true)
+    }
     
     
 }

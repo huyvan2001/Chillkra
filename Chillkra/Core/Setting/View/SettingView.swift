@@ -121,17 +121,6 @@ extension SettingView{
                     .padding(.top)
                 }
                 
-                NavigationLink {
-                    //
-                } label: {
-                    HStack{
-                        Text("Language")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
-                    .padding(.top)
-                }
-                
             }
             .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.smallText))
             

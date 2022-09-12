@@ -12,6 +12,8 @@
 		C42024AF28C9E3CE00468B70 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AE28C9E3CE00468B70 /* ImageUploader.swift */; };
 		C42024B228C9E41500468B70 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024B128C9E41500468B70 /* ImagePicker.swift */; };
 		C42024B528CA37EA00468B70 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C42024B428CA37EA00468B70 /* Kingfisher */; };
+		C42024B728CAF68F00468B70 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024B628CAF68F00468B70 /* Music.swift */; };
+		C42024B928CAF78300468B70 /* SongService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024B828CAF78300468B70 /* SongService.swift */; };
 		C462939B28C887CC00F8D1A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C462939A28C887CC00F8D1A9 /* FirebaseAuth */; };
 		C462939D28C887CC00F8D1A9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C462939C28C887CC00F8D1A9 /* FirebaseDatabase */; };
 		C462939F28C887CC00F8D1A9 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C462939E28C887CC00F8D1A9 /* FirebaseDatabaseSwift */; };
@@ -92,6 +94,8 @@
 		C42024AC28C9DA1700468B70 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		C42024AE28C9E3CE00468B70 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
 		C42024B128C9E41500468B70 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C42024B628CAF68F00468B70 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		C42024B828CAF78300468B70 /* SongService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongService.swift; sourceTree = "<group>"; };
 		C46293A428C8896D00F8D1A9 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C46293A628C88A1400F8D1A9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C46293AB28C8A43D00F8D1A9 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 			children = (
 				C46293AB28C8A43D00F8D1A9 /* UserService.swift */,
 				C42024AE28C9E3CE00468B70 /* ImageUploader.swift */,
+				C42024B828CAF78300468B70 /* SongService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				C46293A628C88A1400F8D1A9 /* User.swift */,
+				C42024B628CAF68F00468B70 /* Music.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -731,6 +737,7 @@
 				C48D7B9828C6137400634E38 /* CustomSize.swift in Sources */,
 				C48D7BAD28C6D9D200634E38 /* MainView.swift in Sources */,
 				C48D7B3E28C5EB9000634E38 /* ContentView.swift in Sources */,
+				C42024B928CAF78300468B70 /* SongService.swift in Sources */,
 				C42024AD28C9DA1700468B70 /* ChangePasswordView.swift in Sources */,
 				C48D7B9E28C6361A00634E38 /* SignUpView.swift in Sources */,
 				C46293A728C88A1400F8D1A9 /* User.swift in Sources */,
@@ -755,6 +762,7 @@
 				C46293A528C8896D00F8D1A9 /* AuthViewModel.swift in Sources */,
 				C46293AC28C8A43D00F8D1A9 /* UserService.swift in Sources */,
 				C4DA900628C852380067A1AB /* TabBar.swift in Sources */,
+				C42024B728CAF68F00468B70 /* Music.swift in Sources */,
 				C48D7BAF28C6DAEC00634E38 /* MusicRow.swift in Sources */,
 				C482EB4F28C82D5000ADAE41 /* SettingView.swift in Sources */,
 			);

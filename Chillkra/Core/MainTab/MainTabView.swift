@@ -15,29 +15,27 @@ struct MainTabView: View {
         VStack{
             if selectedIndex == 0 {
                     MainView(selectedIndex: $selectedIndex)
-                    .frame(height: 888)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             else if selectedIndex == 1 {
                 SearchView(selectedIndex: $selectedIndex)
-                    .frame(height: 888)
-            }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)            }
             else if selectedIndex == 2 {
                 StatsView(selectedIndex: $selectedIndex)
-                    .frame(height: 888)
-            }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)            }
             else if selectedIndex == 3 {
                 FavsView(selectedIndex: $selectedIndex)
-                    .frame(height: 888)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             else if selectedIndex == 4{
                 PlayView(selectedIndex: $selectedIndex)
-                    .frame(height: 888)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             else if selectedIndex == 5 {
                 ScrollView(.vertical){
                     VStack{
                         SettingView(selectedIndex: $selectedIndex)
-                            .frame(height: 888)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     }
                 }
             }
