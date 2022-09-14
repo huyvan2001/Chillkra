@@ -6,44 +6,41 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct MusicRow: View {
-    let imageName: String
-    let time: String
-    let NameRow: String
-    let NameSinger: String
+    var song: Song
     let customSize = CustomSize()
     var body: some View {
         VStack{
             VStack{
-                Image(imageName)
-                    .scaledToFit()
+                KFImage(URL(string: song.imageSongUrl))
+                    .resizable()
                     .frame(width: customSize.MusicRowWidth, height: customSize.MusicRowHeight)
                     .cornerRadius(customSize.radiusMusicRow)
                     .overlay(
                         VStack(){
                             HStack{
                                 Spacer()
-                                Text(time)
+                                Text("")
                                     .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
                             }
                             .padding(10)
                             Spacer()
                         }
                     )
-                    
+                
             }
-            Text(NameRow)
+            Text(song.nameSong)
                 .padding(.bottom,3)
-            Text(NameSinger)
+            Text(song.singer)
         }
         .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
         .foregroundColor(Color("General.mainTextColor"))
+        }
     }
-}
 
-struct MusicRow_Previews: PreviewProvider {
-    static var previews: some View {
-        MusicRow(imageName: "Main.LostMountain", time: "15m", NameRow: "Lost Mountain", NameSinger: "Shiva")
-    }
-}
+//struct MusicRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MusicRow(song: .init(nameSong: "", singer: "", type: "", emotionType: "", lyric: "", urlSong: "", imageSongUrl: ""))
+//    }
+//}

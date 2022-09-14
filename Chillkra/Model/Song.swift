@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-struct Music: Identifiable,Decodable{
+struct Song: Identifiable,Decodable,Equatable{
     @DocumentID var id: String?
     let nameSong: String
     let singer: String
@@ -17,5 +17,8 @@ struct Music: Identifiable,Decodable{
     let emotionType:String
     let lyric: String
     let urlSong: String
+    let imageSongUrl: String
     
 }
+
+

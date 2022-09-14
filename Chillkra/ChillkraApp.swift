@@ -10,6 +10,7 @@ import Firebase
 @main
 struct ChillkraApp: App {
     @StateObject var viewModel = AuthViewModel()
+    @StateObject var mainViewModel = MainViewModel()
     init(){
         FirebaseApp.configure()
     }
@@ -19,6 +20,7 @@ struct ChillkraApp: App {
                 ContentView()
             }
             .environmentObject(viewModel)
+            .environmentObject(mainViewModel)
         }
     }
 }

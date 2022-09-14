@@ -8,6 +8,7 @@
 import SwiftUI
 import AVFoundation
 struct PlayView: View {
+    @Binding var song: Song
     @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel
     let customSize = CustomSize()
@@ -45,22 +46,22 @@ struct PlayView: View {
     }
 }
 
-struct PlayView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayView(selectedIndex: .constant(2))
-            .environmentObject(AuthViewModel())
-    }
-}
+//struct PlayView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlayView(selectedIndex: .constant(2))
+//            .environmentObject(AuthViewModel())
+//    }
+//}
 
 extension PlayView {
     var name: some View {
         VStack{
-            Text("Out of Space")
+            Text(song.nameSong)
                 .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.largeText))
                 .padding()
             
             
-            Text("Krishna")
+            Text(song.singer)
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
                 .foregroundColor(Color("Tab.ColorTab"))
         }

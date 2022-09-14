@@ -7,30 +7,46 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @State var song : Song = .init(nameSong: "", singer: "", type: "", emotionType: "", lyric: "", urlSong: "", imageSongUrl: "")
+    @State var locationUrl: URL?
     let customSize = CustomSize()
-    @Namespace var animation
     @State private var selectedIndex = 0
     @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
     var body: some View {
         VStack{
             if selectedIndex == 0 {
-                    MainView(selectedIndex: $selectedIndex)
+                MainView(locationUrl: $locationUrl, song: $song, selectedIndex: $selectedIndex)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
+            
+            
+            
             else if selectedIndex == 1 {
-                SearchView(selectedIndex: $selectedIndex)
+                SearchView(song: $song, locationUrl: $locationUrl, selectedIndex: $selectedIndex)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)            }
+            
+            
+            
             else if selectedIndex == 2 {
                 StatsView(selectedIndex: $selectedIndex)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)            }
+            
+            
+            
             else if selectedIndex == 3 {
                 FavsView(selectedIndex: $selectedIndex)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
+            
+            
+            
             else if selectedIndex == 4{
-                PlayView(selectedIndex: $selectedIndex)
+                PlayView(song:$song,selectedIndex: $selectedIndex)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
+            
+            
             else if selectedIndex == 5 {
                 ScrollView(.vertical){
                     VStack{
@@ -39,6 +55,9 @@ struct MainTabView: View {
                     }
                 }
             }
+            
+            
+            
             Spacer()
         }
         .background(Color("backgroundColor"))
@@ -46,14 +65,16 @@ struct MainTabView: View {
         .overlay(
             VStack{
                 Spacer()
-//                if selectedIndex != 4{
-//                    Button {
-//                        self.selectedIndex = 4
-//                    } label: {
-//                        RowPlayer()
-//                            .padding(.bottom,-6)
-//                    }
-//                }
+                if song.nameSong != "" {
+                    if selectedIndex != 4{
+                        Button {
+                            self.selectedIndex = 4
+                        } label: {
+                            RowPlayer(locationUrl: $locationUrl, song:song)
+                                .padding(.bottom,-8)
+                        }
+                    }
+                }
                 TabBar(selectedIndex: $selectedIndex)
                 
             }

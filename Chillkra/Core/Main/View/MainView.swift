@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct MainView: View {
+    @StateObject var download = SongDownload()
+    @Binding var locationUrl: URL?
+    @Binding var song: Song
     @Binding var selectedIndex: Int
     var customSize = CustomSize()
     @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
+
+    
     var body: some View {
         VStack(alignment: .leading){
+            
             HeaderView(selectedIndex: $selectedIndex, title: "")
+            
             recently
             
             feelRow
@@ -34,24 +42,38 @@ struct MainView: View {
         .padding()
         .background(Color("backgroundColor"))
     }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView(selectedIndex: .constant(5))
+    
+    func downloadButtonTapped(){
+        guard let previewUrl = URL(string: song.urlSong) else {return}
+        self.download.fetchSongUrl(previewUrl)
     }
 }
+
+//struct MainView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView(song: .constant(Song()), selectedIndex: .constant(5))
+//    }
+//}
 extension MainView{
     var recently: some View {
         VStack(alignment: .leading){
         Text("Recently")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
-                
+            Text("\(Int(self.download.downloadAmount*100))%")
         ScrollView(.horizontal){
             LazyHStack{
-                MusicRow(imageName: "Main.LostMountain", time: "15m", NameRow: "Lost Mountain", NameSinger: "Shiva")
-                MusicRow(imageName: "Main.OutOfSpace", time: "46m", NameRow: "Out Of Space", NameSinger: "Krishna")
-                MusicRow(imageName: "Main.Brahaman", time: "30m", NameRow: "Mother", NameSinger: "Vishnu")
+                ForEach(mainViewModel.songs){ song in
+                    Button {
+                        self.song = song
+                        downloadButtonTapped()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 10){
+                            self.locationUrl = download.locationUrl
+                        }
+                    } label: {
+                        MusicRow(song: song)
+                    }
+
+                }
             }
         }
         }

@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct SearchView: View {
+    @ObservedObject var download = SongDownload()
+    @Binding var song: Song
+    @Binding var locationUrl: URL?
     @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
     @State var textSearch: String = ""
     var customSize = CustomSize()
     var body: some View {
@@ -40,12 +44,12 @@ struct SearchView: View {
     }
 }
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView(selectedIndex: .constant(1))
-            .environmentObject(AuthViewModel())
-    }
-}
+//struct SearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchView(selectedIndex: .constant(1))
+//            .environmentObject(AuthViewModel())
+//    }
+//}
 extension SearchView {
     
     
@@ -80,9 +84,19 @@ extension SearchView {
                 .padding(.bottom)
             ScrollView(.horizontal){
                 LazyHStack{
-                    MusicRow(imageName: "Main.LostMountain", time: "15m", NameRow: "Lost Mountain", NameSinger: "Shiva")
-                    MusicRow(imageName: "Main.OutOfSpace", time: "46m", NameRow: "Out Of Space", NameSinger: "Krishna")
-                    MusicRow(imageName: "Main.Brahaman", time: "30m", NameRow: "Mother", NameSinger: "Vishnu")
+                    ForEach(mainViewModel.songs){
+                        song in
+                        Button {
+                            self.song = song
+                            download.fetchSongUrl(URL(string: song.urlSong)!)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 10){
+                                self.locationUrl = locationUrl
+                            }
+                        } label: {
+                            MusicRow(song: song)
+                        }
+
+                    }
                 }
             }
         }
