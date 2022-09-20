@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State var song : Song = .init(nameSong: "", singer: "", type: "", emotionType: "", lyric: "", urlSong: "", imageSongUrl: "")
+    @State var song : Song = .init(nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "")
     @State var locationUrl: URL?
     let customSize = CustomSize()
     @State private var selectedIndex = 0

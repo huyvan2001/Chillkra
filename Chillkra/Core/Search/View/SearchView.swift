@@ -15,6 +15,7 @@ struct SearchView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
     @State var textSearch: String = ""
+    @ObservedObject var songStore = SongStore()
     var customSize = CustomSize()
     var body: some View {
         VStack{
@@ -84,11 +85,11 @@ extension SearchView {
                 .padding(.bottom)
             ScrollView(.horizontal){
                 LazyHStack{
-                    ForEach(mainViewModel.songs){
+                    ForEach(songStore.songs){
                         song in
                         Button {
                             self.song = song
-                            download.fetchSongUrl(URL(string: song.urlSong)!)
+//                            download.fetchSongUrl(URL(string: song.urlSong)!)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 10){
                                 self.locationUrl = locationUrl
                             }

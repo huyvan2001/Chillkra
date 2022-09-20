@@ -11,6 +11,11 @@ import Firebase
 struct ChillkraApp: App {
     @StateObject var viewModel = AuthViewModel()
     @StateObject var mainViewModel = MainViewModel()
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+          Database.database().reference()
+      }
+    
     init(){
         FirebaseApp.configure()
     }

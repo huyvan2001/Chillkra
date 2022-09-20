@@ -11,27 +11,28 @@ import AVKit
 class MainViewModel: ObservableObject{
     
     @Published var player: AVAudioPlayer?
-    @Published var songs = [Song]()
-    let songService = SongService()
     init(){
-        self.fetchSong()
-    }
-    
-    func fetchSong(){
-        songService.fetchSongs { songs in
-            self.songs = songs
-        }
     }
     
     func played(locationUrl: URL?){
-        do {
-            player = try! AVAudioPlayer(contentsOf: locationUrl!)
-            player?.play()
-            
+        if player != nil{
+            player!.play()
+            return
         }
+        do {
+            player = try AVAudioPlayer(contentsOf: locationUrl!)
+            player?.play()
+        } catch {
+            print(error)
+        }
+       
     }
     func paused(){
         player?.pause()
+    }
+    func stopped(){
+        player?.stop()
+        player = nil
     }
     
 }

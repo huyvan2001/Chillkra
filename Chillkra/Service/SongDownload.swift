@@ -9,6 +9,8 @@ import Foundation
 class SongDownload: NSObject,ObservableObject{
     var downloadTask: URLSessionDownloadTask?
     var downloadURL : URL?
+    let fileManager = FileManager.default
+    @Published var finishDownloading: Float = 0
     @Published var locationUrl: URL?
     @Published var downloadAmount: Float = 0
     
@@ -18,10 +20,26 @@ class SongDownload: NSObject,ObservableObject{
     }()
     
     
-    func fetchSongUrl(_ url: URL){
+    func fetchSongUrl(_ url: URL,completion:@escaping(Bool)-> Void){
         downloadURL = url
+        guard let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first,
+              let lastpathComponent = downloadURL?.lastPathComponent
+        else {
+            fatalError()
+        }
+        
+        let destinationUrl = documentPath.appendingPathComponent(lastpathComponent)
+        if fileManager.fileExists(atPath: destinationUrl.path){
+            DispatchQueue.main.async {
+                self.locationUrl = destinationUrl
+                print(self.locationUrl)
+            }
+            completion(true)
+            return
+        }
         downloadTask = urlSession.downloadTask(with: url)
         downloadTask?.resume()
+        completion(false)
     }
     
 }
@@ -33,6 +51,8 @@ extension SongDownload: URLSessionDownloadDelegate{
         DispatchQueue.main.async {
             self.downloadAmount = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
             print(self.downloadAmount)
+            
+            
         }
     }
     
@@ -44,24 +64,18 @@ extension SongDownload: URLSessionDownloadDelegate{
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        let fileManager = FileManager.default
         guard let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first,
               let lastpathComponent = downloadURL?.lastPathComponent
         else {
             fatalError()
         }
-        
         let destinationUrl = documentPath.appendingPathComponent(lastpathComponent)
         do{
-            if fileManager.fileExists(atPath: destinationUrl.path){
+            try fileManager.copyItem(at: location, to: destinationUrl)
+            while fileManager.fileExists(atPath: destinationUrl.path){
                 DispatchQueue.main.async {
                     self.locationUrl = destinationUrl
                 }
-                return
-            }
-            try fileManager.copyItem(at: location, to: destinationUrl)
-            DispatchQueue.main.async {
-                self.locationUrl = destinationUrl
             }
         }
         catch{

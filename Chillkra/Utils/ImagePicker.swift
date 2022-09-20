@@ -37,6 +37,5 @@ extension ImagePicker {
             parent.presentationMode.wrappedValue.dismiss()
         }
         
-        
     }
 }

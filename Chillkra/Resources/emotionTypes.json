@@ -1,0 +1,26 @@
+[
+    {
+        "idEType":"etype_Hanomy",
+        "nameEType":"Hanomy",
+        "UrlImageEType":""
+    },
+    
+    {
+        "idEType":"etype_Calm",
+        "nameEType":"Calm",
+        "UrlImageEType":""
+    },
+    
+    {
+        "idEType":"etype_Relax",
+        "nameEType":"Relax",
+        "UrlImageEType":""
+    },
+    
+    {
+        "idEType":"etype_Lost",
+        "nameEType":"Lost",
+        "UrlImageEType":""
+    },
+]
+

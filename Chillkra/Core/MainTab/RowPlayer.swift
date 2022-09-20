@@ -78,19 +78,26 @@ struct RowPlayer: View {
             )
             .cornerRadius(customSize.radiusMusicRow)
             .onAppear(){
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10){
-                    mainViewModel.played(locationUrl: locationUrl)
-                }
+               play()
             }
             .onChange(of: song) { _ in
-                mainViewModel.paused()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10){
-                    mainViewModel.played(locationUrl: locationUrl)
-                }
+                mainViewModel.stopped()
+                play()
+                self.pause = true
             }
             
         }
 
+    }
+    func play(){
+        if locationUrl != nil {
+            mainViewModel.played(locationUrl: locationUrl)
+        }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: .now()+15){
+                mainViewModel.played(locationUrl: locationUrl)
+            }
+        }
     }
 }
 

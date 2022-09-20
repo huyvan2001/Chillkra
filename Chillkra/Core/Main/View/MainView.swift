@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var download = SongDownload()
+    @ObservedObject var download = SongDownload()
     @Binding var locationUrl: URL?
     @Binding var song: Song
     @Binding var selectedIndex: Int
+    @State var checkUrlLocation:Bool?
     var customSize = CustomSize()
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
+    @ObservedObject var songStore = SongStore()
 
     
     var body: some View {
@@ -45,7 +47,9 @@ struct MainView: View {
     
     func downloadButtonTapped(){
         guard let previewUrl = URL(string: song.urlSong) else {return}
-        self.download.fetchSongUrl(previewUrl)
+        self.download.fetchSongUrl(previewUrl) { check in
+            self.checkUrlLocation = check
+        }
     }
 }
 
@@ -59,16 +63,25 @@ extension MainView{
         VStack(alignment: .leading){
         Text("Recently")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
-            Text("\(Int(self.download.downloadAmount*100))%")
         ScrollView(.horizontal){
             LazyHStack{
-                ForEach(mainViewModel.songs){ song in
+                ForEach(songStore.songs){ song in
                     Button {
+                        self.locationUrl = nil
                         self.song = song
                         downloadButtonTapped()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 10){
-                            self.locationUrl = download.locationUrl
+                        if checkUrlLocation == true {
+                            DispatchQueue.main.async {
+                                self.locationUrl = download.locationUrl
+                            }
+                            
                         }
+                        else {
+                            DispatchQueue.main.asyncAfter(deadline: .now()+15){
+                                self.locationUrl = download.locationUrl
+                            }
+                        }
+                        
                     } label: {
                         MusicRow(song: song)
                     }
