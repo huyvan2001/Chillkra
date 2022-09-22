@@ -6,6 +6,9 @@
 //
 
 import Foundation
+
+// MARK: - EType
+import Foundation
 struct EType: Codable {
     let idEType: String
     let nameEType: String

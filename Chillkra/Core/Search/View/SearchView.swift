@@ -15,7 +15,7 @@ struct SearchView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
     @State var textSearch: String = ""
-    @ObservedObject var songStore = SongStore()
+    @StateObject var songStore = SongStore()
     var customSize = CustomSize()
     var body: some View {
         VStack{

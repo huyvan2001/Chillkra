@@ -32,7 +32,7 @@ class SongDownload: NSObject,ObservableObject{
         if fileManager.fileExists(atPath: destinationUrl.path){
             DispatchQueue.main.async {
                 self.locationUrl = destinationUrl
-                print(self.locationUrl)
+                print(self.locationUrl!)
             }
             completion(true)
             return

@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
-
+import Kingfisher
 struct FeelRow: View {
-    let imageName: String
+    let urlImageName: String
     let RowName: String
     let customSize = CustomSize()
     var body: some View {
         VStack{
-            Image(imageName)
-                .scaledToFit()
+            KFImage(URL(string: urlImageName))
+                .resizable()
                 .frame(width: customSize.iconFeelSize, height: customSize.iconFeelSize)
                 .cornerRadius(customSize.iconFeelRadius)
             Text(RowName)
@@ -24,8 +24,8 @@ struct FeelRow: View {
     }
 }
 
-struct FeelRow_Previews: PreviewProvider {
-    static var previews: some View {
-        FeelRow(imageName: "", RowName: "")
-    }
-}
+//struct FeelRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FeelRow(imageName: "", RowName: "")
+//    }
+//}

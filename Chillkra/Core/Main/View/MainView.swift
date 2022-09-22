@@ -53,16 +53,29 @@ struct MainView: View {
     }
 }
 
-//struct MainView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MainView(song: .constant(Song()), selectedIndex: .constant(5))
-//    }
-//}
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView(locationUrl: .constant(URL(string: "")), song: .constant(try! Song(from: Song.init(nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "") as! Decoder)), selectedIndex: .constant(5))
+    }
+}
 extension MainView{
     var recently: some View {
         VStack(alignment: .leading){
-        Text("Recently")
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+            HStack{
+                Text("Recently")
+                        .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                Spacer()
+                NavigationLink {
+                    AddSongView()
+                } label: {
+                    HStack{
+                        Image(systemName: "plus.circle")
+                            .font(.largeTitle)
+                    }
+                }
+
+
+            }
         ScrollView(.horizontal){
             LazyHStack{
                 ForEach(songStore.songs){ song in
@@ -98,23 +111,11 @@ extension MainView{
             Text("How do you feel today?")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
             HStack{
-                Spacer()
-                
-                FeelRow(imageName: "Main.Hamony", RowName: "Hamony")
-                  
-                Spacer()
-                
-                FeelRow(imageName: "Main.Calm", RowName: "Calm")
-                    
-                Spacer()
-                
-                FeelRow(imageName: "Main.Relax", RowName: "Relax")
-                
-                Spacer()
-                
-                FeelRow(imageName: "Main.Lost", RowName: "Lost")
-                
-                Spacer()
+                ForEach(songStore.eTypes,id:\.idEType){ etype in
+                    Spacer()
+                    FeelRow(urlImageName: etype.UrlImageEType, RowName: etype.nameEType)
+                    Spacer()
+                }
             }
         }
     }

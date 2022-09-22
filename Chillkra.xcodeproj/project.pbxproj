@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C400916728DB0973004B524A /* AddSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916628DB0973004B524A /* AddSongViewModel.swift */; };
 		C42024AB28C9D5F700468B70 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AA28C9D5F700468B70 /* EditProfileView.swift */; };
 		C42024AD28C9DA1700468B70 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AC28C9DA1700468B70 /* ChangePasswordView.swift */; };
 		C42024AF28C9E3CE00468B70 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AE28C9E3CE00468B70 /* ImageUploader.swift */; };
@@ -15,10 +16,12 @@
 		C42024B728CAF68F00468B70 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024B628CAF68F00468B70 /* Song.swift */; };
 		C42024B928CAF78300468B70 /* SongService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024B828CAF78300468B70 /* SongService.swift */; };
 		C42107C628D94D2C00A0B104 /* SongStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107C528D94D2C00A0B104 /* SongStore.swift */; };
-		C42107C828D94DA100A0B104 /* EType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107C728D94DA100A0B104 /* EType.swift */; };
 		C42107C928D9556300A0B104 /* songs.json in Resources */ = {isa = PBXBuildFile; fileRef = C465E89128D301520088016A /* songs.json */; };
 		C42107CA28D9556300A0B104 /* types.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C2809128D40C7600B35487 /* types.json */; };
 		C42107CB28D9556300A0B104 /* emotionTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C2809228D40C8A00B35487 /* emotionTypes.json */; };
+		C42107CD28D95FB500A0B104 /* EType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107CC28D95FB500A0B104 /* EType.swift */; };
+		C42107CF28D99CAC00A0B104 /* AudioPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107CE28D99CAC00A0B104 /* AudioPicker.swift */; };
+		C42107D628D9A62D00A0B104 /* AddSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107D528D9A62D00A0B104 /* AddSongView.swift */; };
 		C462939B28C887CC00F8D1A9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C462939A28C887CC00F8D1A9 /* FirebaseAuth */; };
 		C462939D28C887CC00F8D1A9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C462939C28C887CC00F8D1A9 /* FirebaseDatabase */; };
 		C462939F28C887CC00F8D1A9 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C462939E28C887CC00F8D1A9 /* FirebaseDatabaseSwift */; };
@@ -99,6 +102,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C400916628DB0973004B524A /* AddSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewModel.swift; sourceTree = "<group>"; };
 		C42024AA28C9D5F700468B70 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		C42024AC28C9DA1700468B70 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		C42024AE28C9E3CE00468B70 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
@@ -106,7 +110,9 @@
 		C42024B628CAF68F00468B70 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		C42024B828CAF78300468B70 /* SongService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongService.swift; sourceTree = "<group>"; };
 		C42107C528D94D2C00A0B104 /* SongStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongStore.swift; sourceTree = "<group>"; };
-		C42107C728D94DA100A0B104 /* EType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EType.swift; sourceTree = "<group>"; };
+		C42107CC28D95FB500A0B104 /* EType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EType.swift; sourceTree = "<group>"; };
+		C42107CE28D99CAC00A0B104 /* AudioPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPicker.swift; sourceTree = "<group>"; };
+		C42107D528D9A62D00A0B104 /* AddSongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongView.swift; sourceTree = "<group>"; };
 		C46293A428C8896D00F8D1A9 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C46293A628C88A1400F8D1A9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C46293AB28C8A43D00F8D1A9 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -207,8 +213,34 @@
 			children = (
 				C42024B128C9E41500468B70 /* ImagePicker.swift */,
 				C465E88C28D1D7F20088016A /* FileManager.swift */,
+				C42107CE28D99CAC00A0B104 /* AudioPicker.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		C42107D028D9A5E400A0B104 /* AddSong */ = {
+			isa = PBXGroup;
+			children = (
+				C42107D228D9A5FD00A0B104 /* ModelView */,
+				C42107D128D9A5F900A0B104 /* View */,
+			);
+			path = AddSong;
+			sourceTree = "<group>";
+		};
+		C42107D128D9A5F900A0B104 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C42107D528D9A62D00A0B104 /* AddSongView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C42107D228D9A5FD00A0B104 /* ModelView */ = {
+			isa = PBXGroup;
+			children = (
+				C400916628DB0973004B524A /* AddSongViewModel.swift */,
+			);
+			path = ModelView;
 			sourceTree = "<group>";
 		};
 		C465E89028D3013A0088016A /* Resources */ = {
@@ -341,7 +373,7 @@
 				C46293A628C88A1400F8D1A9 /* User.swift */,
 				C42024B628CAF68F00468B70 /* Song.swift */,
 				C4C2809328D4259B00B35487 /* Types.swift */,
-				C42107C728D94DA100A0B104 /* EType.swift */,
+				C42107CC28D95FB500A0B104 /* EType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -356,6 +388,7 @@
 		C48D7B6B28C5EBD600634E38 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C42107D028D9A5E400A0B104 /* AddSong */,
 				C48D7B6D28C5EC0B00634E38 /* Authentication */,
 				C4DA900028C849360067A1AB /* Played */,
 				C482EB4B28C82D0D00ADAE41 /* Setting */,
@@ -768,7 +801,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C482EB4A28C7868E00ADAE41 /* FavsRow.swift in Sources */,
-				C42107C828D94DA100A0B104 /* EType.swift in Sources */,
+				C42107CD28D95FB500A0B104 /* EType.swift in Sources */,
 				C48D7BB328C6F1C500634E38 /* ListRow.swift in Sources */,
 				C48D7B7228C5EC2600634E38 /* LoginView.swift in Sources */,
 				C42024B228C9E41500468B70 /* ImagePicker.swift in Sources */,
@@ -780,6 +813,7 @@
 				C42024AD28C9DA1700468B70 /* ChangePasswordView.swift in Sources */,
 				C465E88928D038900088016A /* SongDownload.swift in Sources */,
 				C48D7B9E28C6361A00634E38 /* SignUpView.swift in Sources */,
+				C400916728DB0973004B524A /* AddSongViewModel.swift in Sources */,
 				C46293A728C88A1400F8D1A9 /* User.swift in Sources */,
 				C465E88B28D067420088016A /* MainViewModel.swift in Sources */,
 				C48D7BC428C7243800634E38 /* RowPlayer.swift in Sources */,
@@ -788,6 +822,7 @@
 				C48D7B9A28C61CB500634E38 /* TitleView.swift in Sources */,
 				C48D7BC228C6FDFC00634E38 /* MainTabView.swift in Sources */,
 				C42024AF28C9E3CE00468B70 /* ImageUploader.swift in Sources */,
+				C42107CF28D99CAC00A0B104 /* AudioPicker.swift in Sources */,
 				C4DA8FFF28C847180067A1AB /* TotalRow.swift in Sources */,
 				C48D7BB128C6E49700634E38 /* FeelRow.swift in Sources */,
 				C42107C628D94D2C00A0B104 /* SongStore.swift in Sources */,
@@ -809,6 +844,7 @@
 				C42024B728CAF68F00468B70 /* Song.swift in Sources */,
 				C48D7BAF28C6DAEC00634E38 /* MusicRow.swift in Sources */,
 				C482EB4F28C82D5000ADAE41 /* SettingView.swift in Sources */,
+				C42107D628D9A62D00A0B104 /* AddSongView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

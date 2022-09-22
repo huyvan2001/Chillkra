@@ -42,9 +42,6 @@ class SongStore:ObservableObject{
             songs = try JSONDecoder().decode([Song].self, from: songData)
             types = try JSONDecoder().decode([Types].self, from: typeData)
             eTypes = try JSONDecoder().decode([EType].self, from: EtypeData)
-            print(songs)
-            print(types)
-            print(eTypes)
         }
         catch{
             print("xxxx \(error)")
@@ -62,8 +59,10 @@ class SongStore:ObservableObject{
            print(error)
         }
     }
-//    func addSong(nameSong: String, urlSong: String, imageSongUrl: String, singer: String, emotionType: String,lyric: String,type: String){
-//        let song = Song(nameSong: nameSong, urlSong: urlSong, imageSongUrl: imageSongUrl, singer: singer, emotionType: emotionType, lyric: lyric, type: type)
-//        songs.append(song)
-//    }
+    func addSong(nameSong: String, urlSong: String, imageSongUrl: String, singer: String, emotionType: String,lyric: String,type: String){
+        let song = Song(nameSong: nameSong, urlSong: urlSong, imageSongUrl: imageSongUrl, singer: singer, emotionType: emotionType, lyric: lyric, type: type)
+        songs.append(song)
+        objectWillChange.send()
+        print(songs)
+    }
 }
