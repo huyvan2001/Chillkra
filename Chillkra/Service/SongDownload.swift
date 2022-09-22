@@ -42,6 +42,8 @@ class SongDownload: NSObject,ObservableObject{
         completion(false)
     }
     
+    
+    
 }
 
 extension SongDownload: URLSessionDownloadDelegate{

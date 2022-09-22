@@ -16,9 +16,6 @@
 		C42024B728CAF68F00468B70 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024B628CAF68F00468B70 /* Song.swift */; };
 		C42024B928CAF78300468B70 /* SongService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024B828CAF78300468B70 /* SongService.swift */; };
 		C42107C628D94D2C00A0B104 /* SongStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107C528D94D2C00A0B104 /* SongStore.swift */; };
-		C42107C928D9556300A0B104 /* songs.json in Resources */ = {isa = PBXBuildFile; fileRef = C465E89128D301520088016A /* songs.json */; };
-		C42107CA28D9556300A0B104 /* types.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C2809128D40C7600B35487 /* types.json */; };
-		C42107CB28D9556300A0B104 /* emotionTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = C4C2809228D40C8A00B35487 /* emotionTypes.json */; };
 		C42107CD28D95FB500A0B104 /* EType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107CC28D95FB500A0B104 /* EType.swift */; };
 		C42107CF28D99CAC00A0B104 /* AudioPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107CE28D99CAC00A0B104 /* AudioPicker.swift */; };
 		C42107D628D9A62D00A0B104 /* AddSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42107D528D9A62D00A0B104 /* AddSongView.swift */; };
@@ -119,7 +116,6 @@
 		C465E88828D038900088016A /* SongDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDownload.swift; sourceTree = "<group>"; };
 		C465E88A28D067420088016A /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C465E88C28D1D7F20088016A /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		C465E89128D301520088016A /* songs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = songs.json; sourceTree = "<group>"; };
 		C482EB4528C731DA00ADAE41 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		C482EB4728C7373400ADAE41 /* SearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRow.swift; sourceTree = "<group>"; };
 		C482EB4928C7868E00ADAE41 /* FavsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavsRow.swift; sourceTree = "<group>"; };
@@ -165,8 +161,6 @@
 		C48D7BBE28C6FD4A00634E38 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		C48D7BC128C6FDFC00634E38 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		C48D7BC328C7243800634E38 /* RowPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowPlayer.swift; sourceTree = "<group>"; };
-		C4C2809128D40C7600B35487 /* types.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = types.json; sourceTree = "<group>"; };
-		C4C2809228D40C8A00B35487 /* emotionTypes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = emotionTypes.json; sourceTree = "<group>"; };
 		C4C2809328D4259B00B35487 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		C4DA8FFC28C83C1D0067A1AB /* StatsFillerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsFillerViewModel.swift; sourceTree = "<group>"; };
 		C4DA8FFE28C847180067A1AB /* TotalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalRow.swift; sourceTree = "<group>"; };
@@ -243,16 +237,6 @@
 			path = ModelView;
 			sourceTree = "<group>";
 		};
-		C465E89028D3013A0088016A /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				C465E89128D301520088016A /* songs.json */,
-				C4C2809128D40C7600B35487 /* types.json */,
-				C4C2809228D40C8A00B35487 /* emotionTypes.json */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		C482EB4B28C82D0D00ADAE41 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,7 +286,6 @@
 		C48D7B3A28C5EB9000634E38 /* Chillkra */ = {
 			isa = PBXGroup;
 			children = (
-				C465E89028D3013A0088016A /* Resources */,
 				C42024B028C9E40700468B70 /* Utils */,
 				C48D7B6A28C5EBCB00634E38 /* Extensions */,
 				C48D7B6828C5EBBF00634E38 /* Service */,
@@ -756,9 +739,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C42107C928D9556300A0B104 /* songs.json in Resources */,
-				C42107CA28D9556300A0B104 /* types.json in Resources */,
-				C42107CB28D9556300A0B104 /* emotionTypes.json in Resources */,
 				C48D7B8B28C5EC5700634E38 /* OFL.txt in Resources */,
 				C48D7B4328C5EB9100634E38 /* Preview Assets.xcassets in Resources */,
 				C48D7B4028C5EB9100634E38 /* Assets.xcassets in Resources */,

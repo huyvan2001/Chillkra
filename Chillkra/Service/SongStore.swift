@@ -17,6 +17,9 @@ import Foundation
 
 
 class SongStore:ObservableObject{
+    var songsJSONURL = URL(fileURLWithPath: "songs", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
+    var typesJSONURL = URL(fileURLWithPath: "types", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
+    var eTypesJSONURL = URL(fileURLWithPath: "emotionTypes", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     @Published var songs: [Song] = [] {
         didSet{
             saveJSONSong()
@@ -31,14 +34,9 @@ class SongStore:ObservableObject{
     
     func loadJSON(){
         do {
-            guard let typesURL = Bundle.main.url(forResource: "types",withExtension: "json"),
-                  let songsJSONURL = Bundle.main.url(forResource: "songs",withExtension: "json"),
-                  let eTypesURL = Bundle.main.url(forResource: "emotionTypes",withExtension: "json")
-            else {
-                return }
             let songData = try Data(contentsOf: songsJSONURL)
-            let typeData = try Data(contentsOf: typesURL)
-            let EtypeData = try Data(contentsOf: eTypesURL)
+            let typeData = try Data(contentsOf: typesJSONURL)
+            let EtypeData = try Data(contentsOf: eTypesJSONURL)
             songs = try JSONDecoder().decode([Song].self, from: songData)
             types = try JSONDecoder().decode([Types].self, from: typeData)
             eTypes = try JSONDecoder().decode([EType].self, from: EtypeData)
@@ -48,7 +46,6 @@ class SongStore:ObservableObject{
         }
     }
     func saveJSONSong(){
-        guard let songsJSONURL = Bundle.main.url(forResource: "songs",withExtension: "json") else { return }
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         do {
@@ -59,9 +56,10 @@ class SongStore:ObservableObject{
            print(error)
         }
     }
-    func addSong(nameSong: String, urlSong: String, imageSongUrl: String, singer: String, emotionType: String,lyric: String,type: String){
+    func addSong(nameSong: String, urlSong: String, imageSongUrl: String, singer: String, emotionType: String,lyric: String,type: String,callback:@escaping()->Void){
         let song = Song(nameSong: nameSong, urlSong: urlSong, imageSongUrl: imageSongUrl, singer: singer, emotionType: emotionType, lyric: lyric, type: type)
         songs.append(song)
+        callback()
         objectWillChange.send()
         print(songs)
     }

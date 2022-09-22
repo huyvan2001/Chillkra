@@ -179,7 +179,9 @@ extension AddSongView {
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 6){
-                    songStore.addSong(nameSong: song, urlSong: urlSong, imageSongUrl: urlImageSong, singer: singer, emotionType: Etype, lyric: "", type: type)
+                    songStore.addSong(nameSong: song, urlSong: urlSong, imageSongUrl: urlImageSong, singer: singer, emotionType: Etype, lyric: "", type: type){
+                        songStore.loadJSON()
+                    }
                     presentationMode.wrappedValue.dismiss()
                 }
             }, label: {

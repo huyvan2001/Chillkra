@@ -20,6 +20,9 @@ class AuthViewModel: ObservableObject {
     init(){
         self.userSession = Auth.auth().currentUser
         self.fetchUser()
+        SongService().fetchJSONSong()
+        SongService().fetchJSONType()
+        SongService().fetchJSONEtype()
     }
     
     
