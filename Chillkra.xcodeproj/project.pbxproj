@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C400916728DB0973004B524A /* AddSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916628DB0973004B524A /* AddSongViewModel.swift */; };
+		C400916928DC6AE9004B524A /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916828DC6AE9004B524A /* Access.swift */; };
+		C400916B28DC7554004B524A /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916A28DC7554004B524A /* Sleep.swift */; };
+		C400916F28DD4519004B524A /* BedtimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916E28DD4519004B524A /* BedtimeView.swift */; };
 		C42024AB28C9D5F700468B70 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AA28C9D5F700468B70 /* EditProfileView.swift */; };
 		C42024AD28C9DA1700468B70 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AC28C9DA1700468B70 /* ChangePasswordView.swift */; };
 		C42024AF28C9E3CE00468B70 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42024AE28C9E3CE00468B70 /* ImageUploader.swift */; };
@@ -100,6 +103,9 @@
 
 /* Begin PBXFileReference section */
 		C400916628DB0973004B524A /* AddSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewModel.swift; sourceTree = "<group>"; };
+		C400916828DC6AE9004B524A /* Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Access.swift; sourceTree = "<group>"; };
+		C400916A28DC7554004B524A /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
+		C400916E28DD4519004B524A /* BedtimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeView.swift; sourceTree = "<group>"; };
 		C42024AA28C9D5F700468B70 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		C42024AC28C9DA1700468B70 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		C42024AE28C9E3CE00468B70 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
@@ -357,6 +363,8 @@
 				C42024B628CAF68F00468B70 /* Song.swift */,
 				C4C2809328D4259B00B35487 /* Types.swift */,
 				C42107CC28D95FB500A0B104 /* EType.swift */,
+				C400916828DC6AE9004B524A /* Access.swift */,
+				C400916A28DC7554004B524A /* Sleep.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -568,6 +576,7 @@
 				C48D7BBC28C6FD4100634E38 /* StatsView.swift */,
 				C4DA8FFE28C847180067A1AB /* TotalRow.swift */,
 				C4DA900F28C87EC50067A1AB /* ActivityView.swift */,
+				C400916E28DD4519004B524A /* BedtimeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -795,7 +804,9 @@
 				C48D7B9E28C6361A00634E38 /* SignUpView.swift in Sources */,
 				C400916728DB0973004B524A /* AddSongViewModel.swift in Sources */,
 				C46293A728C88A1400F8D1A9 /* User.swift in Sources */,
+				C400916B28DC7554004B524A /* Sleep.swift in Sources */,
 				C465E88B28D067420088016A /* MainViewModel.swift in Sources */,
+				C400916F28DD4519004B524A /* BedtimeView.swift in Sources */,
 				C48D7BC428C7243800634E38 /* RowPlayer.swift in Sources */,
 				C4C2809428D4259B00B35487 /* Types.swift in Sources */,
 				C48D7B3C28C5EB9000634E38 /* ChillkraApp.swift in Sources */,
@@ -812,6 +823,7 @@
 				C4DA8FFD28C83C1D0067A1AB /* StatsFillerViewModel.swift in Sources */,
 				C48D7BBD28C6FD4100634E38 /* StatsView.swift in Sources */,
 				C48D7BBF28C6FD4A00634E38 /* SearchView.swift in Sources */,
+				C400916928DC6AE9004B524A /* Access.swift in Sources */,
 				C4DA900428C849FF0067A1AB /* PlayView.swift in Sources */,
 				C42024AB28C9D5F700468B70 /* EditProfileView.swift in Sources */,
 				C482EB4628C731DA00ADAE41 /* SearchBar.swift in Sources */,

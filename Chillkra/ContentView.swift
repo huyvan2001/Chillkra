@@ -11,7 +11,7 @@ struct ContentView: View {
     @EnvironmentObject  var viewModel : AuthViewModel
     let customSize = CustomSize()
     var body: some View {
-        if viewModel.userSession == nil{
+        if $viewModel.userSession == nil{
             SplashView()
         }
         else {

@@ -5,12 +5,14 @@
 //  Created by Lê Văn Huy on 06/09/2022.
 //
 import SwiftUI
+import Charts
 struct StatsView: View {
     @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var selectFiller: StatsFillerViewModel = .activity
     let customSize = CustomSize()
     @Namespace var animation
+    let sleep = Sleep(sleep: 7, deep: 3.5, quantity: 3.5/7)
     var body: some View {
         VStack{
             
@@ -19,16 +21,16 @@ struct StatsView: View {
             statsFiller
             if selectFiller == .activity {
                 withAnimation(.easeInOut){
-                    TotalRow(title: "Total played", amount: "120K", nameAmount: "reproductions", timeupdate: "Last update yesterday")
-                    
+                    ActivityView()
                 }
-                    
+                
             }
             else if selectFiller == .bedtime {
                 withAnimation(.easeInOut){
-                    TotalRow(title: "Total slept", amount: "246", nameAmount: "hours", timeupdate: "Last update this morning")
+                    BedtimeView()
                 }
             }
+            
             
             Spacer()
         }
@@ -57,7 +59,7 @@ extension StatsView {
                         .modifier(Fonts(fontName:FontsName.JosefinBold,
                                         size: customSize.mediumText))
                         .foregroundColor(Color(selectFiller == item ?
-                                         "General.mainTextColor" : "Setting.ColorTitle")
+                                               "General.mainTextColor" : "Setting.ColorTitle")
                         )
                     if selectFiller == item {
                         Capsule()
