@@ -20,6 +20,7 @@ class SongStore:ObservableObject{
     var songsJSONURL = URL(fileURLWithPath: "songs", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     var typesJSONURL = URL(fileURLWithPath: "types", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     var eTypesJSONURL = URL(fileURLWithPath: "emotionTypes", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
+    @Published var searchText = ""
     @Published var songs: [Song] = [] {
         didSet{
             saveJSONSong()
@@ -28,10 +29,23 @@ class SongStore:ObservableObject{
     }
     @Published var types: [Types] = []
     @Published var eTypes: [EType] = []
+    
+    var SearchableSong: [Song] {
+        if searchText == "" {
+            return songs
+        }
+        else {
+            return songs.filter({
+                $0.nameSong.contains(searchText) ||
+                $0.singer.contains(searchText)
+            })
+        }
+    }
     init(){
         loadJSON()
     }
     
+    //MARK: LoadJSON
     func loadJSON(){
         do {
             let songData = try Data(contentsOf: songsJSONURL)
@@ -45,6 +59,8 @@ class SongStore:ObservableObject{
             print("xxxx \(error)")
         }
     }
+    
+    //MARK: SAVEJSON
     func saveJSONSong(){
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -56,6 +72,8 @@ class SongStore:ObservableObject{
            print(error)
         }
     }
+    
+    //MARK: ADDSONG
     func addSong(nameSong: String, urlSong: String, imageSongUrl: String, singer: String, emotionType: String,lyric: String,type: String,callback:@escaping()->Void){
         let song = Song(nameSong: nameSong, urlSong: urlSong, imageSongUrl: imageSongUrl, singer: singer, emotionType: emotionType, lyric: lyric, type: type)
         songs.append(song)
@@ -63,4 +81,12 @@ class SongStore:ObservableObject{
         objectWillChange.send()
         print(songs)
     }
+    
+    //MARK: LISTFEELSONG
+    func listFeelSong(idEtype: String)-> [Song]{
+        return songs.filter({
+            $0.emotionType.contains(idEtype)
+        })
+    }
+    
 }

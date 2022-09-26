@@ -16,7 +16,6 @@ struct RowPlayer: View {
     @State var pause: Bool = true
     @State var favs: Bool = true
     
-    
     var body: some View {
         VStack{
             HStack{

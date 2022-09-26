@@ -35,20 +35,20 @@ struct MainTabView: View {
             
             
             else if selectedIndex == 3 {
-                FavsView(selectedIndex: $selectedIndex)
+                FavsView(selectedIndex: $selectedIndex, song: $song, locationUrl:$locationUrl)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             
             
             
             else if selectedIndex == 4{
-                PlayView(song:$song,selectedIndex: $selectedIndex)
+                PlayView(locationUrl: $locationUrl, song:$song,selectedIndex: $selectedIndex)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             
             
             else if selectedIndex == 5 {
-                ScrollView(.vertical){
+                ScrollView(.vertical,showsIndicators: false){
                     VStack{
                         SettingView(selectedIndex: $selectedIndex)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
@@ -73,6 +73,7 @@ struct MainTabView: View {
                             RowPlayer(locationUrl: $locationUrl, song:song)
                                 .padding(.bottom,-8)
                         }
+                        
                     }
                 }
                 TabBar(selectedIndex: $selectedIndex)

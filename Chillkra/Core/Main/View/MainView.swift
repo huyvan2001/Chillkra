@@ -28,7 +28,7 @@ struct MainView: View {
             
             feelRow
             
-            ScrollView{
+            ScrollView(showsIndicators: false){
                 LazyVStack{
                     ListRow()
                     ListRow()
@@ -76,7 +76,7 @@ extension MainView{
 
 
             }
-        ScrollView(.horizontal){
+        ScrollView(.horizontal,showsIndicators: false){
             LazyHStack{
                 ForEach(songStore.songs){ song in
                     Button {
@@ -113,7 +113,9 @@ extension MainView{
             HStack{
                 ForEach(songStore.eTypes,id:\.idEType){ etype in
                     Spacer()
-                    FeelRow(urlImageName: etype.UrlImageEType, RowName: etype.nameEType)
+                    NavigationLink(destination: ListFeelSongView(locationUrl: $locationUrl, selectedIndex: $selectedIndex,song:$song,eType: etype)) {
+                        FeelRow(urlImageName: etype.UrlImageEType, RowName: etype.nameEType)
+                    }
                     Spacer()
                 }
             }

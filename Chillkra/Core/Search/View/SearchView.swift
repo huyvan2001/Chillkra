@@ -17,12 +17,15 @@ struct SearchView: View {
     @State var textSearch: String = ""
     @StateObject var songStore = SongStore()
     var customSize = CustomSize()
+    @State var checkUrlLocation:Bool?
     var body: some View {
         VStack{
             HeaderView(selectedIndex: $selectedIndex, title: "Search")
             
             
-            SearchBar(text: $textSearch)
+            NavigationLink(destination: SearchSongView(locationUrl: $locationUrl, selectedIndex: $selectedIndex, song: $song)) {
+                SearchBar(text: $textSearch)
+            }
             
             
             
@@ -42,6 +45,13 @@ struct SearchView: View {
         .foregroundColor(Color("General.mainTextColor"))
         .padding()
         .background(Color("backgroundColor"))
+    }
+    
+    func downloadButtonTapped(){
+        guard let previewUrl = URL(string: song.urlSong) else {return}
+        self.download.fetchSongUrl(previewUrl) { check in
+            self.checkUrlLocation = check
+        }
     }
 }
 
@@ -83,16 +93,25 @@ extension SearchView {
             Text("Recently played")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
                 .padding(.bottom)
-            ScrollView(.horizontal){
+            ScrollView(.horizontal,showsIndicators: false){
                 LazyHStack{
-                    ForEach(songStore.songs){
-                        song in
+                    ForEach(songStore.songs){ song in
                         Button {
+                            self.locationUrl = nil
                             self.song = song
-//                            download.fetchSongUrl(URL(string: song.urlSong)!)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 10){
-                                self.locationUrl = locationUrl
+                            downloadButtonTapped()
+                            if checkUrlLocation == true {
+                                DispatchQueue.main.async {
+                                    self.locationUrl = download.locationUrl
+                                }
+                                
                             }
+                            else {
+                                DispatchQueue.main.asyncAfter(deadline: .now()+15){
+                                    self.locationUrl = download.locationUrl
+                                }
+                            }
+                            
                         } label: {
                             MusicRow(song: song)
                         }
