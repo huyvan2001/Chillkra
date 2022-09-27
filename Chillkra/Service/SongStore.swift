@@ -24,7 +24,6 @@ class SongStore:ObservableObject{
     @Published var songs: [Song] = [] {
         didSet{
             saveJSONSong()
-            print("OKKK")
         }
     }
     @Published var types: [Types] = []

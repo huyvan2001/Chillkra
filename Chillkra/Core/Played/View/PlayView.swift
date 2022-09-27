@@ -9,6 +9,8 @@ import SwiftUI
 import AVFoundation
 import Kingfisher
 struct PlayView: View {
+    @ObservedObject var download = SongDownload()
+    @ObservedObject var songStore = SongStore()
     @Binding var  locationUrl: URL?
     @EnvironmentObject var mainViewModel: MainViewModel
     @Binding var song: Song
@@ -17,6 +19,9 @@ struct PlayView: View {
     @State var pause: Bool = false
     let customSize = CustomSize()
     @State var width: CGFloat = 0
+    @Binding var currentSong:Int
+    @State var checkUrlLocation:Bool?
+    @State var value: Double = 0
     var body: some View {
             VStack(){
                 HeaderView(selectedIndex: $selectedIndex, title: "")
@@ -56,6 +61,20 @@ struct PlayView: View {
                     }
                 }
             }
+            .onChange(of: song){ _ in
+                width = 0
+                mainViewModel.stopped()
+                playsong()
+                self.pause = false
+                guard let player = mainViewModel.player else { return }
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+                    if player.isPlaying {
+                        let screen = UIScreen.main.bounds.width - 30
+                        value = player.currentTime / player.duration
+                        self.width = screen * CGFloat(value)
+                    }
+                }
+            }
             .ignoresSafeArea()
     }
     func playsong(){
@@ -68,6 +87,12 @@ struct PlayView: View {
             }
         }
         
+    }
+    func downloadButtonTapped(){
+        guard let previewUrl = URL(string: song.urlSong) else {return}
+        self.download.fetchSongUrl(previewUrl) { check in
+            self.checkUrlLocation = check
+        }
     }
 }
 
@@ -82,7 +107,7 @@ extension PlayView {
     var name: some View {
         VStack{
             Text(song.nameSong)
-                .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.largeText))
+                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.largeText))
                 .padding()
             
             Text(song.singer)
@@ -92,9 +117,32 @@ extension PlayView {
     
     var play: some View {
         HStack{
-            Image(systemName: "backward.end.fill")
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
-                .padding()
+            Button {
+                currentSong = currentSong - 1
+                if self.currentSong == -1 {
+                    self.currentSong = songStore.songs.count-1
+                }
+                self.song = songStore.songs[currentSong]
+                downloadButtonTapped()
+                if checkUrlLocation == true {
+                    DispatchQueue.main.async {
+                        self.locationUrl = download.locationUrl
+                    }
+                    
+                }
+                else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 15){
+                        self.locationUrl = download.locationUrl
+                    }
+                }
+                mainViewModel.stopped()
+                playsong()
+            } label: {
+                Image(systemName: "backward.end.fill")
+                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
+                    .padding()
+            }
+
             Button {
                 pause.toggle()
                 if pause == true {
@@ -109,9 +157,32 @@ extension PlayView {
                     .padding()
             }
 
-            Image(systemName: "forward.end.fill")
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
-                .padding()
+            Button {
+                currentSong = currentSong + 1
+                if self.currentSong == songStore.songs.count {
+                    self.currentSong = 0
+                }
+                self.song = songStore.songs[currentSong]
+                downloadButtonTapped()
+                if checkUrlLocation == true {
+                    DispatchQueue.main.async {
+                        self.locationUrl = download.locationUrl
+                    }
+                    
+                }
+                else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 15){
+                        self.locationUrl = download.locationUrl
+                    }
+                }
+                mainViewModel.stopped()
+                playsong()
+            } label: {
+                Image(systemName: "forward.end.fill")
+                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
+                    .padding()
+            }
+
         }
         .padding()
     }

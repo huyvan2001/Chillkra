@@ -9,13 +9,18 @@ import SwiftUI
 import Kingfisher
 import AVKit
 struct RowPlayer: View {
+    @ObservedObject var download = SongDownload()
     @Binding var  locationUrl: URL?
     @EnvironmentObject var mainViewModel: MainViewModel
-    let song: Song
+    @ObservedObject var songStore = SongStore()
+    @Binding var song: Song
     var customSize = CustomSize()
+    @State var checkUrlLocation:Bool?
     @State var pause: Bool = true
     @State var favs: Bool = true
-    
+    @Binding var currentSong:Int
+    @State var width: CGFloat = 0
+    @State var value: Double = 0
     var body: some View {
         VStack{
             HStack{
@@ -60,7 +65,25 @@ struct RowPlayer: View {
                     }
                     
                     Button {
-                        //
+                        currentSong = currentSong + 1
+                        if self.currentSong == songStore.songs.count {
+                            self.currentSong = 0
+                        }
+                        self.song = songStore.songs[currentSong]
+                        downloadButtonTapped()
+                        if checkUrlLocation == true {
+                            DispatchQueue.main.async {
+                                self.locationUrl = download.locationUrl
+                            }
+                            
+                        }
+                        else {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 15){
+                                self.locationUrl = download.locationUrl
+                            }
+                        }
+                        mainViewModel.stopped()
+                        play()
                     } label: {
                         Image(systemName: "forward.end.fill")
                             .foregroundColor(Color("Main.IconPlay"))
@@ -78,13 +101,34 @@ struct RowPlayer: View {
             .cornerRadius(customSize.radiusMusicRow)
             .onAppear(){
                play()
+                guard let player = mainViewModel.player else { return }
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+                    if player.isPlaying {
+                        let screen = UIScreen.main.bounds.width - 30
+                        let value = player.currentTime / player.duration
+                        self.width = screen * CGFloat(value)
+                    }
+                }
             }
             .onChange(of: song) { _ in
+                width = 0
                 mainViewModel.stopped()
                 play()
                 self.pause = true
+                guard let player = mainViewModel.player else { return }
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+                    if player.isPlaying {
+                        let screen = UIScreen.main.bounds.width - 30
+                        value = player.currentTime / player.duration
+                        self.width = screen * CGFloat(value)
+                    }
+                }
             }
-            
+            ZStack(alignment: .leading){
+                Capsule().fill(Color.black.opacity(0.08)).frame(height:3)
+                Capsule().fill(Color.red).frame(width: width,height: 3)
+            }
+            .offset(y:-8)
         }
 
     }
@@ -96,6 +140,12 @@ struct RowPlayer: View {
             DispatchQueue.main.asyncAfter(deadline: .now()+15){
                 mainViewModel.played(locationUrl: locationUrl)
             }
+        }
+    }
+    func downloadButtonTapped(){
+        guard let previewUrl = URL(string: song.urlSong) else {return}
+        self.download.fetchSongUrl(previewUrl) { check in
+            self.checkUrlLocation = check
         }
     }
 }

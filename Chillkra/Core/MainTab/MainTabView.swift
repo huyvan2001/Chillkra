@@ -13,10 +13,11 @@ struct MainTabView: View {
     @State private var selectedIndex = 0
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
+    @State var currentSong = 0
     var body: some View {
         VStack{
             if selectedIndex == 0 {
-                MainView(locationUrl: $locationUrl, song: $song, selectedIndex: $selectedIndex)
+                MainView(locationUrl: $locationUrl, song: $song, selectedIndex: $selectedIndex, currentSong: $currentSong)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             
@@ -42,7 +43,7 @@ struct MainTabView: View {
             
             
             else if selectedIndex == 4{
-                PlayView(locationUrl: $locationUrl, song:$song,selectedIndex: $selectedIndex)
+                PlayView(locationUrl: $locationUrl, song:$song,selectedIndex: $selectedIndex, currentSong: $currentSong)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             
@@ -70,8 +71,8 @@ struct MainTabView: View {
                         Button {
                             self.selectedIndex = 4
                         } label: {
-                            RowPlayer(locationUrl: $locationUrl, song:song)
-                                .padding(.bottom,-8)
+                            RowPlayer(locationUrl: $locationUrl, song:$song, currentSong: $currentSong)
+                                .padding(.bottom,-16)
                         }
                         
                     }

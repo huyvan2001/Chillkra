@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Song: Codable,Identifiable,Equatable {
+struct Song: Codable,Identifiable,Equatable,Hashable {
     let id = UUID()
     let nameSong: String
     let urlSong: String

@@ -17,6 +17,7 @@ struct MainView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
     @ObservedObject var songStore = SongStore()
+    @Binding var currentSong: Int
 
     
     var body: some View {
@@ -53,11 +54,11 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView(locationUrl: .constant(URL(string: "")), song: .constant(try! Song(from: Song.init(nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "") as! Decoder)), selectedIndex: .constant(5))
-    }
-}
+//struct MainView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView(locationUrl: .constant(URL(string: "")), song: .constant(try! Song(from: Song.init(nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "") as! Decoder)), selectedIndex: .constant(5))
+//    }
+//}
 extension MainView{
     var recently: some View {
         VStack(alignment: .leading){
@@ -76,12 +77,14 @@ extension MainView{
 
 
             }
+
         ScrollView(.horizontal,showsIndicators: false){
             LazyHStack{
-                ForEach(songStore.songs){ song in
+                ForEach(Array(zip(songStore.songs.indices,songStore.songs)),id: \.1){ index,song in
                     Button {
                         self.locationUrl = nil
                         self.song = song
+                        self.currentSong = index
                         downloadButtonTapped()
                         if checkUrlLocation == true {
                             DispatchQueue.main.async {
@@ -90,7 +93,7 @@ extension MainView{
                             
                         }
                         else {
-                            DispatchQueue.main.asyncAfter(deadline: .now()+15){
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 15){
                                 self.locationUrl = download.locationUrl
                             }
                         }
