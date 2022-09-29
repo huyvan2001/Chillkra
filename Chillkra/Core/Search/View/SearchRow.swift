@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct SearchRow: View {
+    
     let imageName: String
     let name: String
     let colorName: String
     var customSize = CustomSize()
+    
     var body: some View {
+        
         VStack{
             
         }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045CBB6128E5902D00C42D2F /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBB6028E5902D00C42D2F /* MarqueeText.swift */; };
+		045CBB6328E5905600C42D2F /* SwiftUI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBB6228E5905600C42D2F /* SwiftUI+Extension.swift */; };
 		C400916728DB0973004B524A /* AddSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916628DB0973004B524A /* AddSongViewModel.swift */; };
 		C400916928DC6AE9004B524A /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916828DC6AE9004B524A /* Access.swift */; };
 		C400916B28DC7554004B524A /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916A28DC7554004B524A /* Sleep.swift */; };
@@ -105,6 +107,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		045CBB6028E5902D00C42D2F /* MarqueeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeText.swift; sourceTree = "<group>"; };
+		045CBB6228E5905600C42D2F /* SwiftUI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extension.swift"; sourceTree = "<group>"; };
 		C400916628DB0973004B524A /* AddSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewModel.swift; sourceTree = "<group>"; };
 		C400916828DC6AE9004B524A /* Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Access.swift; sourceTree = "<group>"; };
 		C400916A28DC7554004B524A /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				C42024B128C9E41500468B70 /* ImagePicker.swift */,
 				C465E88C28D1D7F20088016A /* FileManager.swift */,
 				C42107CE28D99CAC00A0B104 /* AudioPicker.swift */,
+				045CBB6028E5902D00C42D2F /* MarqueeText.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 		C48D7B6A28C5EBCB00634E38 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				045CBB6228E5905600C42D2F /* SwiftUI+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -823,6 +829,7 @@
 				C48D7B9A28C61CB500634E38 /* TitleView.swift in Sources */,
 				C48D7BC228C6FDFC00634E38 /* MainTabView.swift in Sources */,
 				C42024AF28C9E3CE00468B70 /* ImageUploader.swift in Sources */,
+				045CBB6128E5902D00C42D2F /* MarqueeText.swift in Sources */,
 				C42107CF28D99CAC00A0B104 /* AudioPicker.swift in Sources */,
 				C4DA8FFF28C847180067A1AB /* TotalRow.swift in Sources */,
 				C48D7BB128C6E49700634E38 /* FeelRow.swift in Sources */,
@@ -841,6 +848,7 @@
 				C4DE832828E1932300F972B3 /* ListFeelSongView.swift in Sources */,
 				C482EB4828C7373400ADAE41 /* SearchRow.swift in Sources */,
 				C48D7BA428C6D7DC00634E38 /* SplashView.swift in Sources */,
+				045CBB6328E5905600C42D2F /* SwiftUI+Extension.swift in Sources */,
 				C48D7BBB28C6FD3500634E38 /* FavsView.swift in Sources */,
 				C46293A528C8896D00F8D1A9 /* AuthViewModel.swift in Sources */,
 				C46293AC28C8A43D00F8D1A9 /* UserService.swift in Sources */,

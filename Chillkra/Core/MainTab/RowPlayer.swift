@@ -8,30 +8,41 @@
 import SwiftUI
 import Kingfisher
 import AVKit
+
 struct RowPlayer: View {
-    @ObservedObject var download = SongDownload()
-    @Binding var  locationUrl: URL?
+    
     @EnvironmentObject var mainViewModel: MainViewModel
+    
+    @ObservedObject var download = SongDownload()
     @ObservedObject var songStore = SongStore()
+    
+    
+    @Binding var  locationUrl: URL?
     @Binding var song: Song
-    var customSize = CustomSize()
     @State var checkUrlLocation:Bool?
     @State var pause: Bool = true
     @State var favs: Bool = true
     @Binding var currentSong:Int
     @State var width: CGFloat = 0
     @State var value: Double = 0
+    
+    var customSize = CustomSize()
+    
     var body: some View {
+        
         VStack{
+            
             HStack{
+                
                 HStack{
+                    
                     KFImage(URL(string: song.imageSongUrl))
                         .resizable()
                         .frame(width: 49, height: 50)
                     VStack(alignment: .leading){
-                        Text(song.nameSong)
-                            .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                        MarqueeText(text: song.nameSong, font: UIFont.preferredFont(forTextStyle:.title2), leftFade: 1, rightFade: 1, startDelay: 0.5)
                             .foregroundColor(Color("Main.NameSong"))
+                            .frame(width: 100)
                         Text(song.singer)
                             .foregroundColor(Color("backgroundColor"))
                             .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
@@ -42,6 +53,7 @@ struct RowPlayer: View {
                 Spacer()
                 
                 HStack{
+                    
                     Button {
                         favs.toggle()
                     } label: {
@@ -101,6 +113,7 @@ struct RowPlayer: View {
             .cornerRadius(customSize.radiusMusicRow)
             .onAppear(){
                play()
+                
                 guard let player = mainViewModel.player else { return }
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
                     if player.isPlaying {
@@ -114,6 +127,7 @@ struct RowPlayer: View {
                 width = 0
                 mainViewModel.stopped()
                 play()
+                
                 self.pause = true
                 guard let player = mainViewModel.player else { return }
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
@@ -130,8 +144,10 @@ struct RowPlayer: View {
             }
             .offset(y:-8)
         }
+        
 
     }
+
     func play(){
         if locationUrl != nil {
             mainViewModel.played(locationUrl: locationUrl)
@@ -142,6 +158,8 @@ struct RowPlayer: View {
             }
         }
     }
+    
+    
     func downloadButtonTapped(){
         guard let previewUrl = URL(string: song.urlSong) else {return}
         self.download.fetchSongUrl(previewUrl) { check in

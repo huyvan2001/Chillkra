@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Charts
+
 var access2019 :[Access] = [
     Access(type: "Jan", value: 400),
     Access(type: "Feb", value: 700),

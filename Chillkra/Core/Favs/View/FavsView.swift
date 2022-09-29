@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct FavsView: View {
-    @Binding var selectedIndex: Int
+    
     @EnvironmentObject var viewModel : AuthViewModel
+    
+    @Binding var selectedIndex: Int
     @Binding var song: Song
     @Binding var locationUrl: URL?
-    let customSize = CustomSize()
     @State private var textSearch: String = ""
+    
+    let customSize = CustomSize()
+    
     var body: some View {
+        
         VStack{
             HeaderView(selectedIndex: $selectedIndex, title: "Favorites")
             
@@ -42,8 +47,11 @@ struct FavsView: View {
 //}
 
 extension FavsView {
+    
     var favsList: some View {
+        
         ScrollView(showsIndicators: false){
+            
             LazyVGrid(columns:[
                 .init(.adaptive(minimum:customSize.favsRowSize),spacing: 20)]){
                     FavsRow(imageName: "Favs.ChillCoffe", nameSong: "Chill Coffees", nameSinger: "Horus")

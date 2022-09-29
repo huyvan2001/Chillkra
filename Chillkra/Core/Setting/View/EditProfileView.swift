@@ -8,17 +8,24 @@
 import SwiftUI
 import Kingfisher
 struct EditProfileView: View {
+    
+    @EnvironmentObject var viewModel: AuthViewModel
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
-    @EnvironmentObject var viewModel: AuthViewModel
     @State var name: String = ""
-    @Environment(\.presentationMode) var presentationMode
+    
     let customSize = CustomSize()
+    
     var body: some View {
+        
         ZStack {
+            
             VStack{
                 HeaderView(selectedIndex: .constant(5), title: "Edit Profile")
+                
                 
                 if let user = viewModel.currentUser {
                     Button {
@@ -56,6 +63,7 @@ struct EditProfileView: View {
                 
                 button
             }
+            
             .navigationBarHidden(true)
             .foregroundColor(Color("General.mainTextColor"))
             .padding()
@@ -63,10 +71,13 @@ struct EditProfileView: View {
         }
         .ignoresSafeArea()
     }
+    
+    
     func loadImage() {
         guard let selectedImage = selectedImage else { return }
         profileImage = Image(uiImage: selectedImage)
     }
+    
 }
 
 struct EditProfileView_Previews: PreviewProvider {
@@ -93,7 +104,6 @@ extension EditProfileView{
             }
         }
     }
-    
     
     
     var button: some View {

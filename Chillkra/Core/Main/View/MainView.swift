@@ -8,35 +8,64 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
+    
+    @ObservedObject var songStore = SongStore()
     @ObservedObject var download = SongDownload()
+    
+    
     @Binding var locationUrl: URL?
     @Binding var song: Song
     @Binding var selectedIndex: Int
-    @State var checkUrlLocation:Bool?
-    var customSize = CustomSize()
-    @EnvironmentObject var viewModel: AuthViewModel
-    @EnvironmentObject var mainViewModel: MainViewModel
-    @ObservedObject var songStore = SongStore()
     @Binding var currentSong: Int
-
+    @State var checkUrlLocation:Bool?
+    
+    var customSize = CustomSize()
     
     var body: some View {
         VStack(alignment: .leading){
             
             HeaderView(selectedIndex: $selectedIndex, title: "")
+                .zIndex(0)
             
-            recently
-            
-            feelRow
-            
-            ScrollView(showsIndicators: false){
-                LazyVStack{
-                    ListRow()
-                    ListRow()
+                
+            GeometryReader{
+                mainView in
+                ScrollView(showsIndicators: false){
+                    GeometryReader{ item in
+                        recently
+                            .scaleEffect(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
+                                                    minY: item.frame(in: .global).minY),anchor: .bottom)
+                            .opacity(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
+                                                minY: item.frame(in: .global).minY))
+                    }
+                    .frame(height: 220)
+                    GeometryReader{ item in
+                        feelRow
+                            .scaleEffect(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
+                                                    minY: item.frame(in: .global).minY),anchor: .bottom)
+                            .opacity(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
+                                                minY: item.frame(in: .global).minY))
+                    }
+                    .frame(height: 180)
+                    
+                    VStack{
+                            ForEach(1...10,id:\.self){ _ in
+                                GeometryReader{ item in
+                                    ListRow()
+                                        .scaleEffect(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
+                                                                           minY: item.frame(in: .global).minY),anchor: .bottom)
+                                        .opacity(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
+                                                                       minY: item.frame(in: .global).minY))
+                                }
+                                .frame(width:customSize.listRowWidth,height: customSize.listRowHeight)
+                            }
+                        }
                 }
+                .zIndex(1)
             }
             
-            Spacer()
             
             
         }
@@ -60,11 +89,12 @@ struct MainView: View {
 //    }
 //}
 extension MainView{
+    
     var recently: some View {
         VStack(alignment: .leading){
             HStack{
                 Text("Recently")
-                        .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                    .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
                 Spacer()
                 NavigationLink {
                     AddSongView()
@@ -74,37 +104,48 @@ extension MainView{
                             .font(.largeTitle)
                     }
                 }
-
-
+                
             }
-
-        ScrollView(.horizontal,showsIndicators: false){
-            LazyHStack{
-                ForEach(Array(zip(songStore.songs.indices,songStore.songs)),id: \.1){ index,song in
-                    Button {
-                        self.locationUrl = nil
-                        self.song = song
-                        self.currentSong = index
-                        downloadButtonTapped()
-                        if checkUrlLocation == true {
-                            DispatchQueue.main.async {
-                                self.locationUrl = download.locationUrl
+            .zIndex(0)
+            
+            GeometryReader{ mainView in
+                ScrollView(.horizontal,showsIndicators: false){
+                    LazyHStack{
+                        ForEach(Array(zip(songStore.songs.indices,songStore.songs)),id: \.1){ index,song in
+                            GeometryReader{ item in
+                                Button {
+                                    self.locationUrl = nil
+                                    self.song = song
+                                    self.currentSong = index
+                                    downloadButtonTapped()
+                                    if checkUrlLocation == true {
+                                        DispatchQueue.main.async {
+                                            self.locationUrl = download.locationUrl
+                                        }
+                                        
+                                    }
+                                    else {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 15){
+                                            self.locationUrl = download.locationUrl
+                                        }
+                                    }
+                                    
+                                } label: {
+                                    MusicRow(song: song)
+                                        .scaleEffect(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minX,
+                                                                           minY: item.frame(in: .global).minX))
+                                        .opacity(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minX,
+                                                                       minY: item.frame(in: .global).minX))
+                                }
+                                
+                                
                             }
-                            
+                            .frame(width: customSize.MusicRowWidth)
                         }
-                        else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 15){
-                                self.locationUrl = download.locationUrl
-                            }
-                        }
-                        
-                    } label: {
-                        MusicRow(song: song)
                     }
-
                 }
+                .zIndex(1)
             }
-        }
         }
         .frame(height: 220)
     }

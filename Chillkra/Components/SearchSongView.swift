@@ -45,39 +45,53 @@ struct SearchSongView: View {
                 Spacer()
             }
             .padding()
-            ScrollView(.vertical,showsIndicators: false){
-                LazyVStack{
-                    ForEach(songStore.SearchableSong) { song in
-                        Button {
-                            self.locationUrl = nil
-                            self.song = song
-                            downloadButtonTapped()
-                            if checkUrlLocation == true {
-                                DispatchQueue.main.async {
-                                    self.locationUrl = download.locationUrl
-                                    self.selectedIndex = 4
-                                    presentationMode.wrappedValue.dismiss()
+            .zIndex(0)
+            //moving view in stack for shadow effect
+            
+            GeometryReader { mainView in
+                
+                ScrollView(.vertical,showsIndicators: false){
+                    LazyVStack{
+                        ForEach(songStore.SearchableSong) { song in
+                            GeometryReader{ item in
+                                Button {
+                                    self.locationUrl = nil
+                                    self.song = song
+                                    downloadButtonTapped()
+                                    if checkUrlLocation == true {
+                                        DispatchQueue.main.async {
+                                            self.locationUrl = download.locationUrl
+                                            self.selectedIndex = 4
+                                            presentationMode.wrappedValue.dismiss()
+                                        }
+                                        
+                                    }
+                                    else {
+                                        DispatchQueue.main.asyncAfter(deadline: .now()+15){
+                                            self.locationUrl = download.locationUrl
+                                            self.selectedIndex = 4
+                                            presentationMode.wrappedValue.dismiss()
+                                        }
+                                    }
+                                    
+                                } label: {
+                                    Row(song: song)
+                                        .padding(.bottom)
+                                        .padding(.leading)
+                                        .scaleEffect(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
+                                                                minY: item.frame(in: .global).minY),anchor: .bottom)
+                                        .opacity(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
+                                                            minY: item.frame(in: .global).minY))
                                 }
-                                
                             }
-                            else {
-                                DispatchQueue.main.asyncAfter(deadline: .now()+15){
-                                    self.locationUrl = download.locationUrl
-                                    self.selectedIndex = 4
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                            }
-                            
-                        } label: {
-                            Row(song: song)
-                                .padding(.bottom)
-                                .padding(.leading)
-                        }
+                            // setting default frame height
+                            .frame(height: 100)
 
+                        }
                     }
                 }
+                .zIndex(1)
             }
-            Spacer()
             
         }
         .navigationBarHidden(true)
@@ -91,6 +105,9 @@ struct SearchSongView: View {
             self.checkUrlLocation = check
         }
     }
+    
+    
+    
 }
 
 //struct SearchView_Previews: PreviewProvider {

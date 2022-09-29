@@ -25,7 +25,7 @@ class MainViewModel: ObservableObject{
         } catch {
             print(error)
         }
-       
+        
     }
     func paused(){
         player?.pause()

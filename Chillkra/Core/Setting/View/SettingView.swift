@@ -7,19 +7,29 @@
 
 import SwiftUI
 import Kingfisher
+
 struct SettingView: View {
-    @Binding var selectedIndex: Int
+    
     @EnvironmentObject var viewModel: AuthViewModel
+    
+    @Binding var selectedIndex: Int
+    
     var customSize = CustomSize()
+    
     var body: some View {
+        
         VStack(alignment: .leading){
+            
             HeaderView(selectedIndex: $selectedIndex, title: "Setting")
             
             
             HStack{
+                
                 Spacer()
+                
                 profile
                     .padding(.bottom)
+                
                 Spacer()
             }
             

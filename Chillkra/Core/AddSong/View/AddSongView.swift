@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct AddSongView: View {
+    
+    
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
     @State private var showaudioPicker: Bool = false
-    @StateObject var songStore = SongStore()
-    @ObservedObject var viewModel = AddSongViewModel()
     @State private var song = ""
     @State private var singer = ""
     @State private var urlSong = ""
@@ -21,18 +21,32 @@ struct AddSongView: View {
     @State private var type = "type_bal"
     @State private var Etype = "etype_Hanomy"
     @State private var doneAdd: Bool = false
+    
+    @StateObject var songStore = SongStore()
+    @ObservedObject var viewModel = AddSongViewModel()
+    
+    
     var customSize = CustomSize()
+    
+    
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
+            
+            
             VStack{
                 HeaderView(selectedIndex: .constant(1), title: "Add Song")
+                
+                
                 HStack{
                     Text("Choose Image")
                     Spacer()
                 }
                 .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                
+                
                 addImage
+                
                 
                 field
                     .padding(.bottom)
@@ -55,11 +69,14 @@ struct AddSongView: View {
         }
         .ignoresSafeArea()
     }
+    
+    
     func loadImage() {
         guard let selectedImage = selectedImage else { return }
         profileImage = Image(uiImage: selectedImage)
     }
 }
+
 
 struct AddSongView_Previews: PreviewProvider {
     static var previews: some View {
@@ -68,7 +85,11 @@ struct AddSongView_Previews: PreviewProvider {
             .environmentObject(MainViewModel())
     }
 }
+
+
 extension AddSongView {
+    
+    
     var addImage: some View {
         VStack{
             Button {
@@ -93,6 +114,8 @@ extension AddSongView {
             }
         }
     }
+    
+    
     var field: some View {
         VStack(alignment: .leading){
                 VStack(alignment: .leading){
@@ -114,6 +137,8 @@ extension AddSongView {
                 .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
         }
     }
+    
+    
     var types: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading){
@@ -153,6 +178,8 @@ extension AddSongView {
             
         }
     }
+    
+    
     var audioPicker: some View {
         HStack{
             Text("Add Music:")
@@ -170,8 +197,14 @@ extension AddSongView {
             }
         }
     }
+    
+    
     var button: some View {
+        
         VStack{
+            
+            
+            
             Button(action: {
                 if let selectedImage = selectedImage {
                     viewModel.saveImageSong(selectedImage) { url in
@@ -191,6 +224,8 @@ extension AddSongView {
                     .background(Color("General.buttonColor"))
                     .cornerRadius(6)
             })
+            
+            
             Button {
                 presentationMode.wrappedValue.dismiss()
             } label: {

@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ListRow: View {
-    let customSize = CustomSize()
     @State var pause: Bool = false
+    
+    let customSize = CustomSize()
+    
     var body: some View {
+        
         ZStack(alignment: .topLeading){
+            
             Image("Main.Brahaman")
                 .scaledToFit()
                 .frame(width: customSize.listRowWidth, height: customSize.listRowHeight)
+            
             HStack{
+                
                 Spacer()
                 Circle()
                     .frame(width: customSize.circleSize, height: customSize.circleSize)
@@ -31,14 +37,16 @@ struct ListRow: View {
             }
             .padding()
             VStack(alignment: .leading){
+                
                 HStack{
+                    
                     VStack(alignment: .leading){
                         Text("20 Meditations\ntechnics")
                             .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.buttonText))
                             .padding(.bottom)
                         Text("Brahman")
                             .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.smallText))
-
+                        
                         Text("90 min")
                             .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
                             .padding(.top,3)
@@ -49,7 +57,7 @@ struct ListRow: View {
                 Spacer()
             }
             .padding()
-
+            
         }
         .frame(width: customSize.listRowWidth, height: customSize.listRowHeight)
     }

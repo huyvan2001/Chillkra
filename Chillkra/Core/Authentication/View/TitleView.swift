@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+
+
 enum type {
     case login
     case signup
@@ -18,6 +20,7 @@ enum type {
             return "Sign up"
         }
     }
+    
     var description:String{
         switch self {
         case .login:
@@ -29,8 +32,11 @@ enum type {
 }
 
 struct TitleView: View {
+    
     var typeView: type
     let customSize = CustomSize()
+    
+    
     var body: some View {
         VStack(alignment:.leading){
             Text(typeView.title)

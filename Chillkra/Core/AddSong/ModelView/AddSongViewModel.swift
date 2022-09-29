@@ -7,7 +7,10 @@
 
 import Foundation
 import SwiftUI
+
+
 class AddSongViewModel: ObservableObject{
+    
     func saveImageSong(_ image: UIImage,compeltion: @escaping(String) -> Void){
         ImageUploader.uploadSongImage(image: image) { url in
             print(url)

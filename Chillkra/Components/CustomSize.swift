@@ -49,5 +49,24 @@ class CustomSize{
     let totalRowHeight: CGFloat = 156.11
     let totalRowWidth: CGFloat = 342.99
     let totalRadius: CGFloat = 24
+    
+    //Simple caculation for scaling Effect
+    func scaleValue(mainFrame: CGFloat, minY: CGFloat)-> CGFloat {
+        withAnimation(.easeInOut){
+            let scale = minY/mainFrame
+            
+            if scale > 1 {
+                return 1
+            }
+             else
+            {
+                 return scale
+             }
+
+        }
+        
+        
+    }
 }
+
 

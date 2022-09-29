@@ -8,23 +8,29 @@
 import SwiftUI
 import AVFoundation
 import Kingfisher
+
 struct PlayView: View {
+    @EnvironmentObject var mainViewModel: MainViewModel
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     @ObservedObject var download = SongDownload()
     @ObservedObject var songStore = SongStore()
-    @Binding var  locationUrl: URL?
-    @EnvironmentObject var mainViewModel: MainViewModel
-    @Binding var song: Song
-    @Binding var selectedIndex: Int
-    @EnvironmentObject var viewModel: AuthViewModel
-    @State var pause: Bool = false
-    let customSize = CustomSize()
-    @State var width: CGFloat = 0
+
     @Binding var currentSong:Int
+    @State var pause: Bool = false
     @State var checkUrlLocation:Bool?
     @State var value: Double = 0
+    @State var width: CGFloat = 0
+    @Binding var  locationUrl: URL?
+    @Binding var song: Song
+    @Binding var selectedIndex: Int
+    
+    let customSize = CustomSize()
+    
     var body: some View {
             VStack(){
                 HeaderView(selectedIndex: $selectedIndex, title: "")
+                
                 
                 KFImage(URL(string: song.imageSongUrl))
                     .resizable()
@@ -34,6 +40,7 @@ struct PlayView: View {
                 name
                     .padding(20)
                
+                
                 ZStack(alignment: .leading){
                     Capsule().fill(Color.black.opacity(0.08)).frame(height:8)
                     Capsule().fill(Color.red).frame(width: width,height: 8)
@@ -52,6 +59,8 @@ struct PlayView: View {
             .padding()
             .onAppear(){
                 playsong()
+                
+                
                 guard let player = mainViewModel.player else { return }
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
                     if player.isPlaying {
@@ -62,10 +71,13 @@ struct PlayView: View {
                 }
             }
             .onChange(of: song){ _ in
+                
                 width = 0
                 mainViewModel.stopped()
                 playsong()
                 self.pause = false
+                
+                
                 guard let player = mainViewModel.player else { return }
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
                     if player.isPlaying {
@@ -77,6 +89,8 @@ struct PlayView: View {
             }
             .ignoresSafeArea()
     }
+    
+    
     func playsong(){
         if locationUrl != nil {
             mainViewModel.played(locationUrl: locationUrl)
@@ -88,6 +102,7 @@ struct PlayView: View {
         }
         
     }
+    
     func downloadButtonTapped(){
         guard let previewUrl = URL(string: song.urlSong) else {return}
         self.download.fetchSongUrl(previewUrl) { check in
@@ -109,11 +124,11 @@ extension PlayView {
             Text(song.nameSong)
                 .modifier(Fonts(fontName: FontsName.kalam, size: customSize.largeText))
                 .padding()
-            
             Text(song.singer)
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
         }
     }
+    
     
     var play: some View {
         HStack{
@@ -186,6 +201,8 @@ extension PlayView {
         }
         .padding()
     }
+    
+    
     var action: some View {
         HStack{
             Image(systemName: "repeat")

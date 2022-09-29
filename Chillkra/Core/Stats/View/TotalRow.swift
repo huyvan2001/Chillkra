@@ -8,26 +8,35 @@
 import SwiftUI
 
 struct TotalRow: View {
+    
     let title: String
     let amount: String
     let nameAmount: String
     let timeupdate: String
     let customSize = CustomSize()
+    
+    
     var body: some View {
+        
+        
         VStack{
             Text(title)
                 .modifier(Fonts(fontName: FontsName.kalam,
                                 size: customSize.largetinyText))
+            
             Text(amount)
                 .modifier(Fonts(fontName: FontsName.kalam,
                                 size: customSize.bigText))
+            
             Text(nameAmount)
                 .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
                 .foregroundColor(Color("Setting.ColorTitle"))
+            
             Text(timeupdate)
                 .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smalltinyText))
                 .foregroundColor(Color("Main.ColorRowPlayerStart"))
                 .padding(3)
+            
         }
         .frame(width: customSize.totalRowWidth, height: customSize.totalRowHeight)
         .background(Color("Stats.Colorrow").opacity(0.15))

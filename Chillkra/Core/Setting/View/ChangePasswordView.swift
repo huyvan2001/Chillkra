@@ -6,19 +6,23 @@
 //
 
 import SwiftUI
-import Charts
 import Kingfisher
+
 struct ChangePasswordView: View {
+    
+    @EnvironmentObject var viewModel: AuthViewModel
+    @Environment(\.presentationMode) var presentationMode
+    
     @State var checkcurrentPassword: Bool = true
     @State var checkConfirmPassword: Bool = false
     @State var checklengthPassword: Bool = false
-    @EnvironmentObject var viewModel: AuthViewModel
     @Binding var selectedIndex: Int
     @State var CurrentPassword: String = ""
     @State var newPassword: String = ""
     @State var confirmnewPassword: String = ""
-    @Environment(\.presentationMode) var presentationMode
+    
     let customSize = CustomSize()
+    
     var body: some View {
         ZStack {
             VStack{
@@ -90,6 +94,7 @@ struct ChangePasswordView_Previews: PreviewProvider {
             .environmentObject(AuthViewModel())
     }
 }
+
 extension ChangePasswordView{
     
     var field: some View {
@@ -161,4 +166,5 @@ extension ChangePasswordView{
         })
         .padding()
     }
+    
 }

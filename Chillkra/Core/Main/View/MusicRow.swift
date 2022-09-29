@@ -8,11 +8,16 @@
 import SwiftUI
 import Kingfisher
 struct MusicRow: View {
+    
     var song: Song
     let customSize = CustomSize()
+    
     var body: some View {
+        
         VStack{
+            
             VStack{
+                
                 KFImage(URL(string: song.imageSongUrl))
                     .resizable()
                     .frame(width: customSize.MusicRowWidth, height: customSize.MusicRowHeight)
@@ -30,9 +35,12 @@ struct MusicRow: View {
                     )
                 
             }
+            
             Text(song.nameSong)
                 .padding(.bottom,3)
+            
             Text(song.singer)
+            
         }
         .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
         .foregroundColor(Color("General.mainTextColor"))

@@ -7,12 +7,16 @@
 import SwiftUI
 import Charts
 struct StatsView: View {
-    @Binding var selectedIndex: Int
     @EnvironmentObject var viewModel: AuthViewModel
+    
+    @Binding var selectedIndex: Int
     @State private var selectFiller: StatsFillerViewModel = .activity
-    let customSize = CustomSize()
+    
     @Namespace var animation
+    
+    let customSize = CustomSize()
     let sleep = Sleep(sleep: 7, deep: 3.5, quantity: 3.5/7)
+    
     var body: some View {
         VStack{
             
@@ -49,8 +53,11 @@ struct StatsView_Previews: PreviewProvider {
 }
 
 extension StatsView {
+    
     var statsFiller: some View {
+        
         HStack{
+            
             Spacer()
             ForEach(StatsFillerViewModel.allCases, id:\.rawValue){
                 item in

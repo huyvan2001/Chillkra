@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BedtimeView: View {
+    
     var customSize = CustomSize()
     let sleep = Sleep(sleep: 7, deep: 3.5, quantity: 3.5/7)
     var body: some View {
@@ -51,12 +52,15 @@ struct BedtimeView_Previews: PreviewProvider {
 }
 
 struct circle: View {
+    
     let customSize = CustomSize()
     let percent: String
     let colorstroke: String
     let value: Double
     let text: String
+    
     var body: some View{
+        
         VStack{
             ZStack{
                 Text(percent)

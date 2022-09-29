@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct SearchView: View {
+    
+    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
+    
     @ObservedObject var download = SongDownload()
+    @StateObject var songStore = SongStore()
+    
     @Binding var song: Song
     @Binding var locationUrl: URL?
     @Binding var selectedIndex: Int
-    @EnvironmentObject var viewModel: AuthViewModel
-    @EnvironmentObject var mainViewModel: MainViewModel
     @State var textSearch: String = ""
-    @StateObject var songStore = SongStore()
-    var customSize = CustomSize()
     @State var checkUrlLocation:Bool?
+    
+    var customSize = CustomSize()
+    
     var body: some View {
+        
         VStack{
             HeaderView(selectedIndex: $selectedIndex, title: "Search")
             
@@ -87,37 +93,47 @@ extension SearchView {
     
     
     
-    
     var recently: some View {
         VStack(alignment: .leading){
             Text("Recently played")
                 .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
                 .padding(.bottom)
-            ScrollView(.horizontal,showsIndicators: false){
-                LazyHStack{
-                    ForEach(songStore.songs){ song in
-                        Button {
-                            self.locationUrl = nil
-                            self.song = song
-                            downloadButtonTapped()
-                            if checkUrlLocation == true {
-                                DispatchQueue.main.async {
-                                    self.locationUrl = download.locationUrl
+                .zIndex(0)
+            GeometryReader{ mainView in
+                ScrollView(.horizontal,showsIndicators: false){
+                    LazyHStack{
+                        ForEach(songStore.songs){ song in
+                            GeometryReader { item in
+                                Button {
+                                    self.locationUrl = nil
+                                    self.song = song
+                                    downloadButtonTapped()
+                                    if checkUrlLocation == true {
+                                        DispatchQueue.main.async {
+                                            self.locationUrl = download.locationUrl
+                                        }
+                                        
+                                    }
+                                    else {
+                                        DispatchQueue.main.asyncAfter(deadline: .now()+15){
+                                            self.locationUrl = download.locationUrl
+                                        }
+                                    }
+                                    
+                                } label: {
+                                    MusicRow(song: song)
+                                        .scaleEffect(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minX,
+                                                                minY: item.frame(in: .global).minX))
+                                        .opacity(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minX,
+                                                            minY: item.frame(in: .global).minX))
                                 }
-                                
-                            }
-                            else {
-                                DispatchQueue.main.asyncAfter(deadline: .now()+15){
-                                    self.locationUrl = download.locationUrl
-                                }
-                            }
-                            
-                        } label: {
-                            MusicRow(song: song)
-                        }
 
+                            }
+                            .frame(width: customSize.MusicRowWidth)
+                        }
                     }
                 }
+                .zIndex(1)
             }
         }
         .frame(height: 220)

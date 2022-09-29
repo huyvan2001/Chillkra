@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct LoginView: View {
+
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     @State var check: Bool = true
     @State var email = ""
     @State var password = ""
-    @EnvironmentObject var viewModel: AuthViewModel
+    
     let customSize = CustomSize()
     
     
     
     var body: some View {
+        
+        
         VStack{
             
             VStack(alignment: .leading){
@@ -95,6 +100,8 @@ extension LoginView{
         .padding(.bottom)
         
     }
+    
+    
     var button: some View {
         Button(action: {
             viewModel.login(withEmail: email, password: password) { check in
@@ -109,6 +116,9 @@ extension LoginView{
         })
         .padding()
     }
+    
+    
+    
     var footer: some View {
         VStack{
             HStack{
@@ -141,4 +151,6 @@ extension LoginView{
             }
         }
     }
+    
+    
 }

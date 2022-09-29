@@ -26,12 +26,14 @@ struct Row: View{
             .padding()
             Spacer()
         }
+        .background(Color("Search.blue").shadow(color:Color.black.opacity(0.12),radius: 5,x:0,y:4))
+        .cornerRadius(15)
     }
     
 }
 
-//struct Row_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Row()
-//    }
-//}
+struct Row_Previews: PreviewProvider {
+    static var previews: some View {
+        Row(song: Song(nameSong: "Em dau biet", urlSong: "", imageSongUrl: "", singer: "Le Van Huy", emotionType: "", lyric: "", type: ""))
+    }
+}

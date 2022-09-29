@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct SignUpView: View {
+    
+    @EnvironmentObject var viewModel : AuthViewModel
+    
     @State var check: Bool = true
     @State var name: String = ""
     @State var email: String = ""
     @State var password: String = ""
+    
     let customSize = CustomSize()
-    @EnvironmentObject var viewModel : AuthViewModel
+    
     var body: some View {
         VStack{
+            
             VStack(alignment: .leading){
                 
                 HeaderView(selectedIndex: .constant(1), title: "")
@@ -27,6 +32,7 @@ struct SignUpView: View {
                 field
                 
             }
+            
             button
             
             if check == false {

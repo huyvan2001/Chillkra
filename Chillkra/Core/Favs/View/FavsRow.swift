@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct FavsRow: View {
+    
     let imageName: String
     let nameSong: String
     let nameSinger: String
     let customSize = CustomSize()
+    
     var body: some View {
+        
         Image(imageName)
             .resizable()
             .frame(width: customSize.favsRowSize, height: customSize.favsRowSize)

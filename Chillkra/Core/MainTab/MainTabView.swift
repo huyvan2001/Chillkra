@@ -7,26 +7,30 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State var song : Song = .init(nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "")
-    @State var locationUrl: URL?
-    let customSize = CustomSize()
-    @State private var selectedIndex = 0
+    
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
+    
+    @State var song : Song = .init(nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "")
+    @State var locationUrl: URL?
+    @State private var selectedIndex = 0
     @State var currentSong = 0
+    
+    let customSize = CustomSize()
+    
     var body: some View {
         VStack{
+            
+            
             if selectedIndex == 0 {
                 MainView(locationUrl: $locationUrl, song: $song, selectedIndex: $selectedIndex, currentSong: $currentSong)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             
             
-            
             else if selectedIndex == 1 {
                 SearchView(song: $song, locationUrl: $locationUrl, selectedIndex: $selectedIndex)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)            }
-            
             
             
             else if selectedIndex == 2 {
@@ -43,7 +47,7 @@ struct MainTabView: View {
             
             
             else if selectedIndex == 4{
-                PlayView(locationUrl: $locationUrl, song:$song,selectedIndex: $selectedIndex, currentSong: $currentSong)
+                PlayView(currentSong: $currentSong, locationUrl: $locationUrl, song:$song,selectedIndex: $selectedIndex)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             
@@ -64,6 +68,7 @@ struct MainTabView: View {
         .background(Color("backgroundColor"))
         .frame(maxWidth: .infinity,maxHeight: .infinity)
         .overlay(
+            
             VStack{
                 Spacer()
                 if song.nameSong != "" {
