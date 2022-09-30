@@ -53,12 +53,9 @@ struct MainTabView: View {
             
             
             else if selectedIndex == 5 {
-                ScrollView(.vertical,showsIndicators: false){
-                    VStack{
                         SettingView(selectedIndex: $selectedIndex)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-                    }
-                }
+                
             }
             
             

@@ -21,29 +21,38 @@ struct SettingView: View {
         VStack(alignment: .leading){
             
             HeaderView(selectedIndex: $selectedIndex, title: "Setting")
-            
-            
-            HStack{
+                HStack{
+                    
+                    Spacer()
+                    
+                    profile
+                        .padding(.bottom)
+                    
+                    Spacer()
+                }
                 
-                Spacer()
                 
-                profile
+                account
                     .padding(.bottom)
                 
-                Spacer()
+                notification
+                    .padding(.bottom)
+                
+                
+            VStack(alignment: .leading){
+                Button {
+                    viewModel.logOut()
+                } label: {
+                    Text("Logout")
+                        .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.smallText))
+                }
+                
             }
+                
+                Spacer()
             
             
-            account
-                .padding(.bottom)
             
-            notification
-                .padding(.bottom)
-            
-            
-            other
-            
-            Spacer()
             
         }
         .navigationBarHidden(true)
@@ -149,25 +158,9 @@ extension SettingView{
                     Text("Notification")
                 }
                 .padding(.bottom)
-                Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
-                    Text("App Notification")
-                }
-                .padding(.bottom)
             }
             .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.smallText))
         }
     }
     
-    
-    var other: some View{
-        VStack(alignment: .leading){
-            Button {
-                viewModel.logOut()
-            } label: {
-                Text("Logout")
-                    .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.smallText))
-            }
-            
-        }
-    }
 }

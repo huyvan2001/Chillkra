@@ -25,11 +25,11 @@ struct RowPlayer: View {
     @Binding var currentSong:Int
     @State var width: CGFloat = 0
     @State var value: Double = 0
-    
+    @State var checksongfinished = false
     var customSize = CustomSize()
     
     var body: some View {
-        
+
         VStack{
             
             HStack{
@@ -118,7 +118,7 @@ struct RowPlayer: View {
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
                     if player.isPlaying {
                         let screen = UIScreen.main.bounds.width - 30
-                        let value = player.currentTime / player.duration
+                        value = player.currentTime / player.duration
                         self.width = screen * CGFloat(value)
                     }
                 }
@@ -138,6 +138,8 @@ struct RowPlayer: View {
                     }
                 }
             }
+           
+            
             ZStack(alignment: .leading){
                 Capsule().fill(Color.black.opacity(0.08)).frame(height:3)
                 Capsule().fill(Color.red).frame(width: width,height: 3)
