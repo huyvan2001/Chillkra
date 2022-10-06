@@ -13,10 +13,13 @@ import SwiftUI
 
 
 class AuthViewModel: ObservableObject {
+    
     @Published var userSession: FirebaseAuth.User?
     @Published var didAuthecationUser : Bool = false
     @Published var currentUser: User?
+    
     private let service = UserService()
+    
     init(){
         self.userSession = Auth.auth().currentUser
         self.fetchUser()
@@ -28,8 +31,11 @@ class AuthViewModel: ObservableObject {
     
     
     //MARK: LOGIN
-    func login(withEmail email: String, password: String,completion:@escaping(Bool)->Void) {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+    func login(withEmail email: String,
+               password: String,
+               completion:@escaping(Bool)->Void) {
+        Auth.auth().signIn(withEmail: email,
+                           password: password) { result, error in
             if let error = error {
                 print("Fail to signIn with error \(error)")
                 completion(false)
@@ -44,8 +50,13 @@ class AuthViewModel: ObservableObject {
     
     
     //MARK: SIGNUP
-    func signup(withEmail email: String, name: String, password: String,completion:@escaping(Bool)->Void){
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+    func signup(withEmail email: String,
+                name: String,
+                password: String,
+                completion:@escaping(Bool)->Void){
+        
+        Auth.auth().createUser(withEmail: email,
+                               password: password) { result, error in
             if let error = error {
                 print("Fail to signup with error \(error)")
                 completion(false)
@@ -64,11 +75,18 @@ class AuthViewModel: ObservableObject {
     
     
     //MARK: CHANGE PASSWORD
-    func changePassword(email:String,currentPassword: String,newPassword: String,completion:@escaping(Bool) -> Void){
-        let credential = EmailAuthProvider.credential(withEmail:email, password: currentPassword)
-        Auth.auth().currentUser?.reauthenticate(with: credential,completion: { _, error in
+    func changePassword(email:String,
+                        currentPassword: String,
+                        newPassword: String,
+                        completion:@escaping(Bool) -> Void){
+        
+        let credential = EmailAuthProvider.credential(withEmail:email,
+                                                      password: currentPassword)
+        Auth.auth().currentUser?.reauthenticate(with: credential,
+                                                completion: { _, error in
                 completion(false)
         })
+        
         Auth.auth().currentUser?.updatePassword(to: newPassword)
         completion(true)
     }
@@ -132,7 +150,8 @@ class AuthViewModel: ObservableObject {
     
     
     //MARK: RESET PASSWORD
-    func resetPassword(email: String,completion:@escaping(Bool)->Void){
+    func resetPassword(email: String,
+                       completion:@escaping(Bool)->Void){
         Auth.auth().sendPasswordReset(withEmail: email) { _ in
             print("Email isn't exist")
         }

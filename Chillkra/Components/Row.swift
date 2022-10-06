@@ -14,12 +14,15 @@ struct Row: View{
         HStack(alignment: .top){
             KFImage(URL(string: song.imageSongUrl))
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: 100,
+                       height: 100)
             VStack(alignment: .leading){
                 Text(song.nameSong)
-                    .modifier(Fonts(fontName: .boldKalam, size: customSize.mediumText))
+                    .modifier(Fonts(fontName: .boldKalam,
+                                    size: customSize.mediumText))
                 Text(song.singer)
-                    .modifier(Fonts(fontName: .kalam, size: customSize.smallText))
+                    .modifier(Fonts(fontName: .kalam,
+                                    size: customSize.smallText))
                 Spacer()
             }
             .foregroundColor(Color("General.mainTextColor"))
@@ -34,6 +37,12 @@ struct Row: View{
 
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
-        Row(song: Song(nameSong: "Em dau biet", urlSong: "", imageSongUrl: "", singer: "Le Van Huy", emotionType: "", lyric: "", type: ""))
+        Row(song: Song(nameSong: "Em dau biet",
+                       urlSong: "",
+                       imageSongUrl: "",
+                       singer: "Le Van Huy",
+                       emotionType: "",
+                       lyric: "",
+                       type: ""))
     }
 }

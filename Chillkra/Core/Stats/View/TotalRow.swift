@@ -29,16 +29,19 @@ struct TotalRow: View {
                                 size: customSize.bigText))
             
             Text(nameAmount)
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.tinyText))
                 .foregroundColor(Color("Setting.ColorTitle"))
             
             Text(timeupdate)
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smalltinyText))
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.smalltinyText))
                 .foregroundColor(Color("Main.ColorRowPlayerStart"))
                 .padding(3)
             
         }
-        .frame(width: customSize.totalRowWidth, height: customSize.totalRowHeight)
+        .frame(width: customSize.totalRowWidth,
+               height: customSize.totalRowHeight)
         .background(Color("Stats.Colorrow").opacity(0.15))
         .cornerRadius(customSize.totalRadius)
         .padding()
@@ -47,6 +50,9 @@ struct TotalRow: View {
 
 struct TotalRow_Previews: PreviewProvider {
     static var previews: some View {
-        TotalRow(title: "Total played", amount: "120K", nameAmount: "reproductions", timeupdate: "Last update yesterday")
+        TotalRow(title: "Total played",
+                 amount: "120K",
+                 nameAmount: "reproductions",
+                 timeupdate: "Last update yesterday")
     }
 }

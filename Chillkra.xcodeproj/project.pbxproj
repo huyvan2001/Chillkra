@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		045CBB6128E5902D00C42D2F /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBB6028E5902D00C42D2F /* MarqueeText.swift */; };
 		045CBB6328E5905600C42D2F /* SwiftUI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBB6228E5905600C42D2F /* SwiftUI+Extension.swift */; };
+		045CBBD928EEC92500C42D2F /* NotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBBD828EEC92500C42D2F /* NotificationDelegate.swift */; };
 		C400916728DB0973004B524A /* AddSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916628DB0973004B524A /* AddSongViewModel.swift */; };
 		C400916928DC6AE9004B524A /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916828DC6AE9004B524A /* Access.swift */; };
 		C400916B28DC7554004B524A /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916A28DC7554004B524A /* Sleep.swift */; };
@@ -109,6 +110,7 @@
 /* Begin PBXFileReference section */
 		045CBB6028E5902D00C42D2F /* MarqueeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeText.swift; sourceTree = "<group>"; };
 		045CBB6228E5905600C42D2F /* SwiftUI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extension.swift"; sourceTree = "<group>"; };
+		045CBBD828EEC92500C42D2F /* NotificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDelegate.swift; sourceTree = "<group>"; };
 		C400916628DB0973004B524A /* AddSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewModel.swift; sourceTree = "<group>"; };
 		C400916828DC6AE9004B524A /* Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Access.swift; sourceTree = "<group>"; };
 		C400916A28DC7554004B524A /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				C42024AE28C9E3CE00468B70 /* ImageUploader.swift */,
 				C42024B828CAF78300468B70 /* SongService.swift */,
 				C42107C528D94D2C00A0B104 /* SongStore.swift */,
+				045CBBD828EEC92500C42D2F /* NotificationDelegate.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -811,6 +814,7 @@
 				C42024B228C9E41500468B70 /* ImagePicker.swift in Sources */,
 				C48D7B9628C5EE6A00634E38 /* CustomFonts.swift in Sources */,
 				C48D7B9828C6137400634E38 /* CustomSize.swift in Sources */,
+				045CBBD928EEC92500C42D2F /* NotificationDelegate.swift in Sources */,
 				C48D7BAD28C6D9D200634E38 /* MainView.swift in Sources */,
 				C48D7B3E28C5EB9000634E38 /* ContentView.swift in Sources */,
 				C42024B928CAF78300468B70 /* SongService.swift in Sources */,

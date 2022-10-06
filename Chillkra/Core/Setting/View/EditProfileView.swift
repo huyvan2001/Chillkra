@@ -24,7 +24,8 @@ struct EditProfileView: View {
         ZStack {
             
             VStack{
-                HeaderView(selectedIndex: .constant(5), title: "Edit Profile")
+                HeaderView(selectedIndex: .constant(5),
+                           title: "Edit Profile")
                 
                 
                 if let user = viewModel.currentUser {
@@ -35,19 +36,22 @@ struct EditProfileView: View {
                             profileImage
                                 .resizable()
                                 .clipShape(Circle())
-                                .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                                .frame(width: customSize.imageprofileSize,
+                                       height: customSize.imageprofileSize)
                             
                         }
                         else if user.urlImage == "" {
                             Image("Person")
                                 .resizable()
-                                .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                                .frame(width: customSize.imageprofileSize,
+                                       height: customSize.imageprofileSize)
                         }
                         else {
                             KFImage(URL(string: user.urlImage))
                                 .resizable()
                                 .clipShape(Circle())
-                                .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                                .frame(width: customSize.imageprofileSize,
+                                       height: customSize.imageprofileSize)
                         }
                     }
                     .sheet(isPresented: $showImagePicker,onDismiss: loadImage){
@@ -96,11 +100,13 @@ extension EditProfileView{
                         .padding(.top)
                         .padding(.bottom)
                     TextField(user.name,text: $name)
-                        .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                        .frame(width: customSize.widthTextField,
+                               height: customSize.heightTextField)
                     Divider()
                         .overlay(Color("General.mainTextColor"))
                 }
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.smallText))
             }
         }
     }
@@ -112,17 +118,21 @@ extension EditProfileView{
                 viewModel.editName(name)
             }
             else if let selectedImage = selectedImage, name == "" {
+                
                 viewModel.editImage(selectedImage)
             }
             else if let selectedImage = selectedImage, name != "" {
+                
                 viewModel.editImage(selectedImage)
                 viewModel.editName(name)
             }
             presentationMode.wrappedValue.dismiss()
         }, label: {
             Text("Save Change")
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))
-                .frame(width: customSize.widthButton, height: customSize.heightButton)
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size:customSize.buttonText))
+                .frame(width: customSize.widthButton,
+                       height: customSize.heightButton)
                 .background(Color("General.buttonColor"))
                 .cornerRadius(6)
         })

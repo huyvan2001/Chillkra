@@ -12,8 +12,6 @@ struct FavsView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     
     @Binding var selectedIndex: Int
-    @Binding var song: Song
-    @Binding var locationUrl: URL?
     @State private var textSearch: String = ""
     
     let customSize = CustomSize()
@@ -21,9 +19,10 @@ struct FavsView: View {
     var body: some View {
         
         VStack{
-            HeaderView(selectedIndex: $selectedIndex, title: "Favorites")
+            HeaderView(selectedIndex: $selectedIndex,
+                       title: "Favorites")
             
-            NavigationLink(destination: SearchSongView(locationUrl: $locationUrl, selectedIndex: $selectedIndex, song: $song)) {
+            NavigationLink(destination: SearchSongView(selectedIndex: $selectedIndex)) {
                 SearchBar(text: $textSearch)
             }
             
@@ -54,12 +53,24 @@ extension FavsView {
             
             LazyVGrid(columns:[
                 .init(.adaptive(minimum:customSize.favsRowSize),spacing: 20)]){
-                    FavsRow(imageName: "Favs.ChillCoffe", nameSong: "Chill Coffees", nameSinger: "Horus")
-                    FavsRow(imageName: "Favs.LostDessert", nameSong: "Lost Dessert", nameSinger: "Shiva")
-                    FavsRow(imageName: "Favs.City", nameSong: "Cities in the sky", nameSinger: "Dana")
-                    FavsRow(imageName: "Favs.Spring", nameSong: "Springs", nameSinger: "Esus")
-                    FavsRow(imageName: "Favs.ChillCoffe", nameSong: "Chill Coffees", nameSinger: "Horus")
-                    FavsRow(imageName: "Favs.LostDessert", nameSong: "Lost Dessert", nameSinger: "Shiva")
+                    FavsRow(imageName: "Favs.ChillCoffe",
+                            nameSong: "Chill Coffees",
+                            nameSinger: "Horus")
+                    FavsRow(imageName: "Favs.LostDessert",
+                            nameSong: "Lost Dessert",
+                            nameSinger: "Shiva")
+                    FavsRow(imageName: "Favs.City",
+                            nameSong: "Cities in the sky",
+                            nameSinger: "Dana")
+                    FavsRow(imageName: "Favs.Spring",
+                            nameSong: "Springs",
+                            nameSinger: "Esus")
+                    FavsRow(imageName: "Favs.ChillCoffe",
+                            nameSong: "Chill Coffees",
+                            nameSinger: "Horus")
+                    FavsRow(imageName: "Favs.LostDessert",
+                            nameSong: "Lost Dessert",
+                            nameSinger: "Shiva")
                 }
         }
         .padding()

@@ -18,15 +18,18 @@ struct FavsRow: View {
         
         Image(imageName)
             .resizable()
-            .frame(width: customSize.favsRowSize, height: customSize.favsRowSize)
+            .frame(width: customSize.favsRowSize,
+                   height: customSize.favsRowSize)
             .cornerRadius(customSize.favsRowRadius)
             .overlay(
                 VStack{
                     Spacer()
                     Text(nameSong)
-                        .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.tinyText))
+                        .modifier(Fonts(fontName: FontsName.boldKalam,
+                                        size: customSize.tinyText))
                     Text(nameSinger)
-                        .modifier(Fonts(fontName: FontsName.Josefin, size: customSize.tinyText))
+                        .modifier(Fonts(fontName: FontsName.Josefin,
+                                        size: customSize.tinyText))
                 }
                     .foregroundColor(Color("General.mainTextColor"))
                     .padding()

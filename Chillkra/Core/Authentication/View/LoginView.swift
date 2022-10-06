@@ -25,7 +25,8 @@ struct LoginView: View {
         VStack{
             
             VStack(alignment: .leading){
-                HeaderView(selectedIndex: .constant(1), title: "")
+                HeaderView(selectedIndex: .constant(1),
+                           title: "")
                 
                 TitleView(typeView: .login)
                 
@@ -38,7 +39,8 @@ struct LoginView: View {
             if check == false {
                 withAnimation(.spring()){
                     Text("Fail to Login. Please check email and password !!!")
-                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .modifier(Fonts(fontName: FontsName.kalam,
+                                        size: customSize.tinyText))
                         .padding()
                         .foregroundColor(.red)
                 }
@@ -70,19 +72,24 @@ extension LoginView{
                 Text("Email")
                     .padding(.top)
                     .padding(.bottom)
-                TextField("example@mail.com",text: $email)
-                    .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                TextField("example@mail.com",
+                          text: $email)
+                    .frame(width: customSize.widthTextField,
+                           height: customSize.heightTextField)
                 Divider()
                     .overlay(Color("General.mainTextColor"))
                 Text("Password")
                     .padding(.top)
                     .padding(.bottom)
-                SecureField("example@email.com",text: $password)
-                    .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                SecureField("example@email.com",
+                            text: $password)
+                    .frame(width: customSize.widthTextField,
+                           height: customSize.heightTextField)
                 Divider()
                     .overlay(Color("General.mainTextColor"))
             }
-            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+            .modifier(Fonts(fontName: FontsName.kalam,
+                            size: customSize.smallText))
             
             
             HStack{
@@ -94,7 +101,8 @@ extension LoginView{
                 }
             }
             .padding(.top)
-            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
+            .modifier(Fonts(fontName: FontsName.kalam,
+                            size: customSize.mediumText))
             
         }
         .padding(.bottom)
@@ -104,13 +112,16 @@ extension LoginView{
     
     var button: some View {
         Button(action: {
-            viewModel.login(withEmail: email, password: password) { check in
+            viewModel.login(withEmail: email,
+                            password: password) { check in
                 self.check = check
             }
         }, label: {
             Text("Login")
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))
-                .frame(width: customSize.widthButton, height: customSize.heightButton)
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size:customSize.buttonText))
+                .frame(width: customSize.widthButton,
+                       height: customSize.heightButton)
                 .background(Color("General.buttonColor"))
                 .cornerRadius(6)
         })
@@ -131,22 +142,26 @@ extension LoginView{
                 }
 
             }
-            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
+            .modifier(Fonts(fontName: FontsName.kalam,
+                            size: customSize.mediumText))
             
             Spacer()
             
             Text("Or login with")
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.smallText))
             
             
             HStack{
                 Image("Google")
                     .scaledToFit()
-                    .frame(width: customSize.iconfooterSize, height: customSize.iconfooterSize)
+                    .frame(width: customSize.iconfooterSize,
+                           height: customSize.iconfooterSize)
                     .padding()
                 Image("Facebook")
                     .scaledToFit()
-                    .frame(width: customSize.iconfooterSize, height: customSize.iconfooterSize)
+                    .frame(width: customSize.iconfooterSize,
+                           height: customSize.iconfooterSize)
                     .padding()
             }
         }

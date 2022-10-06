@@ -30,7 +30,8 @@ struct SearchBar: View {
                     )
             }
             .foregroundColor(Color("Search.ColorSearch"))
-            .frame(width: customSize.searchBarWidth, height: customSize.searchBarHeight)
+            .frame(width: customSize.searchBarWidth,
+                   height: customSize.searchBarHeight)
             .background(Color.white)
         .cornerRadius(customSize.searchBarRadius)
     }

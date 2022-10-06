@@ -71,8 +71,10 @@ extension StatsView {
                     if selectFiller == item {
                         Capsule()
                             .foregroundColor(Color("General.mainTextColor"))
-                            .frame(width:87,height:1)
-                            .matchedGeometryEffect(id: "filler", in: animation)
+                            .frame(width:87,
+                                   height:1)
+                            .matchedGeometryEffect(id: "filler",
+                                                   in: animation)
                     }
                     else{
                         Capsule()
@@ -82,6 +84,7 @@ extension StatsView {
                 }
                 .onTapGesture {
                     withAnimation(.easeInOut) {
+                        
                         self.selectFiller = item
                     }
                 }

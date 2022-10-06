@@ -13,18 +13,10 @@ struct RowPlayer: View {
     
     @EnvironmentObject var mainViewModel: MainViewModel
     
-    @ObservedObject var download = SongDownload()
     @ObservedObject var songStore = SongStore()
     
     
-    @Binding var  locationUrl: URL?
-    @Binding var song: Song
-    @State var checkUrlLocation:Bool?
-    @State var pause: Bool = true
     @State var favs: Bool = true
-    @Binding var currentSong:Int
-    @State var width: CGFloat = 0
-    @State var value: Double = 0
     @State var checksongfinished = false
     var customSize = CustomSize()
     
@@ -36,14 +28,20 @@ struct RowPlayer: View {
                 
                 HStack{
                     
-                    KFImage(URL(string: song.imageSongUrl))
+                    KFImage(URL(string: mainViewModel.song.imageSongUrl))
                         .resizable()
                         .frame(width: 49, height: 50)
+                    
                     VStack(alignment: .leading){
-                        MarqueeText(text: song.nameSong, font: UIFont.preferredFont(forTextStyle:.title2), leftFade: 1, rightFade: 1, startDelay: 0.5)
+                        
+                        MarqueeText(text: mainViewModel.song.nameSong,
+                                    font: UIFont.preferredFont(forTextStyle:.title2),
+                                    leftFade: 1,
+                                    rightFade: 1,
+                                    startDelay: 0.5)
                             .foregroundColor(Color("Main.NameSong"))
                             .frame(width: 100)
-                        Text(song.singer)
+                        Text(mainViewModel.song.singer)
                             .foregroundColor(Color("backgroundColor"))
                             .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
                     }
@@ -63,39 +61,23 @@ struct RowPlayer: View {
                     }
                     
                     Button {
-                        pause.toggle()
-                        if pause == false {
+                        mainViewModel.playing.toggle()
+                        
+                        if mainViewModel.playing == true {
+                            mainViewModel.played()
+                        }
+                        
+                        else {
                             mainViewModel.paused()
                         }
-                        else {
-                            mainViewModel.played(locationUrl: locationUrl)
-                        }
                     } label: {
-                        Image(systemName: pause == true ? "pause.fill" : "play.fill")
+                        Image(systemName: mainViewModel.playing == true ? "pause.fill" : "play.fill")
                             .foregroundColor(Color("Main.IconPlay"))
                             .font(.largeTitle)
                     }
                     
                     Button {
-                        currentSong = currentSong + 1
-                        if self.currentSong == songStore.songs.count {
-                            self.currentSong = 0
-                        }
-                        self.song = songStore.songs[currentSong]
-                        downloadButtonTapped()
-                        if checkUrlLocation == true {
-                            DispatchQueue.main.async {
-                                self.locationUrl = download.locationUrl
-                            }
-                            
-                        }
-                        else {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 15){
-                                self.locationUrl = download.locationUrl
-                            }
-                        }
-                        mainViewModel.stopped()
-                        play()
+                        mainViewModel.nextSong(songs: mainViewModel.songs)
                     } label: {
                         Image(systemName: "forward.end.fill")
                             .foregroundColor(Color("Main.IconPlay"))
@@ -108,41 +90,36 @@ struct RowPlayer: View {
                 .padding()
             }
             .frame(height: customSize.rowPlayerHeight)
-            .background(LinearGradient(colors: [Color("Main.ColorRowPlayerStart").opacity(0.9),Color("Main.ColorRowPlayerEnd").opacity(0.9)], startPoint: .leading, endPoint: .trailing)
+            .background(LinearGradient(colors: [Color("Main.ColorRowPlayerStart").opacity(0.9),
+                                                Color("Main.ColorRowPlayerEnd").opacity(0.9)],
+                                       startPoint: .leading,
+                                       endPoint: .trailing)
             )
             .cornerRadius(customSize.radiusMusicRow)
+            
             .onAppear(){
-               play()
                 
-                guard let player = mainViewModel.player else { return }
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                    if player.isPlaying {
-                        let screen = UIScreen.main.bounds.width - 30
-                        value = player.currentTime / player.duration
-                        self.width = screen * CGFloat(value)
-                    }
-                }
+                mainViewModel.playsong()
             }
-            .onChange(of: song) { _ in
-                width = 0
+            .onChange(of: mainViewModel.song) { _ in
+                
+                mainViewModel.width = 0
                 mainViewModel.stopped()
-                play()
+                mainViewModel.playsong()
                 
-                self.pause = true
-                guard let player = mainViewModel.player else { return }
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                    if player.isPlaying {
-                        let screen = UIScreen.main.bounds.width - 30
-                        value = player.currentTime / player.duration
-                        self.width = screen * CGFloat(value)
-                    }
-                }
+                mainViewModel.playing = true
             }
+            .onReceive(mainViewModel.timer, perform: { (_) in
+                
+                mainViewModel.autoNextSong()
+                mainViewModel.updateTimer()
+            })
+
            
             
             ZStack(alignment: .leading){
                 Capsule().fill(Color.black.opacity(0.08)).frame(height:3)
-                Capsule().fill(Color.red).frame(width: width,height: 3)
+                Capsule().fill(Color.red).frame(width: mainViewModel.width,height: 3)
             }
             .offset(y:-8)
         }
@@ -150,24 +127,7 @@ struct RowPlayer: View {
 
     }
 
-    func play(){
-        if locationUrl != nil {
-            mainViewModel.played(locationUrl: locationUrl)
-        }
-        else {
-            DispatchQueue.main.asyncAfter(deadline: .now()+15){
-                mainViewModel.played(locationUrl: locationUrl)
-            }
-        }
-    }
     
-    
-    func downloadButtonTapped(){
-        guard let previewUrl = URL(string: song.urlSong) else {return}
-        self.download.fetchSongUrl(previewUrl) { check in
-            self.checkUrlLocation = check
-        }
-    }
 }
 
 //struct RowPlayer_Previews: PreviewProvider {

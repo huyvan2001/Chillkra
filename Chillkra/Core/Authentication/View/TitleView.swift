@@ -40,10 +40,12 @@ struct TitleView: View {
     var body: some View {
         VStack(alignment:.leading){
             Text(typeView.title)
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.buttonText))
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size: customSize.buttonText))
                 .padding(.bottom,2)
             Text(typeView.description)
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.smallText))
                 .frame(height: 50)
         }
         .padding(.bottom)

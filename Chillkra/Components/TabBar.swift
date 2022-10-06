@@ -56,7 +56,8 @@ struct TabBar: View {
         .frame(height: customSize.TabHeight)
         .background(Color("Tab.ColorTab"))
         .cornerRadius(customSize.TabRadius)
-        .shadow(color: .white.opacity(0.6), radius: customSize.radiusButton)
+        .shadow(color: .white.opacity(0.6),
+                radius: customSize.radiusButton)
     }
 }
 

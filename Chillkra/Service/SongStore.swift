@@ -20,7 +20,6 @@ class SongStore:ObservableObject{
     var songsJSONURL = URL(fileURLWithPath: "songs", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     var typesJSONURL = URL(fileURLWithPath: "types", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     var eTypesJSONURL = URL(fileURLWithPath: "emotionTypes", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
-    @Published var searchText = ""
     @Published var songs: [Song] = [] {
         didSet{
             saveJSONSong()
@@ -29,17 +28,6 @@ class SongStore:ObservableObject{
     @Published var types: [Types] = []
     @Published var eTypes: [EType] = []
     
-    var SearchableSong: [Song] {
-        if searchText == "" {
-            return songs
-        }
-        else {
-            return songs.filter({
-                $0.nameSong.contains(searchText) ||
-                $0.singer.contains(searchText)
-            })
-        }
-    }
     init(){
         loadJSON()
     }

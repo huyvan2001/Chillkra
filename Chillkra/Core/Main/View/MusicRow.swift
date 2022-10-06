@@ -20,14 +20,16 @@ struct MusicRow: View {
                 
                 KFImage(URL(string: song.imageSongUrl))
                     .resizable()
-                    .frame(width: customSize.MusicRowWidth, height: customSize.MusicRowHeight)
+                    .frame(width: customSize.MusicRowWidth,
+                           height: customSize.MusicRowHeight)
                     .cornerRadius(customSize.radiusMusicRow)
                     .overlay(
                         VStack(){
                             HStack{
                                 Spacer()
                                 Text("")
-                                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                                    .modifier(Fonts(fontName: FontsName.kalam,
+                                                    size: customSize.tinyText))
                             }
                             .padding(10)
                             Spacer()
@@ -42,7 +44,8 @@ struct MusicRow: View {
             Text(song.singer)
             
         }
-        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+        .modifier(Fonts(fontName: FontsName.kalam,
+                        size: customSize.tinyText))
         .foregroundColor(Color("General.mainTextColor"))
         }
     }

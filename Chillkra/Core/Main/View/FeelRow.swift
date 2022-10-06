@@ -17,12 +17,14 @@ struct FeelRow: View {
         VStack{
             KFImage(URL(string: urlImageName))
                 .resizable()
-                .frame(width: customSize.iconFeelSize, height: customSize.iconFeelSize)
+                .frame(width: customSize.iconFeelSize,
+                       height: customSize.iconFeelSize)
                 .cornerRadius(customSize.iconFeelRadius)
             
             Text(RowName)
         }
-        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+        .modifier(Fonts(fontName: FontsName.kalam,
+                        size: customSize.tinyText))
         .foregroundColor(Color("General.mainTextColor"))
     }
 }

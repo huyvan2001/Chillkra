@@ -42,7 +42,8 @@ struct AddSongView: View {
                     Text("Choose Image")
                     Spacer()
                 }
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.smallText))
                 
                 
                 addImage
@@ -98,14 +99,16 @@ extension AddSongView {
                 if let profileImage = profileImage {
                     profileImage
                         .resizable()
-                        .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                        .frame(width: customSize.imageprofileSize,
+                               height: customSize.imageprofileSize)
                     
                 }
                 else
                 {
                     Image("Favs.LostDessert")
                         .resizable()
-                        .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                        .frame(width: customSize.imageprofileSize,
+                               height: customSize.imageprofileSize)
                 }
             }
             .sheet(isPresented: $showImagePicker,
@@ -123,18 +126,21 @@ extension AddSongView {
                         .padding(.top)
                         .padding(.bottom)
                     TextField("",text: $song)
-                        .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                        .frame(width: customSize.widthTextField,
+                               height: customSize.heightTextField)
                     Divider()
                         .overlay(Color("General.mainTextColor"))
                     Text("Singer")
                         .padding(.top)
                         .padding(.bottom)
                     TextField("",text: $singer)
-                        .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                        .frame(width: customSize.widthTextField,
+                               height: customSize.heightTextField)
                     Divider()
                         .overlay(Color("General.mainTextColor"))
                 }
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.smallText))
         }
     }
     
@@ -143,7 +149,8 @@ extension AddSongView {
         VStack(alignment: .leading) {
             VStack(alignment: .leading){
                 Text("Type:")
-                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                    .modifier(Fonts(fontName: FontsName.kalam,
+                                    size: customSize.smallText))
                 HStack{
                     ForEach(songStore.types,id:\.idType){type in
                         Button {
@@ -151,13 +158,16 @@ extension AddSongView {
                         } label: {
                             Text(type.nameType)
                                 .frame(width: 70 , height: 25)
-                                .background(Color(self.type == type.idType ?  "Search.lightPurple": "General.buttonColor"))
-                                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                                .background(Color(self.type == type.idType ?
+                                                  "Search.lightPurple": "General.buttonColor"))
+                                .modifier(Fonts(fontName: FontsName.kalam,
+                                                size: customSize.tinyText))
                                 .cornerRadius(5)
                         }
                     }
                 }
-                Text("Emotion Type:").modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                Text("Emotion Type:").modifier(Fonts(fontName: FontsName.kalam,
+                                                     size: customSize.smallText))
                 HStack{
                     Spacer()
                     ForEach(songStore.eTypes,id:\.idEType){ Etype in
@@ -166,8 +176,10 @@ extension AddSongView {
                         } label: {
                             Text(Etype.nameEType)
                                 .frame(width: 70 , height: 25)
-                                .background(Color(self.Etype == Etype.idEType ?  "Search.lightPurple": "General.buttonColor"))
-                                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                                .background(Color(self.Etype == Etype.idEType ?
+                                                  "Search.lightPurple": "General.buttonColor"))
+                                .modifier(Fonts(fontName: FontsName.kalam,
+                                                size: customSize.tinyText))
                                 .cornerRadius(5)
                         }
                     }
@@ -191,7 +203,8 @@ extension AddSongView {
                     Text(doneAdd == true ? "Done Upload!!!!!!" : "")
 
             }
-            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+            .modifier(Fonts(fontName: FontsName.kalam,
+                            size: customSize.smallText))
             .sheet(isPresented: $showaudioPicker) {
                 AudioPicker(done: $doneAdd, urlSong: $urlSong)
             }
@@ -212,15 +225,22 @@ extension AddSongView {
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 6){
-                    songStore.addSong(nameSong: song, urlSong: urlSong, imageSongUrl: urlImageSong, singer: singer, emotionType: Etype, lyric: "", type: type){
+                    songStore.addSong(nameSong: song,
+                                      urlSong: urlSong,
+                                      imageSongUrl: urlImageSong,
+                                      singer: singer,
+                                      emotionType: Etype, lyric: "",
+                                      type: type){
                         songStore.loadJSON()
                     }
                     presentationMode.wrappedValue.dismiss()
                 }
             }, label: {
                 Text("Add Song")
-                    .modifier(Fonts(fontName: FontsName.boldKalam, size:customSize.buttonText))
-                    .frame(width: customSize.widthButton, height: customSize.heightButton)
+                    .modifier(Fonts(fontName: FontsName.boldKalam,
+                                    size:customSize.buttonText))
+                    .frame(width: customSize.widthButton,
+                           height: customSize.heightButton)
                     .background(Color("General.buttonColor"))
                     .cornerRadius(6)
             })
@@ -230,7 +250,8 @@ extension AddSongView {
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Cancel")
-                    .modifier(Fonts(fontName: FontsName.boldKalam, size:customSize.mediumText))
+                    .modifier(Fonts(fontName: FontsName.boldKalam,
+                                    size:customSize.mediumText))
                     .frame(width: 100, height: 40)
                     .background(Color("General.buttonColor"))
                     .cornerRadius(6)

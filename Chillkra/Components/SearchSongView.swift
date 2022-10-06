@@ -7,17 +7,21 @@
 
 import SwiftUI
 import Kingfisher
+
 struct SearchSongView: View {
-    @ObservedObject var download = SongDownload()
-    var customSize = CustomSize()
-    @ObservedObject var songStore = SongStore()
+
+    @EnvironmentObject var mainViewModel: MainViewModel
     @Environment(\.presentationMode) var presentationMode
-    @Binding var locationUrl: URL?
+    
+    @ObservedObject var songStore = SongStore()
+    
     @Binding var selectedIndex: Int
-    @State var checkUrlLocation:Bool?
-    @Binding var song: Song
+    
+    var customSize = CustomSize()
+    
     var body: some View {
         VStack(alignment: .leading){
+            
             Button {
                 presentationMode.wrappedValue.dismiss()
             } label: {
@@ -27,7 +31,8 @@ struct SearchSongView: View {
             }
 
             HStack{
-                TextField("Artists, songs, or podcasts",text: $songStore.searchText)
+                TextField("Artists, songs, or podcasts",
+                          text: $mainViewModel.searchText)
                     .padding(.horizontal,34)
                     .padding()
                     .overlay(
@@ -39,7 +44,8 @@ struct SearchSongView: View {
                             .padding()
                     )
                     .foregroundColor(Color("Search.ColorSearch"))
-                    .frame(width: customSize.searchBarWidth, height: customSize.searchBarHeight)
+                    .frame(width: customSize.searchBarWidth,
+                           height: customSize.searchBarHeight)
                     .background(Color.white)
                     .cornerRadius(10)
                 Spacer()
@@ -51,30 +57,25 @@ struct SearchSongView: View {
             GeometryReader { mainView in
                 
                 ScrollView(.vertical,showsIndicators: false){
+                    
                     LazyVStack{
-                        ForEach(songStore.SearchableSong) { song in
+                        ForEach(Array(zip(mainViewModel.SearchableSong,
+                                          mainViewModel.SearchableSong.indices)),id:\.1) { song,index in
                             GeometryReader{ item in
+                                
                                 Button {
-                                    self.locationUrl = nil
-                                    self.song = song
-                                    downloadButtonTapped()
-                                    if checkUrlLocation == true {
-                                        DispatchQueue.main.async {
-                                            self.locationUrl = download.locationUrl
-                                            self.selectedIndex = 4
-                                            presentationMode.wrappedValue.dismiss()
-                                        }
-                                        
-                                    }
-                                    else {
-                                        DispatchQueue.main.asyncAfter(deadline: .now()+15){
-                                            self.locationUrl = download.locationUrl
-                                            self.selectedIndex = 4
-                                            presentationMode.wrappedValue.dismiss()
-                                        }
+                                    
+                                    mainViewModel.songs = mainViewModel.SearchableSong
+                                    mainViewModel.song = song
+                                    mainViewModel.playing = true
+                                    mainViewModel.playAtIndex(index: index)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
+                                        self.selectedIndex = 4
                                     }
                                     
+                                    
                                 } label: {
+                                    
                                     Row(song: song)
                                         .padding(.bottom)
                                         .padding(.leading)
@@ -99,14 +100,7 @@ struct SearchSongView: View {
         .background(Color("backgroundColor"))
         
     }
-    func downloadButtonTapped(){
-        guard let previewUrl = URL(string: song.urlSong) else {return}
-        self.download.fetchSongUrl(previewUrl) { check in
-            self.checkUrlLocation = check
-        }
-    }
-    
-    
+
     
 }
 

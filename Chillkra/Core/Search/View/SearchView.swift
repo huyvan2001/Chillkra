@@ -15,24 +15,21 @@ struct SearchView: View {
     @ObservedObject var download = SongDownload()
     @StateObject var songStore = SongStore()
     
-    @Binding var song: Song
-    @Binding var locationUrl: URL?
     @Binding var selectedIndex: Int
     @State var textSearch: String = ""
-    @State var checkUrlLocation:Bool?
     
     var customSize = CustomSize()
     
     var body: some View {
         
         VStack{
-            HeaderView(selectedIndex: $selectedIndex, title: "Search")
+            HeaderView(selectedIndex: $selectedIndex,
+                       title: "Search")
             
             
-            NavigationLink(destination: SearchSongView(locationUrl: $locationUrl, selectedIndex: $selectedIndex, song: $song)) {
+            NavigationLink(destination: SearchSongView(selectedIndex: $selectedIndex)) {
                 SearchBar(text: $textSearch)
             }
-            
             
             
             historySearch
@@ -53,12 +50,6 @@ struct SearchView: View {
         .background(Color("backgroundColor"))
     }
     
-    func downloadButtonTapped(){
-        guard let previewUrl = URL(string: song.urlSong) else {return}
-        self.download.fetchSongUrl(previewUrl) { check in
-            self.checkUrlLocation = check
-        }
-    }
 }
 
 //struct SearchView_Previews: PreviewProvider {
@@ -74,7 +65,9 @@ extension SearchView {
     var historySearch: some View {
         VStack(alignment: .leading){
             Text("You might like...")
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size: customSize.mediumText))
+            
                 .padding(.bottom)
             
             LazyVGrid(columns:[
@@ -96,30 +89,22 @@ extension SearchView {
     var recently: some View {
         VStack(alignment: .leading){
             Text("Recently played")
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size: customSize.mediumText))
                 .padding(.bottom)
                 .zIndex(0)
             GeometryReader{ mainView in
                 ScrollView(.horizontal,showsIndicators: false){
                     LazyHStack{
-                        ForEach(songStore.songs){ song in
+                        ForEach(Array(zip(songStore.songs,
+                                          songStore.songs.indices)),id: \.1){ song,index in
                             GeometryReader { item in
+                                
                                 Button {
-                                    self.locationUrl = nil
-                                    self.song = song
-                                    downloadButtonTapped()
-                                    if checkUrlLocation == true {
-                                        DispatchQueue.main.async {
-                                            self.locationUrl = download.locationUrl
-                                        }
-                                        
-                                    }
-                                    else {
-                                        DispatchQueue.main.asyncAfter(deadline: .now()+15){
-                                            self.locationUrl = download.locationUrl
-                                        }
-                                    }
-                                    
+                                    mainViewModel.songs = songStore.songs
+                                    mainViewModel.song = song
+                                    mainViewModel.playAtIndex(index: index)
+                                             
                                 } label: {
                                     MusicRow(song: song)
                                         .scaleEffect(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minX,

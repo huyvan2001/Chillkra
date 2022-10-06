@@ -6,20 +6,14 @@
 //
 
 import SwiftUI
-
+import AVKit
 struct MainView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
     
     @ObservedObject var songStore = SongStore()
-    @ObservedObject var download = SongDownload()
     
-    
-    @Binding var locationUrl: URL?
-    @Binding var song: Song
     @Binding var selectedIndex: Int
-    @Binding var currentSong: Int
-    @State var checkUrlLocation:Bool?
     
     var customSize = CustomSize()
     
@@ -75,13 +69,7 @@ struct MainView: View {
         .background(Color("backgroundColor"))
     }
     
-    func downloadButtonTapped(){
-        guard let previewUrl = URL(string: song.urlSong) else {return}
-        self.download.fetchSongUrl(previewUrl) { check in
-            self.checkUrlLocation = check
-        }
     }
-}
 
 //struct MainView_Previews: PreviewProvider {
 //    static var previews: some View {
@@ -94,7 +82,8 @@ extension MainView{
         VStack(alignment: .leading){
             HStack{
                 Text("Recently")
-                    .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                    .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                    size: customSize.mediumText))
                 Spacer()
                 NavigationLink {
                     AddSongView()
@@ -111,24 +100,14 @@ extension MainView{
             GeometryReader{ mainView in
                 ScrollView(.horizontal,showsIndicators: false){
                     LazyHStack{
-                        ForEach(Array(zip(songStore.songs.indices,songStore.songs)),id: \.1){ index,song in
+                        ForEach(Array(zip(songStore.songs.indices,
+                                          songStore.songs)),id: \.1){ index,song in
                             GeometryReader{ item in
                                 Button {
-                                    self.locationUrl = nil
-                                    self.song = song
-                                    self.currentSong = index
-                                    downloadButtonTapped()
-                                    if checkUrlLocation == true {
-                                        DispatchQueue.main.async {
-                                            self.locationUrl = download.locationUrl
-                                        }
-                                        
-                                    }
-                                    else {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 15){
-                                            self.locationUrl = download.locationUrl
-                                        }
-                                    }
+                                    
+                                    mainViewModel.songs = songStore.songs
+                                    mainViewModel.song = song
+                                    mainViewModel.playAtIndex(index: index)
                                     
                                 } label: {
                                     MusicRow(song: song)
@@ -153,12 +132,15 @@ extension MainView{
     var feelRow: some View {
         VStack(alignment: .leading){
             Text("How do you feel today?")
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size: customSize.mediumText))
             HStack{
-                ForEach(songStore.eTypes,id:\.idEType){ etype in
+                ForEach(songStore.eTypes,
+                        id:\.idEType){ etype in
                     Spacer()
-                    NavigationLink(destination: ListFeelSongView(locationUrl: $locationUrl, selectedIndex: $selectedIndex,song:$song,eType: etype)) {
-                        FeelRow(urlImageName: etype.UrlImageEType, RowName: etype.nameEType)
+                    NavigationLink(destination: ListFeelSongView(selectedIndex: $selectedIndex,eType: etype)) {
+                        FeelRow(urlImageName: etype.UrlImageEType,
+                                RowName: etype.nameEType)
                     }
                     Spacer()
                 }

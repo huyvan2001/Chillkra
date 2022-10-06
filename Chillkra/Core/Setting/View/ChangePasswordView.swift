@@ -32,13 +32,15 @@ struct ChangePasswordView: View {
                     if user.urlImage == "" {
                         Image("Person")
                             .resizable()
-                            .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                            .frame(width: customSize.imageprofileSize,
+                                   height: customSize.imageprofileSize)
                     }
                     else {
                         KFImage(URL(string: user.urlImage))
                             .resizable()
                             .clipShape(Circle())
-                            .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                            .frame(width: customSize.imageprofileSize,
+                                   height: customSize.imageprofileSize)
                     }
                     
                 }
@@ -53,16 +55,20 @@ struct ChangePasswordView: View {
                 
                 
                 if checkcurrentPassword == false {
+                    
                     Text("Fail to Change Password.\nCurrent password is not correct !!!")
-                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .modifier(Fonts(fontName: FontsName.kalam,
+                                        size: customSize.tinyText))
                         .padding()
                         .foregroundColor(.red)
                         .frame(height: 100)
                 }
                 
                 if checkConfirmPassword == true {
+                    
                     Text("Fail to Change Password.\nConfirm password is not correct !!!")
-                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .modifier(Fonts(fontName: FontsName.kalam,
+                                        size: customSize.tinyText))
                         .padding()
                         .foregroundColor(.red)
                         .frame(height: 100)
@@ -70,8 +76,10 @@ struct ChangePasswordView: View {
                 
                 
                 if checklengthPassword == true {
+                    
                     Text("Fail to Change Password.\nPassword length is longer than 6 !!!")
-                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .modifier(Fonts(fontName: FontsName.kalam,
+                                        size: customSize.tinyText))
                         .padding()
                         .foregroundColor(.red)
                 }
@@ -90,6 +98,7 @@ struct ChangePasswordView: View {
 
 struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
+        
         ChangePasswordView(selectedIndex: .constant(5))
             .environmentObject(AuthViewModel())
     }
@@ -100,19 +109,25 @@ extension ChangePasswordView{
     var field: some View {
         VStack(alignment: .leading){
             VStack(alignment: .leading){
+                
                 Text("Current Password")
                     .padding(.top)
                     .padding(.bottom)
+                
                 SecureField("",text: $CurrentPassword)
                     .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                
                 Divider()
                     .overlay(Color("General.mainTextColor"))
                 
                 Text("New Password")
                     .padding(.top)
                     .padding(.bottom)
+                
                 SecureField("",text: $newPassword)
-                    .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                    .frame(width: customSize.widthTextField,
+                           height: customSize.heightTextField)
+                
                 Divider()
                     .overlay(Color("General.mainTextColor"))
                 
@@ -121,14 +136,16 @@ extension ChangePasswordView{
                     .padding(.top)
                     .padding(.bottom)
                 SecureField("",text: $confirmnewPassword)
-                    .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                    .frame(width: customSize.widthTextField,
+                           height: customSize.heightTextField)
                 Divider()
                     .overlay(Color("General.mainTextColor"))
                 
                 
                 
             }
-            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+            .modifier(Fonts(fontName: FontsName.kalam,
+                            size: customSize.smallText))
         }
     }
     
@@ -138,6 +155,7 @@ extension ChangePasswordView{
         Button(action: {
             
             if newPassword != confirmnewPassword {
+                
                 self.checkConfirmPassword = true
             }
             if newPassword.count < 6 {
@@ -147,7 +165,10 @@ extension ChangePasswordView{
             if checkConfirmPassword == false && checklengthPassword == false {
                 
                 if let user = viewModel.currentUser {
-                    viewModel.changePassword(email: user.email, currentPassword: CurrentPassword, newPassword: newPassword) { check in
+                    viewModel.changePassword(email: user.email,
+                                             currentPassword: CurrentPassword,
+                                             newPassword: newPassword) { check in
+                        
                         self.checkcurrentPassword = check
                     }
                 }
@@ -159,8 +180,10 @@ extension ChangePasswordView{
             
         }, label: {
             Text("Change Password")
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))
-                .frame(width: customSize.widthButton, height: customSize.heightButton)
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size:customSize.buttonText))
+                .frame(width: customSize.widthButton,
+                       height: customSize.heightButton)
                 .background(Color("General.buttonColor"))
                 .cornerRadius(6)
         })

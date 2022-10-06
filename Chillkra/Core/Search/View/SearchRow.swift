@@ -19,14 +19,16 @@ struct SearchRow: View {
         VStack{
             
         }
-        .frame(width: customSize.rowSearchWidth, height: customSize.rowSearchHeight)
+        .frame(width: customSize.rowSearchWidth,
+               height: customSize.rowSearchHeight)
         .background(Color(colorName))
         .overlay(
             HStack{
                 Image(imageName)
                 Spacer()
                 Text(name)
-                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                    .modifier(Fonts(fontName: FontsName.kalam,
+                                    size: customSize.tinyText))
                     .foregroundColor(.white)
                 Spacer()
             }
@@ -37,6 +39,8 @@ struct SearchRow: View {
 
 struct SearchRow_Previews: PreviewProvider {
     static var previews: some View {
-        SearchRow(imageName: "", name: "", colorName: "")
+        SearchRow(imageName: "",
+                  name: "",
+                  colorName: "")
     }
 }

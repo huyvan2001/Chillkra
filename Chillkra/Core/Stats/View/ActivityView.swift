@@ -34,12 +34,16 @@ struct ActivityView: View {
     ]
     var body: some View {
         VStack{
-                TotalRow(title: "Total played", amount: "120K", nameAmount: "reproductions", timeupdate: "Last update yesterday")
+                TotalRow(title: "Total played",
+                         amount: "120K",
+                         nameAmount: "reproductions",
+                         timeupdate: "Last update yesterday")
                 
                 VStack{
                     VStack(alignment: .leading){
                         Text("Monthly activity")
-                            .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                            .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                            size: customSize.mediumText))
                             .padding(.bottom)
                         
                         if #available(iOS 16.0, *) {

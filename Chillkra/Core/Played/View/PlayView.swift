@@ -10,105 +10,85 @@ import AVFoundation
 import Kingfisher
 
 struct PlayView: View {
+    
     @EnvironmentObject var mainViewModel: MainViewModel
     @EnvironmentObject var viewModel: AuthViewModel
     
-    @ObservedObject var download = SongDownload()
-    @ObservedObject var songStore = SongStore()
-
-    @Binding var currentSong:Int
-    @State var pause: Bool = false
-    @State var checkUrlLocation:Bool?
-    @State var value: Double = 0
-    @State var width: CGFloat = 0
-    @Binding var  locationUrl: URL?
-    @Binding var song: Song
+    @StateObject var songStore = SongStore()
+    
+    @State var currentTime: TimeInterval = 0
     @Binding var selectedIndex: Int
     
     let customSize = CustomSize()
     
     var body: some View {
-            VStack(){
-                HeaderView(selectedIndex: $selectedIndex, title: "")
+        VStack(){
+            HeaderView(selectedIndex: $selectedIndex, title: "")
+            
+            KFImage(URL(string: mainViewModel.song.imageSongUrl))
+                .resizable()
+                .frame(width: 200,height: 200)
+                .padding()
+
+            name
+                .padding(20)
+            
+            
+            HStack{
                 
-                
-                KFImage(URL(string: song.imageSongUrl))
-                    .resizable()
-                    .frame(width: 200,height: 200)
+                Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.currentTime))
                     .padding()
-                
-                name
-                    .padding(20)
-               
-                
-                ZStack(alignment: .leading){
-                    Capsule().fill(Color.black.opacity(0.08)).frame(height:8)
-                    Capsule().fill(Color.red).frame(width: width,height: 8)
-                }
-                
-                
-                play
-                
-                
-                action
-                
-                Spacer()
-            }
-            .navigationBarHidden(true)
-            .foregroundColor(Color("General.mainTextColor"))
-            .padding()
-            .onAppear(){
-                playsong()
-                
-                
-                guard let player = mainViewModel.player else { return }
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                    if player.isPlaying {
-                        let screen = UIScreen.main.bounds.width - 30
-                        let value = player.currentTime / player.duration
-                        self.width = screen * CGFloat(value)
+                Slider(value: $mainViewModel.currentTime , in: 0...(mainViewModel.player!.duration))
+                { isEditing in
+                    if !isEditing {
+                        
+                        mainViewModel.player?.currentTime = mainViewModel.currentTime
+                        mainViewModel.played()
+                        mainViewModel.timer = Timer.publish(every: 0.1, on: .current, in: .default).autoconnect()
+                        
+                    }
+                    else{
+                        mainViewModel.timer.upstream.connect().cancel()
                     }
                 }
+                .frame(height: 4)
+                Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.duration))
+                    .padding()
             }
-            .onChange(of: song){ _ in
-                
-                width = 0
-                mainViewModel.stopped()
-                playsong()
-                self.pause = false
-                
-                
-                guard let player = mainViewModel.player else { return }
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                    if player.isPlaying {
-                        let screen = UIScreen.main.bounds.width - 30
-                        value = player.currentTime / player.duration
-                        self.width = screen * CGFloat(value)
-                    }
-                }
-            }
-            .ignoresSafeArea()
+              
+            play
+            
+            
+            action
+            
+            Spacer()
+        }
+        .navigationBarHidden(true)
+        .foregroundColor(Color("General.mainTextColor"))
+        .padding()
+        .onAppear(){
+            mainViewModel.playsong()
+        }
+        .onChange(of: mainViewModel.song){ _ in
+            
+            mainViewModel.stopped()
+            
+            mainViewModel.playsong()
+            mainViewModel.playing = true
+            
+        }
+        .onReceive(mainViewModel.timer, perform: { (_) in
+            
+            mainViewModel.autoNextSong()
+            mainViewModel.updateTimer()
+            
+        })
+
+        .ignoresSafeArea()
     }
     
     
-    func playsong(){
-        if locationUrl != nil {
-            mainViewModel.played(locationUrl: locationUrl)
-        }
-        else {
-            DispatchQueue.main.asyncAfter(deadline: .now()+15){
-                mainViewModel.played(locationUrl: locationUrl)
-            }
-        }
-        
-    }
     
-    func downloadButtonTapped(){
-        guard let previewUrl = URL(string: song.urlSong) else {return}
-        self.download.fetchSongUrl(previewUrl) { check in
-            self.checkUrlLocation = check
-        }
-    }
 }
 
 //struct PlayView_Previews: PreviewProvider {
@@ -121,11 +101,13 @@ struct PlayView: View {
 extension PlayView {
     var name: some View {
         VStack{
-            Text(song.nameSong)
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.largeText))
+            Text(mainViewModel.song.nameSong)
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.mediumText))
                 .padding()
-            Text(song.singer)
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+            Text(mainViewModel.song.singer)
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size: customSize.tinyText))
         }
     }
     
@@ -133,71 +115,38 @@ extension PlayView {
     var play: some View {
         HStack{
             Button {
-                currentSong = currentSong - 1
-                if self.currentSong == -1 {
-                    self.currentSong = songStore.songs.count-1
-                }
-                self.song = songStore.songs[currentSong]
-                downloadButtonTapped()
-                if checkUrlLocation == true {
-                    DispatchQueue.main.async {
-                        self.locationUrl = download.locationUrl
-                    }
-                    
-                }
-                else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 15){
-                        self.locationUrl = download.locationUrl
-                    }
-                }
-                mainViewModel.stopped()
-                playsong()
+                mainViewModel.backSong(songs: mainViewModel.songs)
             } label: {
                 Image(systemName: "backward.end.fill")
-                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
+                    .modifier(Fonts(fontName: FontsName.kalam,
+                                    size: customSize.mediumText))
                     .padding()
             }
-
+            
             Button {
-                pause.toggle()
-                if pause == true {
+                mainViewModel.playing.toggle()
+                if mainViewModel.playing == true {
+                    mainViewModel.played()
+                }
+                else {
                     mainViewModel.paused()
                 }
-                else {
-                    mainViewModel.played(locationUrl: locationUrl)
-                }
             } label: {
-                Image(systemName: pause == true ? "play.circle.fill" : "pause.circle.fill")
-                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.bigText))
+                Image(systemName: mainViewModel.playing == true ? "pause.circle.fill" : "play.circle.fill")
+                    .modifier(Fonts(fontName: FontsName.kalam,
+                                    size: customSize.bigText))
                     .padding()
             }
-
+            
             Button {
-                currentSong = currentSong + 1
-                if self.currentSong == songStore.songs.count {
-                    self.currentSong = 0
-                }
-                self.song = songStore.songs[currentSong]
-                downloadButtonTapped()
-                if checkUrlLocation == true {
-                    DispatchQueue.main.async {
-                        self.locationUrl = download.locationUrl
-                    }
-                    
-                }
-                else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 15){
-                        self.locationUrl = download.locationUrl
-                    }
-                }
-                mainViewModel.stopped()
-                playsong()
+                mainViewModel.nextSong(songs: mainViewModel.songs)
             } label: {
                 Image(systemName: "forward.end.fill")
-                    .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
+                    .modifier(Fonts(fontName: FontsName.kalam,
+                                    size: customSize.mediumText))
                     .padding()
             }
-
+            
         }
         .padding()
     }
@@ -215,6 +164,7 @@ extension PlayView {
                 .padding()
         }
         .padding()
-        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
+        .modifier(Fonts(fontName: FontsName.kalam,
+                        size: customSize.mediumText))
     }
 }

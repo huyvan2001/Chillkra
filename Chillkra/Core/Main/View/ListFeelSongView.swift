@@ -9,15 +9,11 @@ import SwiftUI
 
 struct ListFeelSongView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var mainViewModel: MainViewModel
     
-    @ObservedObject var download = SongDownload()
-    @ObservedObject var songStore = SongStore()
+    @StateObject var songStore = SongStore()
     
-    @Binding var locationUrl: URL?
     @Binding var selectedIndex: Int
-    @State var checkUrlLocation:Bool?
-    @Binding var song: Song
-    
     var customSize = CustomSize()
     var eType: EType
     
@@ -36,34 +32,29 @@ struct ListFeelSongView: View {
                 Spacer()
                 Text(eType.nameEType)
                     .padding()
-                    .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.largeText))
+                    .modifier(Fonts(fontName: FontsName.boldKalam,
+                                    size: customSize.largeText))
                 Spacer()
             }
             .zIndex(0)
             GeometryReader { mainView in
                 ScrollView{
                     LazyVStack{
-                        ForEach(songStore.listFeelSong(idEtype: eType.idEType)){ song in
+                        ForEach(Array(zip(songStore.listFeelSong(idEtype: eType.idEType),
+                                          songStore.listFeelSong(idEtype: eType.idEType).indices)),id:\.1){ song,index in
                             GeometryReader { item in
+                                
                                 Button {
-                                    self.locationUrl = nil
-                                    self.song = song
-                                    downloadButtonTapped()
-                                    if checkUrlLocation == true {
-                                        DispatchQueue.main.async {
-                                            self.locationUrl = download.locationUrl
-                                            self.selectedIndex = 4
-                                            presentationMode.wrappedValue.dismiss()
-                                        }
-                                        
+                                    
+                                    mainViewModel.songs = songStore.listFeelSong(idEtype: eType.idEType)
+                                    mainViewModel.song = song
+                                    mainViewModel.playing = true
+                                    mainViewModel.playAtIndex(index: index)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2)
+                                    {
+                                        self.selectedIndex = 4
                                     }
-                                    else {
-                                        DispatchQueue.main.asyncAfter(deadline: .now()+15){
-                                            self.locationUrl = download.locationUrl
-                                            self.selectedIndex = 4
-                                            presentationMode.wrappedValue.dismiss()
-                                        }
-                                    }
+                                    
                                 } label: {
                                     Row(song:song)
                                         .padding(.bottom)
@@ -89,12 +80,6 @@ struct ListFeelSongView: View {
         .padding()
         .background(Color("backgroundColor"))
         
-    }
-    func downloadButtonTapped(){
-        guard let previewUrl = URL(string: song.urlSong) else {return}
-        self.download.fetchSongUrl(previewUrl) { check in
-            self.checkUrlLocation = check
-        }
     }
 }
 

@@ -5,17 +5,15 @@
 //  Created by Lê Văn Huy on 06/09/2022.
 //
 import SwiftUI
-
+import UserNotifications
 struct MainTabView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
     
-    @State var song : Song = .init(nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "")
-    @State var locationUrl: URL?
+    @StateObject var delegate = NotificationDelegate()
+    @State var timer = Timer.publish(every: 86400, on: .current, in: .default).autoconnect()
     @State private var selectedIndex = 0
-    @State var currentSong = 0
-    
     let customSize = CustomSize()
     
     var body: some View {
@@ -23,38 +21,62 @@ struct MainTabView: View {
             
             
             if selectedIndex == 0 {
-                MainView(locationUrl: $locationUrl, song: $song, selectedIndex: $selectedIndex, currentSong: $currentSong)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                MainView(selectedIndex: $selectedIndex)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity,
+                           alignment: .center)
             }
             
             
             else if selectedIndex == 1 {
-                SearchView(song: $song, locationUrl: $locationUrl, selectedIndex: $selectedIndex)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)            }
+                SearchView(selectedIndex: $selectedIndex)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity,
+                           alignment: .center)          }
             
             
             else if selectedIndex == 2 {
                 StatsView(selectedIndex: $selectedIndex)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)            }
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity,
+                           alignment: .center)           }
             
             
             
             else if selectedIndex == 3 {
-                FavsView(selectedIndex: $selectedIndex, song: $song, locationUrl:$locationUrl)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                FavsView(selectedIndex: $selectedIndex)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity,
+                           alignment: .center)
             }
             
             
             
             else if selectedIndex == 4{
-                PlayView(currentSong: $currentSong, locationUrl: $locationUrl, song:$song,selectedIndex: $selectedIndex)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                PlayView(selectedIndex: $selectedIndex)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity,
+                           alignment: .center)
             }
             
             
             else if selectedIndex == 5 {
-                        SettingView(selectedIndex: $selectedIndex)
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                SettingView(selectedIndex: $selectedIndex)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity,
+                           alignment: .center)
                 
             }
             
@@ -68,12 +90,12 @@ struct MainTabView: View {
             
             VStack{
                 Spacer()
-                if song.nameSong != "" {
+                if mainViewModel.song.nameSong != "" {
                     if selectedIndex != 4{
                         Button {
                             self.selectedIndex = 4
                         } label: {
-                            RowPlayer(locationUrl: $locationUrl, song:$song, currentSong: $currentSong)
+                            RowPlayer()
                                 .padding(.bottom,-16)
                         }
                         
@@ -84,12 +106,22 @@ struct MainTabView: View {
             }
         )
         .ignoresSafeArea()
+        .onAppear(){
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge]) { _, _ in
+                
+                UNUserNotificationCenter.current().delegate = delegate
+            }
+        }
+        .onReceive(timer) { _ in
+            
+            mainViewModel.createNotification()
+        }
     }
 }
 
-struct MainTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainTabView()
-            .environmentObject(AuthViewModel())
-    }
-}
+//struct MainTabView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainTabView()
+//            .environmentObject(AuthViewModel())
+//    }
+//}

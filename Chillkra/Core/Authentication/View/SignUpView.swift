@@ -38,7 +38,8 @@ struct SignUpView: View {
             if check == false {
                 withAnimation(.spring()) {
                     Text("Fail to Sign Up. Email exists!!!")
-                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .modifier(Fonts(fontName: FontsName.kalam,
+                                        size: customSize.tinyText))
                         .padding()
                         .foregroundColor(.red)
 
@@ -48,7 +49,8 @@ struct SignUpView: View {
             if name.isEmpty || email.isEmpty || password.isEmpty {
                 withAnimation(.spring()) {
                     Text("Please fill Information ")
-                        .modifier(Fonts(fontName: FontsName.kalam, size: customSize.tinyText))
+                        .modifier(Fonts(fontName: FontsName.kalam,
+                                        size: customSize.tinyText))
                         .padding()
                         .foregroundColor(.red)
                 }
@@ -85,7 +87,8 @@ extension SignUpView {
                     .padding(.top)
                     .padding(.bottom)
                 TextField("Buda Maitreya",text: $name)
-                    .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                    .frame(width: customSize.widthTextField,
+                           height: customSize.heightTextField)
                 Divider()
                     .overlay(Color("General.mainTextColor"))
                 
@@ -94,7 +97,8 @@ extension SignUpView {
                     .padding(.top)
                     .padding(.bottom)
                 TextField("example@mail.com",text: $email)
-                    .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                    .frame(width: customSize.widthTextField,
+                           height: customSize.heightTextField)
                 Divider()
                     .overlay(Color("General.mainTextColor"))
                 
@@ -104,11 +108,13 @@ extension SignUpView {
                     .padding(.top)
                     .padding(.bottom)
                 SecureField("example@email.com",text: $password)
-                    .frame(width: customSize.widthTextField, height: customSize.heightTextField)
+                    .frame(width: customSize.widthTextField,
+                           height: customSize.heightTextField)
                 Divider()
                     .overlay(Color("General.mainTextColor"))
             }
-            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+            .modifier(Fonts(fontName: FontsName.kalam,
+                            size: customSize.smallText))
 
             
         }
@@ -120,7 +126,9 @@ extension SignUpView {
         Button(action: {
             
             if !name.isEmpty && !email.isEmpty && !password.isEmpty {
-                viewModel.signup(withEmail: email, name: name, password: password) { check in
+                viewModel.signup(withEmail: email,
+                                 name: name,
+                                 password: password) { check in
                     self.check = check
                 }
             }
@@ -129,8 +137,10 @@ extension SignUpView {
             
         }, label: {
             Text("Sign up")
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size:customSize.buttonText))
-                .frame(width: customSize.widthButton, height: customSize.heightButton)
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size:customSize.buttonText))
+                .frame(width: customSize.widthButton,
+                       height: customSize.heightButton)
                 .background(Color("General.buttonColor"))
                 .cornerRadius(6)
         })
@@ -150,22 +160,26 @@ extension SignUpView {
                 }
 
             }
-            .modifier(Fonts(fontName: FontsName.kalam, size: customSize.mediumText))
+            .modifier(Fonts(fontName: FontsName.kalam,
+                            size: customSize.mediumText))
             
             Spacer()
             
             Text("Or login with")
-                .modifier(Fonts(fontName: FontsName.kalam, size: customSize.smallText))
+                .modifier(Fonts(fontName: FontsName.kalam,
+                                size: customSize.smallText))
             
             
             HStack{
                 Image("Google")
                     .scaledToFit()
-                    .frame(width: customSize.iconfooterSize, height: customSize.iconfooterSize)
+                    .frame(width: customSize.iconfooterSize,
+                           height: customSize.iconfooterSize)
                     .padding()
                 Image("Facebook")
                     .scaledToFit()
-                    .frame(width: customSize.iconfooterSize, height: customSize.iconfooterSize)
+                    .frame(width: customSize.iconfooterSize,
+                           height: customSize.iconfooterSize)
                     .padding()
             }
         }

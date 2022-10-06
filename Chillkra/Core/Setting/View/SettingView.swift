@@ -80,16 +80,19 @@ extension SettingView{
                 if user.urlImage == "" {
                     Image("Person")
                         .resizable()
-                        .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                        .frame(width: customSize.imageprofileSize,
+                               height: customSize.imageprofileSize)
                 }
                 else {
                     KFImage(URL(string: user.urlImage))
                         .resizable()
                         .clipShape(Circle())
-                        .frame(width: customSize.imageprofileSize, height: customSize.imageprofileSize)
+                        .frame(width: customSize.imageprofileSize,
+                               height: customSize.imageprofileSize)
                 }
                 Text(user.name)
-                    .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.mediumText))
+                    .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                    size: customSize.mediumText))
             }
         }
         
@@ -100,7 +103,8 @@ extension SettingView{
         VStack(alignment: .leading){
             Text("Account")
                 .foregroundColor(Color("Setting.ColorTitle"))
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.tinyText))
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size: customSize.tinyText))
             
             VStack(alignment: .leading){
                 NavigationLink {
@@ -141,7 +145,8 @@ extension SettingView{
                 }
                 
             }
-            .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.smallText))
+            .modifier(Fonts(fontName: FontsName.boldKalam,
+                            size: customSize.smallText))
             
         }
     }
@@ -151,7 +156,8 @@ extension SettingView{
         VStack(alignment: .leading){
             Text("Notification")
                 .foregroundColor(Color("Setting.ColorTitle"))
-                .modifier(Fonts(fontName: FontsName.JosefinBold, size: customSize.tinyText))
+                .modifier(Fonts(fontName: FontsName.JosefinBold,
+                                size: customSize.tinyText))
                 .padding(.bottom)
             VStack(alignment: .leading){
                 Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
@@ -159,7 +165,8 @@ extension SettingView{
                 }
                 .padding(.bottom)
             }
-            .modifier(Fonts(fontName: FontsName.boldKalam, size: customSize.smallText))
+            .modifier(Fonts(fontName: FontsName.boldKalam,
+                            size: customSize.smallText))
         }
     }
     
