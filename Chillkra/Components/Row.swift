@@ -23,6 +23,14 @@ struct Row: View{
                 Text(song.singer)
                     .modifier(Fonts(fontName: .kalam,
                                     size: customSize.smallText))
+                HStack{
+                    Spacer()
+                        Image(systemName: "heart.fill")
+                            .modifier(Fonts(fontName: .kalam,
+                                            size: customSize.smalltinyText))
+                            .foregroundColor(Color(song.like == false ?  "Main.IconPlay": "heartColor"))
+                    
+                }
                 Spacer()
             }
             .foregroundColor(Color("General.mainTextColor"))
@@ -37,12 +45,13 @@ struct Row: View{
 
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
-        Row(song: Song(nameSong: "Em dau biet",
+        Row(song: Song(id: UUID(),
+                       nameSong: "Em dau biet",
                        urlSong: "",
                        imageSongUrl: "",
                        singer: "Le Van Huy",
                        emotionType: "",
                        lyric: "",
-                       type: ""))
+                       type: "", like: true))
     }
 }

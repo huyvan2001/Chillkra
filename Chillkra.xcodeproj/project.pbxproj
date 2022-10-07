@@ -10,6 +10,7 @@
 		045CBB6128E5902D00C42D2F /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBB6028E5902D00C42D2F /* MarqueeText.swift */; };
 		045CBB6328E5905600C42D2F /* SwiftUI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBB6228E5905600C42D2F /* SwiftUI+Extension.swift */; };
 		045CBBD928EEC92500C42D2F /* NotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBBD828EEC92500C42D2F /* NotificationDelegate.swift */; };
+		045CBBDD28EFBAE800C42D2F /* ListSongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CBBDC28EFBAE800C42D2F /* ListSongView.swift */; };
 		C400916728DB0973004B524A /* AddSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916628DB0973004B524A /* AddSongViewModel.swift */; };
 		C400916928DC6AE9004B524A /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916828DC6AE9004B524A /* Access.swift */; };
 		C400916B28DC7554004B524A /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400916A28DC7554004B524A /* Sleep.swift */; };
@@ -111,6 +112,7 @@
 		045CBB6028E5902D00C42D2F /* MarqueeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeText.swift; sourceTree = "<group>"; };
 		045CBB6228E5905600C42D2F /* SwiftUI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extension.swift"; sourceTree = "<group>"; };
 		045CBBD828EEC92500C42D2F /* NotificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDelegate.swift; sourceTree = "<group>"; };
+		045CBBDC28EFBAE800C42D2F /* ListSongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSongView.swift; sourceTree = "<group>"; };
 		C400916628DB0973004B524A /* AddSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongViewModel.swift; sourceTree = "<group>"; };
 		C400916828DC6AE9004B524A /* Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Access.swift; sourceTree = "<group>"; };
 		C400916A28DC7554004B524A /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 			isa = PBXGroup;
 			children = (
 				C4DA900328C849FF0067A1AB /* PlayView.swift */,
+				045CBBDC28EFBAE800C42D2F /* ListSongView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -848,6 +851,7 @@
 				C4DA900428C849FF0067A1AB /* PlayView.swift in Sources */,
 				C42024AB28C9D5F700468B70 /* EditProfileView.swift in Sources */,
 				C482EB4628C731DA00ADAE41 /* SearchBar.swift in Sources */,
+				045CBBDD28EFBAE800C42D2F /* ListSongView.swift in Sources */,
 				C4DE832628E1802500F972B3 /* SearchSongView.swift in Sources */,
 				C4DE832828E1932300F972B3 /* ListFeelSongView.swift in Sources */,
 				C482EB4828C7373400ADAE41 /* SearchRow.swift in Sources */,

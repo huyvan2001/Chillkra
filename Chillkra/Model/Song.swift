@@ -9,17 +9,17 @@
 import Foundation
 
 struct Song: Codable,Identifiable,Equatable,Hashable {
-    let id = UUID()
+    let id : UUID
     let nameSong: String
     let urlSong: String
     let imageSongUrl: String
     let singer, emotionType, lyric: String
     let type: String
-
+    var like: Bool
     enum CodingKeys: String, CodingKey {
         case id, nameSong, urlSong
         case imageSongUrl
-        case singer, emotionType, lyric, type
+        case singer, emotionType, lyric, type,like
     }
 }
 

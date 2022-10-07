@@ -15,8 +15,6 @@ struct RowPlayer: View {
     
     @ObservedObject var songStore = SongStore()
     
-    
-    @State var favs: Bool = true
     @State var checksongfinished = false
     var customSize = CustomSize()
     
@@ -53,11 +51,11 @@ struct RowPlayer: View {
                 HStack{
                     
                     Button {
-                        favs.toggle()
+                        mainViewModel.song.like == true ? mainViewModel.unlikeSong(song: mainViewModel.song) : mainViewModel.likeSong(song: mainViewModel.song)
                     } label: {
                         Image(systemName: "heart.fill")
                             .font(.title3)
-                            .foregroundColor(Color(favs == true ? "backgroundColor": "Main.IconPlay"))
+                            .foregroundColor(Color(mainViewModel.song.like == false ?  "Main.IconPlay": "heartColor"))
                     }
                     
                     Button {
@@ -77,7 +75,12 @@ struct RowPlayer: View {
                     }
                     
                     Button {
-                        mainViewModel.nextSong(songs: mainViewModel.songs)
+                        if mainViewModel.isRandom == true {
+                            mainViewModel.randomSong()
+                        }
+                        else {
+                            mainViewModel.nextSong(songs: mainViewModel.songs)
+                        }
                     } label: {
                         Image(systemName: "forward.end.fill")
                             .foregroundColor(Color("Main.IconPlay"))
@@ -101,7 +104,7 @@ struct RowPlayer: View {
                 
                 mainViewModel.playsong()
             }
-            .onChange(of: mainViewModel.song) { _ in
+            .onChange(of: mainViewModel.song.id) { _ in
                 
                 mainViewModel.width = 0
                 mainViewModel.stopped()
@@ -111,8 +114,23 @@ struct RowPlayer: View {
             }
             .onReceive(mainViewModel.timer, perform: { (_) in
                 
-                mainViewModel.autoNextSong()
+                if mainViewModel.isRepeat == true {
+                    mainViewModel.repeatSong()
+                }
+                else if mainViewModel.isRandom == true {
+                    if mainViewModel.isRepeat == true {
+                        mainViewModel.repeatSong()
+                    }
+                    else {
+                        mainViewModel.autoRandomSong()
+                    }
+                }
+                else{
+                    mainViewModel.autoNextSong()
+                    
+                }
                 mainViewModel.updateTimer()
+                
             })
 
            
@@ -121,6 +139,7 @@ struct RowPlayer: View {
                 Capsule().fill(Color.black.opacity(0.08)).frame(height:3)
                 Capsule().fill(Color.red).frame(width: mainViewModel.width,height: 3)
             }
+            .padding(.leading)
             .offset(y:-8)
         }
         

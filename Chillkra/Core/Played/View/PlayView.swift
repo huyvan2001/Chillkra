@@ -17,51 +17,63 @@ struct PlayView: View {
     @StateObject var songStore = SongStore()
     
     @State var currentTime: TimeInterval = 0
+    @State var isVisible = false
     @Binding var selectedIndex: Int
     
     let customSize = CustomSize()
     
     var body: some View {
-        VStack(){
-            HeaderView(selectedIndex: $selectedIndex, title: "")
-            
-            KFImage(URL(string: mainViewModel.song.imageSongUrl))
-                .resizable()
-                .frame(width: 200,height: 200)
-                .padding()
+        ZStack(){
+            if isVisible == false {
+                VStack{
+                    HeaderView(selectedIndex: $selectedIndex, title: "")
+                    
+                    KFImage(URL(string: mainViewModel.song.imageSongUrl))
+                        .resizable()
+                        .frame(width: 200,height: 200)
+                        .padding()
 
-            name
-                .padding(20)
-            
-            
-            HStack{
-                
-                Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.currentTime))
-                    .padding()
-                Slider(value: $mainViewModel.currentTime , in: 0...(mainViewModel.player!.duration))
-                { isEditing in
-                    if !isEditing {
+                    name
+                        .padding(20)
+                    
+                    
+                    HStack{
                         
-                        mainViewModel.player?.currentTime = mainViewModel.currentTime
-                        mainViewModel.played()
-                        mainViewModel.timer = Timer.publish(every: 0.1, on: .current, in: .default).autoconnect()
-                        
+                        Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.currentTime))
+                            .padding()
+                        Slider(value: $mainViewModel.currentTime , in: 0...(mainViewModel.player!.duration))
+                        { isEditing in
+                            if !isEditing {
+                                
+                                mainViewModel.player?.currentTime = mainViewModel.currentTime
+                                mainViewModel.played()
+                                mainViewModel.timer = Timer.publish(every: 0.1, on: .current, in: .default).autoconnect()
+                                
+                            }
+                            else{
+                                mainViewModel.timer.upstream.connect().cancel()
+                            }
+                        }
+                        .frame(height: 4)
+                        Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.duration))
+                            .padding()
                     }
-                    else{
-                        mainViewModel.timer.upstream.connect().cancel()
-                    }
+                      
+                    play
+                    
+                    
+                    action
+                    
+                    Spacer()
+
                 }
-                .frame(height: 4)
-                Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.duration))
-                    .padding()
             }
-              
-            play
-            
-            
-            action
-            
-            Spacer()
+            else {
+                withAnimation(){
+                    ListSongView(isVisible: $isVisible)
+                        .padding(.top)
+                }
+            }
         }
         .navigationBarHidden(true)
         .foregroundColor(Color("General.mainTextColor"))
@@ -69,7 +81,7 @@ struct PlayView: View {
         .onAppear(){
             mainViewModel.playsong()
         }
-        .onChange(of: mainViewModel.song){ _ in
+        .onChange(of: mainViewModel.song.id){ _ in
             
             mainViewModel.stopped()
             
@@ -79,7 +91,21 @@ struct PlayView: View {
         }
         .onReceive(mainViewModel.timer, perform: { (_) in
             
-            mainViewModel.autoNextSong()
+            if mainViewModel.isRepeat == true {
+                mainViewModel.repeatSong()
+            }
+            else if mainViewModel.isRandom == true {
+                if mainViewModel.isRepeat == true {
+                    mainViewModel.repeatSong()
+                }
+                else {
+                    mainViewModel.autoRandomSong()
+                }
+            }
+            else{
+                mainViewModel.autoNextSong()
+                
+            }
             mainViewModel.updateTimer()
             
         })
@@ -115,7 +141,12 @@ extension PlayView {
     var play: some View {
         HStack{
             Button {
-                mainViewModel.backSong(songs: mainViewModel.songs)
+                if mainViewModel.isRandom == true {
+                    mainViewModel.randomSong()
+                }
+                else {
+                    mainViewModel.backSong(songs: mainViewModel.songs)
+                }
             } label: {
                 Image(systemName: "backward.end.fill")
                     .modifier(Fonts(fontName: FontsName.kalam,
@@ -139,7 +170,12 @@ extension PlayView {
             }
             
             Button {
-                mainViewModel.nextSong(songs: mainViewModel.songs)
+                if mainViewModel.isRandom == true {
+                    mainViewModel.randomSong()
+                }
+                else {
+                    mainViewModel.nextSong(songs: mainViewModel.songs)
+                }
             } label: {
                 Image(systemName: "forward.end.fill")
                     .modifier(Fonts(fontName: FontsName.kalam,
@@ -154,17 +190,37 @@ extension PlayView {
     
     var action: some View {
         HStack{
-            Image(systemName: "repeat")
-                .padding()
-            Image(systemName: "shuffle")
-                .padding()
-            Image(systemName: "moon.fill")
-                .padding()
-            Image(systemName: "heart")
-                .padding()
+            Button {
+                mainViewModel.isRepeat.toggle()
+            } label: {
+                Image(systemName: mainViewModel.isRepeat == true ? "repeat.1": "repeat")
+                    .padding()
+            }
+
+            Button {
+                mainViewModel.isRandom.toggle()
+            } label: {
+                Image(systemName: mainViewModel.isRandom == true ? "shuffle.circle.fill": "shuffle.circle")
+                    .padding()
+            }
+
+            Button {
+                isVisible.toggle()
+            } label: {
+                Image(systemName: "list.dash")
+                    .padding()
+            }
+
+            Button {
+                mainViewModel.song.like == true ? mainViewModel.unlikeSong(song: mainViewModel.song) : mainViewModel.likeSong(song: mainViewModel.song)
+            } label: {
+                Image(systemName: "heart.fill")
+                    .foregroundColor(Color(mainViewModel.song.like == false ?  "Main.IconPlay": "heartColor"))
+            }
+
         }
         .padding()
-        .modifier(Fonts(fontName: FontsName.kalam,
+        .modifier(Fonts(fontName: FontsName.JosefinBold,
                         size: customSize.mediumText))
     }
 }

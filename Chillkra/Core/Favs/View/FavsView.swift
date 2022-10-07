@@ -13,23 +13,33 @@ struct FavsView: View {
     
     @Binding var selectedIndex: Int
     @State private var textSearch: String = ""
-    
+    @State var isVisible:Bool = false
     let customSize = CustomSize()
     
     var body: some View {
         
-        VStack{
-            HeaderView(selectedIndex: $selectedIndex,
-                       title: "Favorites")
-            
-            NavigationLink(destination: SearchSongView(selectedIndex: $selectedIndex)) {
-                SearchBar(text: $textSearch)
+        ZStack{
+            if isVisible == false {
+                VStack{
+                    HeaderView(selectedIndex: $selectedIndex,
+                               title: "Favorites")
+                    
+                    SearchBar(text: $textSearch).onTapGesture {
+                        isVisible.toggle()
+                    }
+                    
+                    favsList
+                    
+                    Spacer()
+                    
+                }
             }
-            
-            favsList
-            
-            Spacer()
-            
+            else{
+                withAnimation(.easeInOut(duration: 1)){
+                    SearchSongView(selectedIndex: $selectedIndex,isVisible: $isVisible)
+                        .padding(.top)
+                }
+            }
         }
         .navigationBarHidden(true)
         .foregroundColor(Color("General.mainTextColor"))

@@ -10,20 +10,21 @@ import Foundation
 import AVKit
 import UserNotifications
 class MainViewModel: ObservableObject{
-    
+    @ObservedObject var songStore = SongStore()
     @ObservedObject var download = SongDownload()
     @Published var player: AVAudioPlayer?
     @Published var width: CGFloat = 0
     @Published var currentSong = 0
     @Published var currentTime: TimeInterval = 0
-    @Published var song = Song(nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "")
+    @Published var song = Song(id: UUID(), nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "", like: true)
     @Published var angel: CGFloat = 0
     @Published var songs : [Song] = []
     @Published var searchText = ""
     @Published var locationUrl: URL?
     @Published var playing: Bool = true
     @Published var timer = Timer.publish(every: 0.1, on: .current, in: .default).autoconnect()
-    
+    @Published var isRepeat = false
+    @Published var isRandom = false
     
     //MARK: SEARCHABLE SONG
     var SearchableSong: [Song] {
@@ -35,6 +36,22 @@ class MainViewModel: ObservableObject{
                 $0.nameSong.contains(searchText) ||
                 $0.singer.contains(searchText)
             })
+        }
+    }
+    //MARK: LIKE SONG
+    func likeSong(song: Song){
+        if let index = songStore.songs.firstIndex(of: song){
+            songStore.songs[index].like = true
+            self.song.like = true
+        }
+        
+    }
+    
+    //MARK: UNLIKE SONG
+    func unlikeSong(song: Song){
+        if let index = songStore.songs.firstIndex(of: song){
+            songStore.songs[index].like = false
+            self.song.like = false
         }
     }
     
@@ -98,6 +115,34 @@ class MainViewModel: ObservableObject{
         if currentSong == songs.count {
             currentSong = 0
         }
+        song = songs[currentSong]
+        downloadButtonTapped(urlSong: songs[currentSong].urlSong)
+        playsong()
+    }
+    
+    
+    //MARK: REPEAT SONG
+    func repeatSong(){
+        if Int(self.currentTime) == Int(player!.duration){
+            locationUrl = nil
+            song = songs[currentSong]
+            downloadButtonTapped(urlSong: songs[currentSong].urlSong)
+            playsong()
+        }
+    }
+    
+    //MARK: AUTO RANDOM SONG
+    func autoRandomSong(){
+        if Int(self.currentTime) == Int(player!.duration){
+            randomSong()
+        }
+    }
+    
+    //MARK: RANDOM SONG
+    func randomSong(){
+        locationUrl = nil
+        let currentSongrandom = Int.random(in: 0..<songs.count)
+        self.currentSong = currentSongrandom
         song = songs[currentSong]
         downloadButtonTapped(urlSong: songs[currentSong].urlSong)
         playsong()
@@ -170,6 +215,7 @@ class MainViewModel: ObservableObject{
         let request = UNNotificationRequest(identifier: "IN-APP", content: content, trigger: triggle)
         UNUserNotificationCenter.current().add(request)
     }
+    
     
     
 }

@@ -19,6 +19,7 @@ struct SignUpView: View {
     let customSize = CustomSize()
     
     var body: some View {
+        
         VStack{
             
             VStack(alignment: .leading){

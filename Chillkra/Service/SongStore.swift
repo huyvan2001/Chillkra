@@ -61,8 +61,23 @@ class SongStore:ObservableObject{
     }
     
     //MARK: ADDSONG
-    func addSong(nameSong: String, urlSong: String, imageSongUrl: String, singer: String, emotionType: String,lyric: String,type: String,callback:@escaping()->Void){
-        let song = Song(nameSong: nameSong, urlSong: urlSong, imageSongUrl: imageSongUrl, singer: singer, emotionType: emotionType, lyric: lyric, type: type)
+    func addSong(nameSong: String,
+                 urlSong: String,
+                 imageSongUrl: String,
+                 singer: String,
+                 emotionType: String,
+                 lyric: String,
+                 type: String,
+                 callback:@escaping()->Void){
+        let song = Song(id: UUID(),
+                        nameSong: nameSong,
+                        urlSong: urlSong,
+                        imageSongUrl: imageSongUrl,
+                        singer: singer,
+                        emotionType: emotionType,
+                        lyric: lyric,
+                        type: type,
+                        like: true)
         songs.append(song)
         callback()
         objectWillChange.send()
@@ -75,5 +90,6 @@ class SongStore:ObservableObject{
             $0.emotionType.contains(idEtype)
         })
     }
+    
     
 }

@@ -1,26 +1,23 @@
 //
-//  SearchView.swift
+//  ListSongView.swift
 //  Chillkra
 //
-//  Created by Lê Văn Huy on 26/09/2022.
+//  Created by Van Huy on 07/10/2022.
 //
 
 import SwiftUI
-import Kingfisher
 
-struct SearchSongView: View {
-
+struct ListSongView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     
     @ObservedObject var songStore = SongStore()
     
-    @Binding var selectedIndex: Int
     @Binding var isVisible: Bool
+    
     var customSize = CustomSize()
     
     var body: some View {
         VStack(alignment: .leading){
-            
             Button {
                 isVisible.toggle()
             } label: {
@@ -28,50 +25,41 @@ struct SearchSongView: View {
                     .font(.largeTitle)
                     .foregroundColor(Color("General.mainTextColor"))
             }
-
-            HStack{
-                TextField("Artists, songs, or podcasts",
-                          text: $mainViewModel.searchText)
-                    .padding(.horizontal,34)
-                    .padding()
-                    .overlay(
-                        HStack{
-                            Image(systemName: "magnifyingglass")
-                            Spacer()
-                            
-                        }
-                            .padding()
-                    )
-                    .foregroundColor(Color("Search.ColorSearch"))
-                    .frame(width: customSize.searchBarWidth,
-                           height: customSize.searchBarHeight)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                Spacer()
+            VStack(alignment: .leading){
+                Text("Now Playing")
+                    .modifier(Fonts(fontName: .JosefinBold, size: customSize.mediumText))
+                    .padding(.top)
+                    .padding(.bottom)
+                Row(song: mainViewModel.song)
+                    .frame(height: 100)
+                    .onTapGesture {
+                        self.isVisible.toggle()
+                    }
             }
-            .padding()
             .zIndex(0)
-            //moving view in stack for shadow effect
+                
+            
+            Text("List Songs Play")
+                .modifier(Fonts(fontName: .JosefinBold, size: customSize.mediumText))
+                .padding(.top)
+                .padding(.bottom)
             
             GeometryReader { mainView in
                 
                 ScrollView(.vertical,showsIndicators: false){
                     
                     LazyVStack{
-                        ForEach(Array(zip(mainViewModel.SearchableSong,
-                                          mainViewModel.SearchableSong.indices)),id:\.1) { song,index in
+                        ForEach(Array(zip(mainViewModel.songs,
+                                          mainViewModel.songs.indices)),id:\.1) { song,index in
                             GeometryReader{ item in
                                 
                                 Button {
                                     
-                                    mainViewModel.songs = mainViewModel.SearchableSong
+                                    mainViewModel.songs = mainViewModel.songs
                                     mainViewModel.song = song
                                     mainViewModel.playing = true
                                     mainViewModel.playAtIndex(index: index)
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
-                                        self.isVisible.toggle()
-                                        self.selectedIndex = 4
-                                    }
+                                    self.isVisible.toggle()
                                     
                                     
                                 } label: {
@@ -80,33 +68,34 @@ struct SearchSongView: View {
                                         .padding(.bottom)
                                         .padding(.leading)
                                         .scaleEffect(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
-                                                                minY: item.frame(in: .global).minY),anchor: .bottom)
+                                                                           minY: item.frame(in: .global).minY),anchor: .bottom)
                                         .opacity(customSize.scaleValue(mainFrame: mainView.frame(in: .global).minY,
-                                                            minY: item.frame(in: .global).minY))
+                                                                       minY: item.frame(in: .global).minY))
                                 }
                             }
                             // setting default frame height
                             .frame(height: 100)
-
+                            
                         }
                     }
                 }
+                .onChange(of: mainViewModel.song, perform: { newValue in
+                    //
+                })
                 .zIndex(1)
+                
             }
-            
         }
+        .foregroundColor(Color("General.mainTextColor"))
         .navigationBarHidden(true)
         .padding()
         .background(Color("backgroundColor"))
-        
     }
-
-    
 }
 
-//struct SearchView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchSongView(song: song)
-//    }
-//}
-
+struct ListSongView_Previews: PreviewProvider {
+    static var previews: some View {
+        ListSongView(isVisible: .constant(true))
+            .environmentObject(MainViewModel())
+    }
+}

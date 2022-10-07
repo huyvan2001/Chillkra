@@ -17,32 +17,41 @@ struct SearchView: View {
     
     @Binding var selectedIndex: Int
     @State var textSearch: String = ""
-    
+    @State var isVisible = false
     var customSize = CustomSize()
     
     var body: some View {
         
-        VStack{
-            HeaderView(selectedIndex: $selectedIndex,
-                       title: "Search")
-            
-            
-            NavigationLink(destination: SearchSongView(selectedIndex: $selectedIndex)) {
-                SearchBar(text: $textSearch)
+        ZStack{
+            if isVisible == false {
+                VStack{
+                    HeaderView(selectedIndex: $selectedIndex,
+                               title: "Search")
+                    
+                    SearchBar(text: $textSearch)
+                        .onTapGesture {
+                            self.isVisible.toggle()
+                        }
+                    
+                    historySearch
+                        .padding(.bottom)
+                    
+                    
+                    
+                    recently
+                    
+                    
+                    
+                    
+                    Spacer()
+                }
             }
-            
-            
-            historySearch
-                .padding(.bottom)
-            
-            
-            
-            recently
-            
-            
-            
-            
-            Spacer()
+            else {
+                withAnimation(.easeInOut(duration: 1)){
+                    SearchSongView(selectedIndex: $selectedIndex,isVisible: $isVisible)
+                        .padding(.top)
+                }
+            }
         }
         .navigationBarHidden(true)
         .foregroundColor(Color("General.mainTextColor"))
