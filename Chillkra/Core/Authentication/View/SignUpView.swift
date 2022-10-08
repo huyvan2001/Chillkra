@@ -11,7 +11,7 @@ struct SignUpView: View {
     
     @EnvironmentObject var viewModel : AuthViewModel
     
-    @State var check: Bool = true
+    @State var error: AuthViewModel.SignUpError?
     @State var name: String = ""
     @State var email: String = ""
     @State var password: String = ""
@@ -36,9 +36,9 @@ struct SignUpView: View {
             
             button
             
-            if check == false {
+            if error != nil {
                 withAnimation(.spring()) {
-                    Text("Fail to Sign Up. Email exists!!!")
+                    Text(error!.message)
                         .modifier(Fonts(fontName: FontsName.kalam,
                                         size: customSize.tinyText))
                         .padding()
@@ -47,9 +47,9 @@ struct SignUpView: View {
                 }
             }
             
-            if name.isEmpty || email.isEmpty || password.isEmpty {
+            if validate(name: name, email: email, password: password) {
                 withAnimation(.spring()) {
-                    Text("Please fill Information ")
+                    Text(error!.message)
                         .modifier(Fonts(fontName: FontsName.kalam,
                                         size: customSize.tinyText))
                         .padding()
@@ -70,6 +70,16 @@ struct SignUpView: View {
         .frame(maxWidth:.infinity,maxHeight: .infinity)
         .background(Color("backgroundColor"))
     }
+    
+    func validate(name: String, email: String, password: String) -> Bool {
+        self.error = .EmptyField
+        if name.isEmpty || email.isEmpty || password.isEmpty {
+            return true
+        }
+        return false
+    }
+    
+    
 }
 
 struct SignUpView_Previews: PreviewProvider {
@@ -129,8 +139,8 @@ extension SignUpView {
             if !name.isEmpty && !email.isEmpty && !password.isEmpty {
                 viewModel.signup(withEmail: email,
                                  name: name,
-                                 password: password) { check in
-                    self.check = check
+                                 password: password) { error in
+                    self.error = error
                 }
             }
             

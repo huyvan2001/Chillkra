@@ -32,7 +32,7 @@ struct PlayView: View {
                         .resizable()
                         .frame(width: 200,height: 200)
                         .padding()
-
+                    
                     name
                         .padding(20)
                     
@@ -58,14 +58,14 @@ struct PlayView: View {
                         Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.duration))
                             .padding()
                     }
-                      
+                    
                     play
                     
                     
                     action
                     
                     Spacer()
-
+                    
                 }
             }
             else {
@@ -109,7 +109,7 @@ struct PlayView: View {
             mainViewModel.updateTimer()
             
         })
-
+        
         .ignoresSafeArea()
     }
     
@@ -196,28 +196,28 @@ extension PlayView {
                 Image(systemName: mainViewModel.isRepeat == true ? "repeat.1": "repeat")
                     .padding()
             }
-
+            
             Button {
                 mainViewModel.isRandom.toggle()
             } label: {
                 Image(systemName: mainViewModel.isRandom == true ? "shuffle.circle.fill": "shuffle.circle")
                     .padding()
             }
-
+            
             Button {
                 isVisible.toggle()
             } label: {
                 Image(systemName: "list.dash")
                     .padding()
             }
-
+            
             Button {
                 mainViewModel.song.like == true ? mainViewModel.unlikeSong(song: mainViewModel.song) : mainViewModel.likeSong(song: mainViewModel.song)
             } label: {
                 Image(systemName: "heart.fill")
                     .foregroundColor(Color(mainViewModel.song.like == false ?  "Main.IconPlay": "heartColor"))
             }
-
+            
         }
         .padding()
         .modifier(Fonts(fontName: FontsName.JosefinBold,

@@ -29,21 +29,51 @@ class AuthViewModel: ObservableObject {
     }
     
     
+    enum LoginError {
+        case Unknown
+        case UsernameNotExist
+        case WrongPass
+        
+        var message: String {
+            switch self {
+            case .Unknown:
+                return "Fail to Login. Please check email and password !!!"
+            case .UsernameNotExist:
+                return ""
+            case .WrongPass:
+                return ""
+            }
+        }
+    }
+    enum SignUpError{
+        case ExistEmail
+        case EmptyField
+        
+        var message: String {
+            switch self {
+            case .ExistEmail:
+                return "Fail to Sign Up. Email exists!!!"
+            case .EmptyField:
+                return "Please fill Information "
+            
+            }
+        }
+    }
     
     //MARK: LOGIN
     func login(withEmail email: String,
                password: String,
-               completion:@escaping(Bool)->Void) {
+               completion:@escaping (LoginError?)->Void) {
         Auth.auth().signIn(withEmail: email,
                            password: password) { result, error in
             if let error = error {
                 print("Fail to signIn with error \(error)")
-                completion(false)
+                completion(.Unknown)
             }
             guard let user = result?.user else { return }
             self.userSession = user
             self.fetchUser()
-            completion(true)
+            completion(nil)
         }
     }
     
@@ -53,13 +83,13 @@ class AuthViewModel: ObservableObject {
     func signup(withEmail email: String,
                 name: String,
                 password: String,
-                completion:@escaping(Bool)->Void){
+                completion:@escaping(SignUpError?)->Void){
         
         Auth.auth().createUser(withEmail: email,
                                password: password) { result, error in
             if let error = error {
                 print("Fail to signup with error \(error)")
-                completion(false)
+                completion(.ExistEmail)
             }
             guard let user = result?.user else { return }
             let data = ["name":name,
@@ -68,7 +98,7 @@ class AuthViewModel: ObservableObject {
                 .collection("users")
                 .document(user.uid)
                 .setData(data)
-            completion(true)
+            completion(nil)
         }
     }
     

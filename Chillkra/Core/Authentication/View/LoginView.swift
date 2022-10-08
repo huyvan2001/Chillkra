@@ -11,7 +11,7 @@ struct LoginView: View {
 
     @EnvironmentObject var viewModel: AuthViewModel
     
-    @State var check: Bool = true
+    @State var error: AuthViewModel.LoginError?
     @State var email = ""
     @State var password = ""
     
@@ -36,9 +36,9 @@ struct LoginView: View {
             
             button
             
-            if check == false {
+            if error != nil {
                 withAnimation(.spring()){
-                    Text("Fail to Login. Please check email and password !!!")
+                    Text(error!.message)
                         .modifier(Fonts(fontName: FontsName.kalam,
                                         size: customSize.tinyText))
                         .padding()
@@ -112,9 +112,8 @@ extension LoginView{
     
     var button: some View {
         Button(action: {
-            viewModel.login(withEmail: email,
-                            password: password) { check in
-                self.check = check
+            viewModel.login(withEmail: email, password: password) { error in
+                self.error = error
             }
         }, label: {
             Text("Login")

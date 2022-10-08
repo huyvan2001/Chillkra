@@ -207,7 +207,9 @@ class MainViewModel: ObservableObject{
     
     //MARK: CREATE NOTIFICATION
     func createNotification(){
+        
         let content = UNMutableNotificationContent()
+        
         content.title = "Chillkra"
         content.subtitle = "Come back to listen music"
         
