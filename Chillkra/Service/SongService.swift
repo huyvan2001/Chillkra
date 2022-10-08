@@ -13,8 +13,8 @@ struct SongService {
     let documentpath = FileManager.documentsDirectoryURL
     
     let stringUrlSong = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2Fsongs.json?alt=media&token=25923791-cbc0-42cf-8c35-22dd6ae07f67"
-    let stringUrlType = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2Ftypes.json?alt=media&token=1a88459d-ec03-4589-8d6a-ecb059e1af34"
-    let stringUrlEType = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2Ftypes.json?alt=media&token=49fb1eca-f05c-4d54-b367-0e07aadbda8c"
+    let stringUrlType = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2Ftypes.json?alt=media&token=49fb1eca-f05c-4d54-b367-0e07aadbda8c"
+    let stringUrlEType = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2FemotionTypes.json?alt=media&token=dd37b3a0-47cc-41d8-9eb2-429ead3e1397"
     
     func fetchJSONSong(){
         guard let url = URL(string: stringUrlSong) else {return }
