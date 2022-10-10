@@ -3,7 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ListFeelSongView.songs.setter:ListFeelSongView.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #4 in closure #1 in SearchSongView.body.getter:SearchSongView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in PlayView.body.getter:PlayView.swift">
@@ -22,13 +22,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #4 in closure #1 in ListFeelSongView.body.getter:ListFeelSongView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #4 in closure #1 in SearchSongView.body.getter:SearchSongView.swift">
-      </ContextState>
-      <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in closure #4 in closure #1 in ListFeelSongView.body.getter:ListFeelSongView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SongDownload.urlSession(_:downloadTask:didFinishDownloadingTo:):SongDownload.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "downloadTaskDoneHandler">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListFeelSongView.songs.setter:ListFeelSongView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #4 in closure #1 in ListFeelSongView.body.getter:ListFeelSongView.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

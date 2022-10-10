@@ -52,6 +52,7 @@ struct Row_Previews: PreviewProvider {
                        singer: "Le Van Huy",
                        emotionType: "",
                        lyric: "",
-                       type: "", like: true))
+                       type: "", like: true,
+                       downloaded: true))
     }
 }

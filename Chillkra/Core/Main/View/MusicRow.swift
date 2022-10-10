@@ -12,6 +12,7 @@ struct MusicRow: View {
     var song: Song
     let customSize = CustomSize()
     
+    
     var body: some View {
         
         VStack{
@@ -27,11 +28,9 @@ struct MusicRow: View {
                         VStack(){
                             HStack{
                                 Spacer()
-                                Text("")
-                                    .modifier(Fonts(fontName: FontsName.kalam,
-                                                    size: customSize.tinyText))
+                                Image(systemName: song.downloaded == true ? "" : "arrow.down.app.fill")
+                                    .padding(8)
                             }
-                            .padding(10)
                             Spacer()
                         }
                     )
@@ -50,8 +49,8 @@ struct MusicRow: View {
         }
     }
 
-//struct MusicRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MusicRow(song: .init(nameSong: "", singer: "", type: "", emotionType: "", lyric: "", urlSong: "", imageSongUrl: ""))
-//    }
-//}
+struct MusicRow_Previews: PreviewProvider {
+    static var previews: some View {
+        MusicRow(song: Song(id: UUID(), nameSong: "Anh chua thuong ", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "", like: true, downloaded: true))
+    }
+}

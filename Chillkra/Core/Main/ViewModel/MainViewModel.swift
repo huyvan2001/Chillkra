@@ -16,7 +16,7 @@ class MainViewModel: ObservableObject{
     @Published var width: CGFloat = 0
     @Published var currentSong = 0
     @Published var currentTime: TimeInterval = 0
-    @Published var song = Song(id: UUID(), nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "", like: true)
+    @Published var song = Song(id: UUID(), nameSong: "", urlSong: "", imageSongUrl: "", singer: "", emotionType: "", lyric: "", type: "", like: true, downloaded: true)
     @Published var angel: CGFloat = 0
     @Published var songs : [Song] = []
     @Published var searchText = ""
@@ -25,6 +25,8 @@ class MainViewModel: ObservableObject{
     @Published var timer = Timer.publish(every: 0.1, on: .current, in: .default).autoconnect()
     @Published var isRepeat = false
     @Published var isRandom = false
+    
+    let fileManager = FileManager.default
     
     //MARK: SEARCHABLE SONG
     var SearchableSong: [Song] {
@@ -64,11 +66,26 @@ class MainViewModel: ObservableObject{
                 return
             }
             do {
-                player = try AVAudioPlayer(contentsOf: self.locationUrl!)
+                guard let _locationUrl = self.locationUrl, self.fileExisted(in: _locationUrl) else {
+                    return
+                }
+                player = try AVAudioPlayer(contentsOf: _locationUrl)
                 player?.play()
             } catch {
                 print(error)
             }
+        }
+    }
+    
+    private func fileExisted(in destinationUrl: URL) -> Bool {
+        if fileManager.fileExists(atPath: destinationUrl.path){
+            self.locationUrl = destinationUrl
+            print(self.locationUrl!)
+            return true
+        }
+        else{
+            song.downloaded = true
+            return false
         }
     }
     
@@ -86,9 +103,7 @@ class MainViewModel: ObservableObject{
             played()
         }
         else {
-            DispatchQueue.main.asyncAfter(deadline: .now()+15){
-                self.played()
-            }
+            self.played()
         }
     }
     
@@ -133,8 +148,10 @@ class MainViewModel: ObservableObject{
     
     //MARK: AUTO RANDOM SONG
     func autoRandomSong(){
-        if Int(self.currentTime) == Int(player!.duration){
-            randomSong()
+        if player != nil {
+            if Int(self.currentTime) == Int(player!.duration){
+                randomSong()
+            }
         }
     }
     
@@ -165,8 +182,10 @@ class MainViewModel: ObservableObject{
     
     //MARK: AUTO NEXT SONG
     func autoNextSong() {
-        if Int(self.currentTime) == Int(player!.duration) {
-            nextSong(songs: songs)
+        if player != nil{
+            if Int(self.currentTime) == Int(player!.duration) {
+                nextSong(songs: songs)
+            }
         }
     }
     
@@ -184,23 +203,24 @@ class MainViewModel: ObservableObject{
     //MARK: GET CURRENT TIME
     func getCurrentTime(value: TimeInterval)-> String{
         
-        return "\(Int(value/60)):\(Int(value.truncatingRemainder(dividingBy: 60)) <= 9 ? "0": "")\(Int(value.truncatingRemainder(dividingBy: 60)))"
+        if player != nil {
+            return "\(Int(value/60)):\(Int(value.truncatingRemainder(dividingBy: 60)) <= 9 ? "0": "")\(Int(value.truncatingRemainder(dividingBy: 60)))"
+        }
+        return "00:00"
     }
     
     
    //MARK: DOWNLOAD SONG
     func downloadButtonTapped(urlSong: String){
         guard let previewUrl = URL(string:urlSong) else { return}
-        self.download.fetchSongUrl(previewUrl) { check in
-            if check == true {
+        self.download.fetchSongUrl(previewUrl) { downloaded in
+            if downloaded {
                 DispatchQueue.main.async {
                     self.locationUrl = self.download.locationUrl!
+                    self.playsong()
                 }
-            }
-            else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 15){
-                    self.locationUrl = self.download.locationUrl!
-                }
+            } else {
+                print("ERROR")
             }
         }
     }

@@ -39,9 +39,9 @@ struct PlayView: View {
                     
                     HStack{
                         
-                        Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.currentTime))
+                        Text(mainViewModel.getCurrentTime(value: mainViewModel.player?.currentTime ?? TimeInterval(0)) )
                             .padding()
-                        Slider(value: $mainViewModel.currentTime , in: 0...(mainViewModel.player!.duration))
+                        Slider(value: $mainViewModel.currentTime , in: 0...(mainViewModel.player?.duration ?? TimeInterval(0)))
                         { isEditing in
                             if !isEditing {
                                 
@@ -55,7 +55,7 @@ struct PlayView: View {
                             }
                         }
                         .frame(height: 4)
-                        Text(mainViewModel.getCurrentTime(value: mainViewModel.player!.duration))
+                        Text(mainViewModel.getCurrentTime(value: mainViewModel.player?.duration ?? TimeInterval(0)))
                             .padding()
                     }
                     

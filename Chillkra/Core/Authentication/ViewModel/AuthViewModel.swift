@@ -18,11 +18,16 @@ class AuthViewModel: ObservableObject {
     @Published var didAuthecationUser : Bool = false
     @Published var currentUser: User?
     
+    @AppStorage("justDownloaded") var justDownloaded: Bool?
+    
     private let service = UserService()
     
     init(){
-        self.userSession = Auth.auth().currentUser
-        self.fetchUser()
+        if justDownloaded != nil {
+            self.userSession = Auth.auth().currentUser
+            self.fetchUser()
+        }
+        
         SongService().fetchJSONSong()
         SongService().fetchJSONType()
         SongService().fetchJSONEtype()
@@ -65,7 +70,7 @@ class AuthViewModel: ObservableObject {
                password: String,
                completion:@escaping (LoginError?)->Void) {
         Auth.auth().signIn(withEmail: email,
-                           password: password) { result, error in
+                           password: password) { [self] result, error in
             if let error = error {
                 print("Fail to signIn with error \(error)")
                 completion(.Unknown)
@@ -74,6 +79,8 @@ class AuthViewModel: ObservableObject {
             self.userSession = user
             self.fetchUser()
             completion(nil)
+            
+            justDownloaded = true
         }
     }
     

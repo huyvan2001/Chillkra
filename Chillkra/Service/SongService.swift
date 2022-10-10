@@ -10,19 +10,20 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct SongService {
+    var download = SongDownload()
     let documentpath = FileManager.documentsDirectoryURL
     
-    let stringUrlSong = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2Fsongs.json?alt=media&token=25923791-cbc0-42cf-8c35-22dd6ae07f67"
+    let stringUrlSong = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2Fsongs.json?alt=media&token=e23f9be7-dfae-4e49-99e5-83cfa698eb15"
     let stringUrlType = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2Ftypes.json?alt=media&token=49fb1eca-f05c-4d54-b367-0e07aadbda8c"
     let stringUrlEType = "https://firebasestorage.googleapis.com/v0/b/chillkra-dc0e4.appspot.com/o/JSON%2FemotionTypes.json?alt=media&token=dd37b3a0-47cc-41d8-9eb2-429ead3e1397"
+    
+    
     
     func fetchJSONSong(){
         guard let url = URL(string: stringUrlSong) else {return }
         let lastpathcomponent = url.lastPathComponent
         let destinationUrl = documentpath.appendingPathComponent(lastpathcomponent)
-//        if FileManager.default.fileExists(atPath: destinationUrl.path){
-//            return
-//        }
+
         let task = URLSession.shared.downloadTask(with: url){ location,response,error in
             
             do {

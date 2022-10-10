@@ -9,10 +9,14 @@ import Foundation
 class SongDownload: NSObject,ObservableObject{
     var downloadTask: URLSessionDownloadTask?
     var downloadURL : URL?
+    
     let fileManager = FileManager.default
     @Published var finishDownloading: Float = 0
     @Published var locationUrl: URL?
     @Published var downloadAmount: Float = 0
+    
+    typealias BoolClosure = (Bool) -> Void
+    private var downloadTaskDoneHandler: BoolClosure?
     
     lazy var urlSession: URLSession = {
         let configuration = URLSessionConfiguration.default
@@ -20,7 +24,7 @@ class SongDownload: NSObject,ObservableObject{
     }()
     
     
-    func fetchSongUrl(_ url: URL,completion:@escaping(Bool)-> Void){
+    func fetchSongUrl(_ url: URL, completion: @escaping BoolClosure){
         downloadURL = url
         guard let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first,
               let lastpathComponent = downloadURL?.lastPathComponent
@@ -29,20 +33,24 @@ class SongDownload: NSObject,ObservableObject{
         }
         
         let destinationUrl = documentPath.appendingPathComponent(lastpathComponent)
-        if fileManager.fileExists(atPath: destinationUrl.path){
-            DispatchQueue.main.async {
-                self.locationUrl = destinationUrl
-                print(self.locationUrl!)
-            }
+        
+        if fileExisted(in: destinationUrl) {
             completion(true)
-            return
+        } else {
+            downloadTask = urlSession.downloadTask(with: url)
+            downloadTask?.resume()
+            self.downloadTaskDoneHandler = completion
         }
-        downloadTask = urlSession.downloadTask(with: url)
-        downloadTask?.resume()
-        completion(false)
     }
     
-    
+    private func fileExisted(in destinationUrl: URL) -> Bool {
+        if fileManager.fileExists(atPath: destinationUrl.path){
+            self.locationUrl = destinationUrl
+            print(self.locationUrl!)
+            return true
+        }
+        return false
+    }
     
 }
 
@@ -72,16 +80,21 @@ extension SongDownload: URLSessionDownloadDelegate{
             fatalError()
         }
         let destinationUrl = documentPath.appendingPathComponent(lastpathComponent)
+        
         do{
             try fileManager.copyItem(at: location, to: destinationUrl)
-            while fileManager.fileExists(atPath: destinationUrl.path){
+            if fileManager.fileExists(atPath: destinationUrl.path) {
                 DispatchQueue.main.async {
                     self.locationUrl = destinationUrl
+                    self.downloadTaskDoneHandler?(true)
+                    self.downloadTaskDoneHandler = nil
                 }
             }
         }
         catch{
             print(error)
+            self.downloadTaskDoneHandler?(false)
+            self.downloadTaskDoneHandler = nil
         }
         
     }

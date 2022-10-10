@@ -77,7 +77,8 @@ class SongStore:ObservableObject{
                         emotionType: emotionType,
                         lyric: lyric,
                         type: type,
-                        like: true)
+                        like: true,
+                        downloaded: true)
         songs.append(song)
         callback()
         objectWillChange.send()
