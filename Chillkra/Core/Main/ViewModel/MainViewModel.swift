@@ -24,6 +24,7 @@ class MainViewModel: ObservableObject{
     @Published var playing: Bool = true
     @Published var timer = Timer.publish(every: 0.1, on: .current, in: .default).autoconnect()
     @Published var isRepeat = false
+    @Published var urlIsDownloading: URL?
     @Published var isRandom = false
     
     let fileManager = FileManager.default
@@ -141,6 +142,7 @@ class MainViewModel: ObservableObject{
         if Int(self.currentTime) == Int(player!.duration){
             locationUrl = nil
             song = songs[currentSong]
+
             downloadButtonTapped(urlSong: songs[currentSong].urlSong)
             playsong()
         }
@@ -213,6 +215,7 @@ class MainViewModel: ObservableObject{
    //MARK: DOWNLOAD SONG
     func downloadButtonTapped(urlSong: String){
         guard let previewUrl = URL(string:urlSong) else { return}
+        if previewUrl == urlIsDownloading { return }
         self.download.fetchSongUrl(previewUrl) { downloaded in
             if downloaded {
                 DispatchQueue.main.async {

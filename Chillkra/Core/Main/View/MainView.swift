@@ -108,6 +108,8 @@ extension MainView{
                                     mainViewModel.songs = songStore.songs
                                     mainViewModel.song = song
                                     mainViewModel.playAtIndex(index: index)
+                                    guard let urlDownload = URL(string: song.urlSong) else {return}
+                                    mainViewModel.urlIsDownloading = urlDownload
                                     
                                 } label: {
                                     MusicRow(song: song)
